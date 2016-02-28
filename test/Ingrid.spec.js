@@ -64,26 +64,6 @@ describe(`react-ingrid`, () => {
                 ItemComponent: rndoam.noop(),
                 itemWidth: rndoam.number(),
                 itemHeight: rndoam.number(),
-                items: rndoam.array(),
-                total: rndoam.number()
-            }
-
-            const tree = TestUtils.renderIntoDocument(
-                <Ingrid {...props} />
-            )
-
-            const display = TestUtils.findRenderedComponentWithType(tree, DisplayMock)
-
-            const {ItemComponent, ...displayProps} = props
-
-            expect(display.props).toEqual(displayProps)
-        })
-
-        it(`should set total from the items length`, () => {
-            const props = {
-                ItemComponent: rndoam.noop(),
-                itemWidth: rndoam.number(),
-                itemHeight: rndoam.number(),
                 items: rndoam.array()
             }
 
@@ -93,7 +73,13 @@ describe(`react-ingrid`, () => {
 
             const display = TestUtils.findRenderedComponentWithType(tree, DisplayMock)
 
-            expect(display.props.total).toEqual(props.items.length)
+            const {ItemComponent, ...restProps} = props
+
+            const displayProps = {
+                ...restProps,
+                total: props.items.length
+            }
+            expect(display.props).toEqual(displayProps)
         })
     })
 })

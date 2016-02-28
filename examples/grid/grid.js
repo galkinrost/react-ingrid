@@ -6547,8 +6547,8 @@
 	            var items = _props2.items;
 	            var itemWidth = _props2.itemWidth;
 	            var itemHeight = _props2.itemHeight;
-	            var _props2$total = _props2.total;
-	            var total = _props2$total === undefined ? items.length : _props2$total;
+
+	            var total = items.length;
 
 	            return _react2.default.createElement(_Display2.default, {
 	                items: items,
@@ -6573,8 +6573,7 @@
 	    itemWidth: _react.PropTypes.number.isRequired,
 	    itemHeight: _react.PropTypes.number.isRequired,
 	    items: _react.PropTypes.array.isRequired,
-	    ItemComponent: _react.PropTypes.func.isRequired,
-	    total: _react.PropTypes.number
+	    ItemComponent: _react.PropTypes.func.isRequired
 	};
 
 	exports.default = Ingrid;

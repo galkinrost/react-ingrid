@@ -15,7 +15,9 @@ class Ingrid extends Component {
     }
 
     render() {
-        const {items, itemWidth, itemHeight, total = items.length} = this.props
+        const {items, itemWidth, itemHeight} = this.props
+
+        const total = items.length
 
         return (
             <Display
@@ -39,8 +41,7 @@ Ingrid.propTypes = {
     itemWidth: PropTypes.number.isRequired,
     itemHeight: PropTypes.number.isRequired,
     items: PropTypes.array.isRequired,
-    ItemComponent: PropTypes.func.isRequired,
-    total: PropTypes.number
+    ItemComponent: PropTypes.func.isRequired
 }
 
 export default Ingrid
