@@ -120,7 +120,8 @@ describe(`react-ingrid`, () => {
         it(`should transfer properties into the Grid component`, () => {
             const props = {
                 itemWidth: 100,
-                itemHeight: 100
+                itemHeight: 100,
+                total: 100
             }
 
             const display = TestUtils.renderIntoDocument(
@@ -134,7 +135,8 @@ describe(`react-ingrid`, () => {
                     minVisibleIndex: 0,
                     maxVisibleIndex: 0,
                     offsetTop: 0,
-                    height: 0
+                    height: 10000,
+                    total: props.total
                 })
         })
 
@@ -243,6 +245,156 @@ describe(`react-ingrid`, () => {
             expect(spyRemoveListener.calls.length).toEqual(1)
 
             expect(spyAddListener.calls[0].arguments[1]).toEqual(spyRemoveListener.calls[0].arguments[1])
+        })
+
+        it(`should call the load method when maxVisibleIndex greater than total`, () => {
+
+            const props = {
+                total: 100,
+                load: expect.createSpy(),
+                loading: false,
+                more: true
+            }
+
+            class Container extends Component {
+
+                componentDidMount() {
+                    this.display.setState({
+                        maxVisibleIndex: 200
+                    })
+                }
+
+                render() {
+                    return (
+                        <Display ref={display => {
+                            this.display = display
+                        }} {...props}
+                        />
+                    )
+                }
+            }
+
+            TestUtils.renderIntoDocument(
+                <Container />
+            )
+
+            expect(props.load.calls.length).toEqual(1)
+        })
+
+        it(`should not call the load method if it has already been called`, () => {
+
+            const props = {
+                total: 100,
+                load: expect.createSpy(),
+                loading: true,
+                more: true
+            }
+
+            class Container extends Component {
+
+                componentDidMount() {
+                    this.display.setState({
+                        maxVisibleIndex: 200
+                    })
+                }
+
+                render() {
+                    return (
+                        <Display ref={display => {
+                            this.display = display
+                        }} {...props}
+                        />
+                    )
+                }
+            }
+
+            TestUtils.renderIntoDocument(
+                <Container />
+            )
+
+            expect(props.load.calls.length).toEqual(0)
+        })
+
+        it(`should not call the load method if it's no more`, () => {
+
+            const props = {
+                total: 100,
+                load: expect.createSpy(),
+                loading: false,
+                more: false
+            }
+
+            class Container extends Component {
+
+                componentDidMount() {
+                    this.display.setState({
+                        maxVisibleIndex: 200
+                    })
+                }
+
+                render() {
+                    return (
+                        <Display ref={display => {
+                            this.display = display
+                        }} {...props}
+                        />
+                    )
+                }
+            }
+
+            TestUtils.renderIntoDocument(
+                <Container />
+            )
+
+            expect(props.load.calls.length).toEqual(0)
+        })
+
+        it(`should call the load method when maxVisibleIndex greater than total`, () => {
+
+            const props = {
+                itemWidth: 100,
+                itemHeight: 100
+            }
+
+            class Container extends Component {
+
+                constructor() {
+                    super()
+                    this.state = {
+                        total: 10
+                    }
+                }
+
+                componentDidMount() {
+                    this.setState({
+                        total: 20
+                    })
+                }
+
+                render() {
+                    return (
+                        <Display {...props} {...this.state}/>
+                    )
+                }
+            }
+
+            const restoreDisplay = setDisplayClientBoundingRect({
+                top: 0,
+                width: 200,
+                height: 100
+            })
+
+            const tree = TestUtils.renderIntoDocument(
+                <Container />
+            )
+
+            const grid = TestUtils.findRenderedComponentWithType(tree, GridMock)
+
+            const expectedHeight = 1000
+
+            expect(grid.props.height).toEqual(expectedHeight)
+
+            restoreDisplay()
         })
     })
 })

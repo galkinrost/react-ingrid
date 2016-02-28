@@ -67,6 +67,23 @@ class Display extends Component {
         window.removeEventListener(`resize`, this.windowResizeListener)
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.total !== this.props.total) {
+            this.calculator.updateTotal(nextProps.total)
+            this.setState(
+                this.calculator.getState()
+            )
+        }
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        const {total, load, loading, more} = nextProps
+        const {maxVisibleIndex} = nextState
+        if (more && !loading && maxVisibleIndex > total) {
+            load()
+        }
+    }
+
     getDisplayBoundingClientRect() {
         return this.display.getBoundingClientRect()
     }
@@ -76,6 +93,8 @@ class Display extends Component {
     }
 
     render() {
+
+        const {total} = this.props
 
         return (
             <div ref={display => {
@@ -87,7 +106,7 @@ class Display extends Component {
                     this.content = content
                 }} style={contentStyle}
                 >
-                    <Grid {...this.state} />
+                    <Grid total={total} {...this.state} />
                 </div>
             </div>
         )

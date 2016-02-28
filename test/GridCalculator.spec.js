@@ -108,6 +108,21 @@ describe(`react-ingrid`, () => {
             expect(calculator.offsetTop).toEqual(200)
         })
 
+        it(`should update total`, () => {
+            const calculator = new GridCalculator({
+                itemHeight: 200,
+                itemWidth: 200,
+                displayWidth: 600,
+                displayHeight: 400,
+                total: 0,
+                itemsPerRow: 3
+            })
+
+            calculator.updateTotal(300)
+
+            expect(calculator.height).toEqual(20000)
+        })
+
         it(`should return state`, () => {
             const state = {
                 minVisibleIndex: 100,

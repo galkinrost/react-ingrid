@@ -117,6 +117,15 @@ class GridCalculator {
 
     /**
      *
+     * @param total
+     */
+    updateTotal(total) {
+        this.total = total
+        this.height = calculateHeight(this.total, this.itemsPerRow, this.itemHeight)
+    }
+
+    /**
+     *
      * @returns {{minVisibleIndex: *, maxVisibleIndex: *, offsetTop: *}}
      */
     getState() {

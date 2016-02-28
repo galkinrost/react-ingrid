@@ -15,7 +15,7 @@ class Ingrid extends Component {
     }
 
     render() {
-        const {buffer, items, itemWidth, itemHeight} = this.props
+        const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more} = this.props
 
         const total = items.length
 
@@ -26,6 +26,9 @@ class Ingrid extends Component {
                 itemWidth={itemWidth}
                 itemHeight={itemHeight}
                 total={total}
+                load={load}
+                loading={loading}
+                more={more}
             />
         )
     }

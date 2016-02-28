@@ -6544,17 +6544,28 @@
 	        key: 'render',
 	        value: function render() {
 	            var _props2 = this.props;
+	            var buffer = _props2.buffer;
 	            var items = _props2.items;
 	            var itemWidth = _props2.itemWidth;
 	            var itemHeight = _props2.itemHeight;
+	            var _props2$load = _props2.load;
+	            var load = _props2$load === undefined ? function () {
+	                return null;
+	            } : _props2$load;
+	            var loading = _props2.loading;
+	            var more = _props2.more;
 
 	            var total = items.length;
 
 	            return _react2.default.createElement(_Display2.default, {
+	                buffer: buffer,
 	                items: items,
 	                itemWidth: itemWidth,
 	                itemHeight: itemHeight,
-	                total: total
+	                total: total,
+	                load: load,
+	                loading: loading,
+	                more: more
 	            });
 	        }
 	    }]);
@@ -6570,6 +6581,7 @@
 	};
 
 	Ingrid.propTypes = {
+	    buffer: _react.PropTypes.number,
 	    itemWidth: _react.PropTypes.number.isRequired,
 	    itemHeight: _react.PropTypes.number.isRequired,
 	    items: _react.PropTypes.array.isRequired,
@@ -10738,6 +10750,16 @@
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) {
+	    for (var i = 1; i < arguments.length; i++) {
+	        var source = arguments[i];for (var key in source) {
+	            if (Object.prototype.hasOwnProperty.call(source, key)) {
+	                target[key] = source[key];
+	            }
+	        }
+	    }return target;
+	};
+
 	var _createClass = function () {
 	    function defineProperties(target, props) {
 	        for (var i = 0; i < props.length; i++) {
@@ -10850,8 +10872,9 @@
 	        var itemWidth = props.itemWidth;
 	        var itemHeight = props.itemHeight;
 	        var total = props.total;
+	        var buffer = props.buffer;
 
-	        _this.calculator = new _GridCalculator2.default({ itemWidth: itemWidth, itemHeight: itemHeight, total: total });
+	        _this.calculator = new _GridCalculator2.default({ itemWidth: itemWidth, itemHeight: itemHeight, total: total, buffer: buffer });
 
 	        _this.state = _this.calculator.getState();
 	        return _this;
@@ -10879,6 +10902,27 @@
 	            window.removeEventListener('resize', this.windowResizeListener);
 	        }
 	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            if (nextProps.total !== this.props.total) {
+	                this.calculator.updateTotal(nextProps.total);
+	                this.setState(this.calculator.getState());
+	            }
+	        }
+	    }, {
+	        key: 'componentWillUpdate',
+	        value: function componentWillUpdate(nextProps, nextState) {
+	            var total = nextProps.total;
+	            var load = nextProps.load;
+	            var loading = nextProps.loading;
+	            var more = nextProps.more;
+	            var maxVisibleIndex = nextState.maxVisibleIndex;
+
+	            if (more && !loading && maxVisibleIndex > total) {
+	                load();
+	            }
+	        }
+	    }, {
 	        key: 'getDisplayBoundingClientRect',
 	        value: function getDisplayBoundingClientRect() {
 	            return this.display.getBoundingClientRect();
@@ -10893,6 +10937,8 @@
 	        value: function render() {
 	            var _this2 = this;
 
+	            var total = this.props.total;
+
 	            return _react2.default.createElement('div', { ref: function ref(display) {
 	                    _this2.display = display;
 	                },
@@ -10900,7 +10946,7 @@
 	            }, _react2.default.createElement('div', { ref: function ref(content) {
 	                    _this2.content = content;
 	                }, style: contentStyle
-	            }, _react2.default.createElement(_Grid2.default, this.state)));
+	            }, _react2.default.createElement(_Grid2.default, _extends({ total: total }, this.state))));
 	        }
 	    }]);
 
@@ -11199,6 +11245,18 @@
 	      this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow);
 	      this.maxVisibleIndex = calculateMaxVisibleIndex(this.displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer);
 	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight);
+	    }
+
+	    /**
+	     *
+	     * @param total
+	     */
+
+	  }, {
+	    key: "updateTotal",
+	    value: function updateTotal(total) {
+	      this.total = total;
+	      this.height = calculateHeight(this.total, this.itemsPerRow, this.itemHeight);
 	    }
 
 	    /**

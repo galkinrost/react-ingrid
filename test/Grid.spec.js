@@ -17,7 +17,7 @@ class ItemMock extends Component {
 describe(`react-ingrid`, () => {
 
     describe(`Grid`, () => {
-        let Grid
+        let Grid, GridWithContext
 
         before(() => {
             mockery.enable({
@@ -26,6 +26,12 @@ describe(`react-ingrid`, () => {
 
             mockery.registerMock(`./Item`, ItemMock);
             ({default: Grid} = require(`../src/Grid`))
+
+            GridWithContext = contextify({
+                items: PropTypes.array
+            }, props => ({
+                items: props.items || []
+            }))(Grid)
         })
 
         after(() => {
@@ -33,32 +39,23 @@ describe(`react-ingrid`, () => {
             mockery.deregisterAll()
         })
 
-        it(`should receive items in the context`, () => {
-            const WithContext = contextify({
-                items: PropTypes.array
-            }, props => ({
-                items: props.items
-            }))(Grid)
+        it(`should receive props in the context`, () => {
 
-            const items = rndoam.array()
+            const context = {
+                items: rndoam.array()
+            }
 
             const tree = TestUtils
                 .renderIntoDocument(
-                    <WithContext items={items}/>
+                    <GridWithContext {...context} />
                 )
 
             const grid = TestUtils.findRenderedComponentWithType(tree, Grid)
 
-            expect(grid.context.items).toEqual(items)
+            expect(grid.context).toEqual(context)
         })
 
         it(`should render only visible items`, () => {
-            const WithContext = contextify({
-                items: PropTypes.array
-            }, props => ({
-                items: props.items
-            }))(Grid)
-
             const props = {
                 minVisibleIndex: 3,
                 maxVisibleIndex: 5
@@ -68,7 +65,7 @@ describe(`react-ingrid`, () => {
 
             const tree = TestUtils
                 .renderIntoDocument(
-                    <WithContext {...props} items={items}/>
+                    <GridWithContext {...props} items={items}/>
                 )
 
             const itemInstances = TestUtils.scryRenderedComponentsWithType(tree, ItemMock)
@@ -107,12 +104,6 @@ describe(`react-ingrid`, () => {
         })
 
         it(`should set keys from the id`, () => {
-            const WithContext = contextify({
-                items: PropTypes.array
-            }, props => ({
-                items: props.items
-            }))(Grid)
-
             let id = 0
             const itemsCount = 10
             const props = {
@@ -125,7 +116,7 @@ describe(`react-ingrid`, () => {
 
             const grid = TestUtils
                 .renderIntoDocument(
-                    <WithContext {...props} />
+                    <GridWithContext {...props} />
                 )
 
             const items = TestUtils.scryRenderedComponentsWithType(grid, ItemMock)

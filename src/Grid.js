@@ -10,6 +10,7 @@ const defaultScrollHelperStyle = {
 }
 
 class Grid extends Component {
+
     render() {
         const {
             offsetTop = 0,
