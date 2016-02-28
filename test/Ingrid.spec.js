@@ -62,6 +62,7 @@ describe(`react-ingrid`, () => {
         it(`should transfer props into the Display component`, () => {
             const props = {
                 ItemComponent: rndoam.noop(),
+                buffer: rndoam.number(),
                 itemWidth: rndoam.number(),
                 itemHeight: rndoam.number(),
                 items: rndoam.array()

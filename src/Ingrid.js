@@ -15,12 +15,13 @@ class Ingrid extends Component {
     }
 
     render() {
-        const {items, itemWidth, itemHeight} = this.props
+        const {buffer, items, itemWidth, itemHeight} = this.props
 
         const total = items.length
 
         return (
             <Display
+                buffer={buffer}
                 items={items}
                 itemWidth={itemWidth}
                 itemHeight={itemHeight}
@@ -38,6 +39,7 @@ Ingrid.childContextTypes = {
 }
 
 Ingrid.propTypes = {
+    buffer: PropTypes.number,
     itemWidth: PropTypes.number.isRequired,
     itemHeight: PropTypes.number.isRequired,
     items: PropTypes.array.isRequired,
