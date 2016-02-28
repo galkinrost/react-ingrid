@@ -39,7 +39,7 @@ import {ingrid} from 'react-ingrid'
 const Grid = ingrid(props => props)(ItemComponent)
 ```
 
-## Infinit scroll
+## Infinite scroll
 
 ```javascript
 const props = {
