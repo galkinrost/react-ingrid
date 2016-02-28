@@ -48,8 +48,6 @@
 
 	var _lib = __webpack_require__(93);
 
-	var _lib2 = _interopRequireDefault(_lib);
-
 	var _react = __webpack_require__(18);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -98,12 +96,13 @@
 	    );
 	};
 
-	var props = {
-	    ItemComponent: ItemComponent,
-	    items: items,
-	    itemWidth: 100,
-	    itemHeight: 100
-	};
+	ItemComponent = (0, _lib.ingrid)(function () {
+	    return {
+	        items: items,
+	        itemWidth: 100,
+	        itemHeight: 100
+	    };
+	})(ItemComponent);
 
 	var wrapperStyle = {
 	    height: '100vh',
@@ -114,7 +113,7 @@
 	    _reactDom2.default.render(_react2.default.createElement(
 	        'div',
 	        { style: wrapperStyle },
-	        _react2.default.createElement(_lib2.default, props)
+	        _react2.default.createElement(ItemComponent, null)
 	    ), document.getElementById('app'));
 	});
 

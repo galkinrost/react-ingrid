@@ -1,7 +1,8 @@
 import Ingrid from './Ingrid'
 import React from 'react'
 
-const ingrid = (props = {}) =>
-    (ItemComponent) => <Ingrid {...props} ItemComponent={ItemComponent} />
+const ingrid = (mapProps = () => ({})) =>
+    (ItemComponent) =>
+        props => <Ingrid {...mapProps(props)} ItemComponent={ItemComponent}/>
 
 export default ingrid

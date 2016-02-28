@@ -13,7 +13,7 @@
     "build:examples": "cross-env NODE_ENV=development webpack --config webpack.config.examples.js",
     "build:umd": "cross-env NODE_ENV=development webpack src/index.js dist/react-ingrid.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/react-ingrid.min.js",
-    "build": "npm run build:lib && npm run build:umd && npm run build:umd:min && node ./prepublish",
+    "build": "npm run build:lib && npm run build:examples && npm run build:umd && npm run build:umd:min && node ./prepublish",
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src test",
     "test": "mocha --compilers js:babel-register --recursive --require ./test/setup.js",

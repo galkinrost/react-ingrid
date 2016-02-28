@@ -40,7 +40,7 @@ Ingrid.propTypes = {
     itemHeight: PropTypes.number.isRequired,
     items: PropTypes.array.isRequired,
     ItemComponent: PropTypes.func.isRequired,
-    total: PropTypes.number.isRequired
+    total: PropTypes.number
 }
 
 export default Ingrid
