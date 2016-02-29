@@ -55,9 +55,9 @@ const props = {
 <Ingrid {...props} />
 ```
 
-## Examples
+## Example
 
-[Watch here](https://github.com/babotech/react-ingrid/tree/master/examples)
+[Watch here](http://babotech.github.io/react-ingrid/)
 
 ## License 
 
