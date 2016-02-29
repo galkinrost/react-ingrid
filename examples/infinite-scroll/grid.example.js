@@ -77,6 +77,7 @@ class Container extends Component {
         const props = {
             ...defaultProps,
             ...this.state,
+            buffer: 10,
             load
         }
 

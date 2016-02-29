@@ -155,6 +155,7 @@
 	                }, 1000);
 	            };
 	            var props = _extends({}, defaultProps, this.state, {
+	                buffer: 10,
 	                load: load
 	            });
 
