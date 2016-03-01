@@ -31,8 +31,8 @@ describe(`react-ingrid`, () => {
 
         it(`should correctly calculate max visible index`, () => {
             // calculateMaxVisibleIndex(displayHeight: number, itemHeight: number, itemsPerRow: number, scrollTop:number, minVisibleIndex: number)
-            expect(calculateMaxVisibleIndex(400, 100, 3, 0)).toEqual(14)
-            expect(calculateMaxVisibleIndex(50, 100, 3, 0)).toEqual(5)
+            expect(calculateMaxVisibleIndex(400, 100, 3, 0, 0)).toEqual(14)
+            expect(calculateMaxVisibleIndex(50, 100, 3, 0, 0)).toEqual(5)
 
         })
 

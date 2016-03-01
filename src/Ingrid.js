@@ -17,7 +17,13 @@ class Ingrid extends Component {
     render() {
         const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more} = this.props
 
-        const total = items.length
+        let total
+
+        if (typeof items.count === `function`) {
+            total = items.count()
+        } else {
+            total = items.length
+        }
 
         return (
             <Display
@@ -38,14 +44,14 @@ Ingrid.childContextTypes = {
     ItemComponent: PropTypes.func,
     itemWidth: PropTypes.number,
     itemHeight: PropTypes.number,
-    items: PropTypes.array
+    items: PropTypes.oneOf([ PropTypes.array, PropTypes.object ])
 }
 
 Ingrid.propTypes = {
     buffer: PropTypes.number,
     itemWidth: PropTypes.number.isRequired,
     itemHeight: PropTypes.number.isRequired,
-    items: PropTypes.array.isRequired,
+    items: PropTypes.oneOf([ PropTypes.array, PropTypes.object ]),
     ItemComponent: PropTypes.func.isRequired
 }
 

@@ -10,16 +10,19 @@ npm install --save react-ingrid
 
 *  *windowing* - render only visible items
 *  relative positioning - all items position relative each other
+*  supports Immutable.js
 
 ## Usage
 ```javascript
 import Ingrid from 'react-ingrid'
 
+// Regular array or Immutable.js List
 const items = [
     {id:1, foo: 'bar'},
     ...
 ]
 
+// Your component must accept 'data' prop.
 const ItemComponent = ({data}) => (
     ...
 )
@@ -49,7 +52,7 @@ const props = {
     itemHeight,
     load: () => ( /* load more items */ ),
     more: Boolean, // has more
-    loading: Boolean 
+    loading: Boolean
 }
 
 <Ingrid {...props} />
@@ -59,6 +62,6 @@ const props = {
 
 [Watch here](http://babotech.github.io/react-ingrid/)
 
-## License 
+## License
 
 **MIT**
