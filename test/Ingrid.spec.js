@@ -36,7 +36,7 @@ describe(`react-ingrid`, () => {
                 ItemComponent: PropTypes.func,
                 itemWidth: PropTypes.number,
                 itemHeight: PropTypes.number,
-                items: PropTypes.array
+                items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ])
             }
 
             try {

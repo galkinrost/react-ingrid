@@ -46,7 +46,7 @@ class Grid extends Component {
 }
 
 Grid.contextTypes = {
-    items: PropTypes.array
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ])
 }
 
 export default Grid
