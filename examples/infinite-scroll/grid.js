@@ -6616,7 +6616,13 @@
 	            var loading = _props2.loading;
 	            var more = _props2.more;
 
-	            var total = items.length;
+	            var total = undefined;
+
+	            if (typeof items.count === 'function') {
+	                total = items.count();
+	            } else {
+	                total = items.length;
+	            }
 
 	            return _react2.default.createElement(_Display2.default, {
 	                buffer: buffer,
@@ -6638,14 +6644,14 @@
 	    ItemComponent: _react.PropTypes.func,
 	    itemWidth: _react.PropTypes.number,
 	    itemHeight: _react.PropTypes.number,
-	    items: _react.PropTypes.array
+	    items: _react.PropTypes.oneOf([_react.PropTypes.array, _react.PropTypes.object])
 	};
 
 	Ingrid.propTypes = {
 	    buffer: _react.PropTypes.number,
 	    itemWidth: _react.PropTypes.number.isRequired,
 	    itemHeight: _react.PropTypes.number.isRequired,
-	    items: _react.PropTypes.array.isRequired,
+	    items: _react.PropTypes.oneOf([_react.PropTypes.array, _react.PropTypes.object]),
 	    ItemComponent: _react.PropTypes.func.isRequired
 	};
 
@@ -11118,7 +11124,7 @@
 	            });
 
 	            return _react2.default.createElement('div', { style: contentStyle }, _react2.default.createElement('div', { style: scrollHelperStyle }), items.slice(minVisibleIndex, maxVisibleIndex + 1).map(function (item) {
-	                return _react2.default.createElement(_Item2.default, { key: item.id, item: item });
+	                return _react2.default.createElement(_Item2.default, { key: typeof item.get === 'function' ? item.get('id') : item.id, item: item });
 	            }));
 	        }
 	    }]);
@@ -11188,8 +11194,7 @@
 	 * @param buffer
 	 * @returns {number}
 	 */
-	var calculateMaxVisibleIndex = exports.calculateMaxVisibleIndex = function calculateMaxVisibleIndex(displayHeight, itemHeight, itemsPerRow, minVisibleIndex) {
-	  var buffer = arguments.length <= 4 || arguments[4] === undefined ? 0 : arguments[4];
+	var calculateMaxVisibleIndex = exports.calculateMaxVisibleIndex = function calculateMaxVisibleIndex(displayHeight, itemHeight, itemsPerRow, minVisibleIndex, buffer) {
 	  return itemHeight && displayHeight ? minVisibleIndex + Math.ceil(displayHeight / itemHeight) * itemsPerRow + buffer * itemsPerRow + itemsPerRow - 1 : minVisibleIndex;
 	};
 
