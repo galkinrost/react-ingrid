@@ -29,9 +29,11 @@ describe(`react-ingrid`, () => {
             ({default: Grid} = require(`../src/Grid`))
 
             GridWithContext = contextify({
-                items: PropTypes.array
+                items: PropTypes.array,
+                paddingTop: PropTypes.number
             }, props => ({
-                items: props.items || []
+                items: props.items || [],
+                paddingTop: props.paddingTop || 0
             }))(Grid)
         })
 
@@ -43,7 +45,8 @@ describe(`react-ingrid`, () => {
         it(`should receive props in the context`, () => {
 
             const context = {
-                items: rndoam.array()
+                items: rndoam.array(),
+                paddingTop: rndoam.number()
             }
 
             const tree = TestUtils
@@ -87,6 +90,20 @@ describe(`react-ingrid`, () => {
             const divs = TestUtils.scryRenderedDOMComponentsWithTag(grid, `div`)
 
             expect(divs[1].style.height).toEqual(`${props.offsetTop}px`)
+        })
+
+        it(`should add paddingTop to helper tag's height`, () => {
+            const props = { offsetTop: 100 }
+            const context = { paddingTop: 50 }
+
+            const grid = TestUtils
+                .renderIntoDocument(
+                    <GridWithContext {...context} {...props} />
+                )
+
+            const divs = TestUtils.scryRenderedDOMComponentsWithTag(grid, `div`)
+
+            expect(divs[1].style.height).toEqual(`${props.offsetTop + context.paddingTop}px`)
         })
 
         it(`should set height of the content area`, () => {
