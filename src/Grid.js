@@ -38,7 +38,7 @@ class Grid extends Component {
                 {items
                     .slice(minVisibleIndex, maxVisibleIndex + 1)
                     .map(item => (
-                        <Item key={item.id} item={item}/>
+                        <Item key={typeof item.get === `function` ? item.get(`id`) : item.id} item={item}/>
                     ))}
             </div>
         )

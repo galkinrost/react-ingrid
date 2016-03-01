@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
 
+import {List} from 'immutable'
 import TestUtils from 'react-addons-test-utils'
 
 import expect from 'expect'
@@ -82,6 +83,30 @@ describe(`react-ingrid`, () => {
             const displayProps = {
                 ...restProps,
                 total: props.items.length
+            }
+            expect(display.props).toEqual(displayProps)
+        })
+
+        it(`should accept Immutable.js data structures`, () => {
+            const props = {
+                buffer: rndoam.number(),
+                itemWidth: rndoam.number(),
+                itemHeight: rndoam.number(),
+                items: List(),
+                load: rndoam.noop(),
+                loading: true,
+                more: true
+            }
+
+            const tree = TestUtils.renderIntoDocument(
+                <Ingrid {...props} />
+            )
+
+            const display = TestUtils.findRenderedComponentWithType(tree, DisplayMock)
+
+            const displayProps = {
+                ...props,
+                total: props.items.count()
             }
             expect(display.props).toEqual(displayProps)
         })
