@@ -38,7 +38,7 @@
   "homepage": "https://github.com/babotech/react-ingrid#readme",
   "devDependencies": {
     "babel-cli": "^6.5.1",
-    "babel-core": "^6.5.2",
+    "babel-core": "^6.6.0",
     "babel-loader": "^6.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.5.0",
     "babel-plugin-transform-react-jsx": "^6.5.0",
@@ -49,6 +49,7 @@
     "eslint-config-babo": "^0.1.1",
     "expect": "^1.14.0",
     "glob": "^7.0.0",
+    "immutable": "^3.7.6",
     "jsdom": "^8.0.2",
     "mocha": "^2.4.5",
     "mockery": "^1.4.0",
