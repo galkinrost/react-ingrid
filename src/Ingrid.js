@@ -44,14 +44,14 @@ Ingrid.childContextTypes = {
     ItemComponent: PropTypes.func,
     itemWidth: PropTypes.number,
     itemHeight: PropTypes.number,
-    items: PropTypes.oneOf([ PropTypes.array, PropTypes.object ])
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ])
 }
 
 Ingrid.propTypes = {
     buffer: PropTypes.number,
     itemWidth: PropTypes.number.isRequired,
     itemHeight: PropTypes.number.isRequired,
-    items: PropTypes.oneOf([ PropTypes.array, PropTypes.object ]),
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     ItemComponent: PropTypes.func.isRequired
 }
 

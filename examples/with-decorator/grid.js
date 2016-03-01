@@ -6582,14 +6582,14 @@
 	    ItemComponent: _react.PropTypes.func,
 	    itemWidth: _react.PropTypes.number,
 	    itemHeight: _react.PropTypes.number,
-	    items: _react.PropTypes.oneOf([_react.PropTypes.array, _react.PropTypes.object])
+	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object])
 	};
 
 	Ingrid.propTypes = {
 	    buffer: _react.PropTypes.number,
 	    itemWidth: _react.PropTypes.number.isRequired,
 	    itemHeight: _react.PropTypes.number.isRequired,
-	    items: _react.PropTypes.oneOf([_react.PropTypes.array, _react.PropTypes.object]),
+	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    ItemComponent: _react.PropTypes.func.isRequired
 	};
 
@@ -11071,7 +11071,7 @@
 	}(_react.Component);
 
 	Grid.contextTypes = {
-	    items: _react.PropTypes.array
+	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object])
 	};
 
 	exports.default = Grid;
