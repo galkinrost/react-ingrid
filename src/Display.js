@@ -43,6 +43,7 @@ const createWindowResizeListener = inst => {
     return inst.windowResizeListener
 }
 
+
 class Display extends Component {
 
     constructor(props) {
@@ -73,6 +74,11 @@ class Display extends Component {
             this.setState(
                 this.calculator.getState()
             )
+        }
+        if (nextProps.itemWidth !== this.props.itemWidth || nextProps.itemHeight !== this.props.itemHeight) {
+            const {itemWidth, itemHeight} = nextProps
+            this.calculator.handleItemsSizeChange(itemWidth, itemHeight)
+            this.setState(this.calculator.getState())
         }
     }
 

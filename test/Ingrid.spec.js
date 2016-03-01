@@ -34,17 +34,19 @@ describe(`react-ingrid`, () => {
         it(`should transfer props into the context`, () => {
             DisplayMock.contextTypes = {
                 ItemComponent: PropTypes.func,
-                itemWidth: PropTypes.number,
                 itemHeight: PropTypes.number,
-                items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ])
+                items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+                itemWidth: PropTypes.number,
+                paddingTop: PropTypes.number
             }
 
             try {
                 const props = {
                     ItemComponent: rndoam.noop(),
-                    itemWidth: rndoam.number(),
                     itemHeight: rndoam.number(),
-                    items: rndoam.array()
+                    items: rndoam.array(),
+                    itemWidth: rndoam.number(),
+                    paddingTop: rndoam.number()
                 }
 
                 const tree = TestUtils.renderIntoDocument(

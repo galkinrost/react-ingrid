@@ -4,13 +4,14 @@ import Display from './Display'
 class Ingrid extends Component {
 
     getChildContext() {
-        const {ItemComponent, itemWidth, itemHeight, items} = this.props
+        const {ItemComponent, itemWidth, itemHeight, items, paddingTop} = this.props
 
         return {
             ItemComponent,
             itemWidth,
             itemHeight,
-            items
+            items,
+            paddingTop
         }
     }
 
@@ -42,17 +43,19 @@ class Ingrid extends Component {
 
 Ingrid.childContextTypes = {
     ItemComponent: PropTypes.func,
-    itemWidth: PropTypes.number,
     itemHeight: PropTypes.number,
-    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ])
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    itemWidth: PropTypes.number,
+    paddingTop: PropTypes.number
 }
 
 Ingrid.propTypes = {
     buffer: PropTypes.number,
-    itemWidth: PropTypes.number.isRequired,
+    ItemComponent: PropTypes.func.isRequired,
     itemHeight: PropTypes.number.isRequired,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    ItemComponent: PropTypes.func.isRequired
+    itemWidth: PropTypes.number.isRequired,
+    paddingTop: PropTypes.number
 }
 
 export default Ingrid
