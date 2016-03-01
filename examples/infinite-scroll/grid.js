@@ -6593,12 +6593,14 @@
 	            var itemWidth = _props.itemWidth;
 	            var itemHeight = _props.itemHeight;
 	            var items = _props.items;
+	            var paddingTop = _props.paddingTop;
 
 	            return {
 	                ItemComponent: ItemComponent,
 	                itemWidth: itemWidth,
 	                itemHeight: itemHeight,
-	                items: items
+	                items: items,
+	                paddingTop: paddingTop
 	            };
 	        }
 	    }, {
@@ -6642,17 +6644,19 @@
 
 	Ingrid.childContextTypes = {
 	    ItemComponent: _react.PropTypes.func,
-	    itemWidth: _react.PropTypes.number,
 	    itemHeight: _react.PropTypes.number,
-	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object])
+	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
+	    itemWidth: _react.PropTypes.number,
+	    paddingTop: _react.PropTypes.number
 	};
 
 	Ingrid.propTypes = {
 	    buffer: _react.PropTypes.number,
-	    itemWidth: _react.PropTypes.number.isRequired,
+	    ItemComponent: _react.PropTypes.func.isRequired,
 	    itemHeight: _react.PropTypes.number.isRequired,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
-	    ItemComponent: _react.PropTypes.func.isRequired
+	    itemWidth: _react.PropTypes.number.isRequired,
+	    paddingTop: _react.PropTypes.number
 	};
 
 	exports.default = Ingrid;
@@ -10975,6 +10979,13 @@
 	                this.calculator.updateTotal(nextProps.total);
 	                this.setState(this.calculator.getState());
 	            }
+	            if (nextProps.itemWidth !== this.props.itemWidth || nextProps.itemHeight !== this.props.itemHeight) {
+	                var itemWidth = nextProps.itemWidth;
+	                var itemHeight = nextProps.itemHeight;
+
+	                this.calculator.handleItemsSizeChange(itemWidth, itemHeight);
+	                this.setState(this.calculator.getState());
+	            }
 	        }
 	    }, {
 	        key: 'componentWillUpdate',
@@ -11112,15 +11123,18 @@
 	            var maxVisibleIndex = _props$maxVisibleInde === undefined ? 0 : _props$maxVisibleInde;
 	            var _props$height = _props.height;
 	            var height = _props$height === undefined ? 0 : _props$height;
-	            var _context$items = this.context.items;
+	            var _context = this.context;
+	            var _context$items = _context.items;
 	            var items = _context$items === undefined ? [] : _context$items;
+	            var _context$paddingTop = _context.paddingTop;
+	            var paddingTop = _context$paddingTop === undefined ? 0 : _context$paddingTop;
 
 	            var contentStyle = {
 	                height: height
 	            };
 
 	            var scrollHelperStyle = _extends({}, defaultScrollHelperStyle, {
-	                height: offsetTop
+	                height: offsetTop + paddingTop
 	            });
 
 	            return _react2.default.createElement('div', { style: contentStyle }, _react2.default.createElement('div', { style: scrollHelperStyle }), items.slice(minVisibleIndex, maxVisibleIndex + 1).map(function (item) {
@@ -11133,7 +11147,8 @@
 	}(_react.Component);
 
 	Grid.contextTypes = {
-	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object])
+	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
+	    paddingTop: _react.PropTypes.number
 	};
 
 	exports.default = Grid;
@@ -11294,6 +11309,18 @@
 	      this.height = calculateHeight(this.total, this.itemsPerRow, this.itemHeight);
 	      this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow);
 	      this.maxVisibleIndex = calculateMaxVisibleIndex(displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer);
+	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight);
+	    }
+	  }, {
+	    key: "handleItemsSizeChange",
+	    value: function handleItemsSizeChange(itemWidth, itemHeight) {
+	      this.itemWidth = itemWidth;
+	      this.itemHeight = itemHeight;
+
+	      this.itemsPerRow = calculateItemsPerRow(this.displayWidth, this.itemWidth);
+	      this.height = calculateHeight(this.total, this.itemsPerRow, this.itemHeight);
+	      this.minVisibleIndex = calculateMinVisibleIndex(this.scrollTop, this.itemHeight, this.itemsPerRow);
+	      this.maxVisibleIndex = calculateMaxVisibleIndex(this.displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer);
 	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight);
 	    }
 
