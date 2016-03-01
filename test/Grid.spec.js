@@ -5,7 +5,8 @@ import TestUtils from 'react-addons-test-utils'
 import contextify from 'react-contextify'
 import expect from 'expect'
 import mockery from 'mockery'
-import rndoam from 'rndoam'
+import rndoam from 'rndoam/lib/withImmutable'
+
 
 class ItemMock extends Component {
     render() {
@@ -110,6 +111,31 @@ describe(`react-ingrid`, () => {
                 minVisibleIndex: 0,
                 maxVisibleIndex: 10,
                 items: rndoam.collection({
+                    id: () => id++
+                }, itemsCount)
+            }
+
+            const grid = TestUtils
+                .renderIntoDocument(
+                    <GridWithContext {...props} />
+                )
+
+            const items = TestUtils.scryRenderedComponentsWithType(grid, ItemMock)
+
+            expect(items.length).toEqual(itemsCount)
+
+            items.forEach((item, i) =>
+                expect(item._reactInternalInstance._currentElement.key).toEqual(i.toString())
+            )
+        })
+
+        it(`should set key for Immutable.js items`, () => {
+            let id = 0
+            const itemsCount = 10
+            const props = {
+                minVisibleIndex: 0,
+                maxVisibleIndex: 10,
+                items: rndoam.immutableCollection({
                     id: () => id++
                 }, itemsCount)
             }

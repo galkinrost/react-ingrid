@@ -24,7 +24,7 @@ export const calculateMinVisibleIndex = (scrollTop, itemHeight, itemsPerRow) => 
  * @param buffer
  * @returns {number}
  */
-export const calculateMaxVisibleIndex = (displayHeight, itemHeight, itemsPerRow, minVisibleIndex, buffer = 0) => itemHeight && displayHeight ? minVisibleIndex + Math.ceil(displayHeight / itemHeight) * itemsPerRow + buffer * itemsPerRow + itemsPerRow - 1 : minVisibleIndex
+export const calculateMaxVisibleIndex = (displayHeight, itemHeight, itemsPerRow, minVisibleIndex, buffer) => itemHeight && displayHeight ? minVisibleIndex + Math.ceil(displayHeight / itemHeight) * itemsPerRow + buffer * itemsPerRow + itemsPerRow - 1 : minVisibleIndex
 
 /**
  *
