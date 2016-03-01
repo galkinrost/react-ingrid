@@ -135,5 +135,28 @@ describe(`react-ingrid`, () => {
 
             expect(calculator.getState()).toEqual(state)
         })
+
+        it(`should update calculator when display&items sizes changes`, () => {
+            const calculator = new GridCalculator({
+                itemHeight: 200,
+                itemWidth: 200,
+                displayWidth: 1200,
+                displayHeight: 800,
+                scrollTop: 0,
+                total: 300
+            })
+
+            // (itemWidth, itemHeight)
+            calculator.handleItemsSizeChange(400, 400)
+
+            expect(calculator.displayHeight).toEqual(800)
+            expect(calculator.displayWidth).toEqual(1200)
+            expect(calculator.scrollTop).toEqual(0)
+            expect(calculator.itemsPerRow).toEqual(3)
+            expect(calculator.offsetTop).toEqual(0)
+            expect(calculator.minVisibleIndex).toEqual(0)
+            expect(calculator.maxVisibleIndex).toEqual(8)
+            expect(calculator.height).toEqual(40000)
+        })
     })
 })
