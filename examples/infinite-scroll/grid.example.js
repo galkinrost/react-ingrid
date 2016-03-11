@@ -78,6 +78,7 @@ class Container extends Component {
             ...defaultProps,
             ...this.state,
             buffer: 10,
+            paddingTop: 100,
             load
         }
 

@@ -4,19 +4,18 @@ import Display from './Display'
 class Ingrid extends Component {
 
     getChildContext() {
-        const {ItemComponent, itemWidth, itemHeight, items, paddingTop} = this.props
+        const {ItemComponent, itemWidth, itemHeight, items} = this.props
 
         return {
             ItemComponent,
             itemWidth,
             itemHeight,
-            items,
-            paddingTop
+            items
         }
     }
 
     render() {
-        const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more} = this.props
+        const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more, paddingTop} = this.props
 
         let total
 
@@ -36,6 +35,7 @@ class Ingrid extends Component {
                 load={load}
                 loading={loading}
                 more={more}
+                paddingTop={paddingTop}
             />
         )
     }
@@ -45,8 +45,7 @@ Ingrid.childContextTypes = {
     ItemComponent: PropTypes.func,
     itemHeight: PropTypes.number,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    itemWidth: PropTypes.number,
-    paddingTop: PropTypes.number
+    itemWidth: PropTypes.number
 }
 
 Ingrid.propTypes = {

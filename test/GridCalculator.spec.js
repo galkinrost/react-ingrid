@@ -24,9 +24,16 @@ describe(`react-ingrid`, () => {
             // ***
             // ***
             // calculateMinVisibleIndex(scrollTop: number, itemHeight: number, itemsPerRow: number)
-            expect(calculateMinVisibleIndex(200, 100, 3)).toEqual(6)
+            expect(calculateMinVisibleIndex(200, 100, 3, 100)).toEqual(3)
 
-            expect(calculateMinVisibleIndex(250, 100, 3)).toEqual(6)
+            expect(calculateMinVisibleIndex(250, 100, 3, 100)).toEqual(3)
+        })
+
+        it(`should correctly calculate minimal visible index when scrollTop < paddingTop`, () => {
+            // ***
+            // ***
+            // calculateMinVisibleIndex(scrollTop: number, itemHeight: number, itemsPerRow: number)
+            expect(calculateMinVisibleIndex(0, 100, 3, 100)).toEqual(0)
         })
 
         it(`should correctly calculate max visible index`, () => {
@@ -40,8 +47,9 @@ describe(`react-ingrid`, () => {
             const minVisibleIndex = 6
             const itemsPerRow = 3
             const itemHeight = 100
+            const paddingTop = 100
 
-            expect(calculateOffsetTop(minVisibleIndex, itemsPerRow, itemHeight)).toEqual(200)
+            expect(calculateOffsetTop(minVisibleIndex, itemsPerRow, itemHeight, paddingTop)).toEqual(300)
         })
 
         it(`should correctly calculate content height`, () => {

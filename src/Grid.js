@@ -47,8 +47,7 @@ class Grid extends Component {
 }
 
 Grid.contextTypes = {
-    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    paddingTop: PropTypes.number
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ])
 }
 
 export default Grid

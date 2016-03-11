@@ -156,6 +156,7 @@
 	            };
 	            var props = _extends({}, defaultProps, this.state, {
 	                buffer: 10,
+	                paddingTop: 100,
 	                load: load
 	            });
 
@@ -6593,14 +6594,12 @@
 	            var itemWidth = _props.itemWidth;
 	            var itemHeight = _props.itemHeight;
 	            var items = _props.items;
-	            var paddingTop = _props.paddingTop;
 
 	            return {
 	                ItemComponent: ItemComponent,
 	                itemWidth: itemWidth,
 	                itemHeight: itemHeight,
-	                items: items,
-	                paddingTop: paddingTop
+	                items: items
 	            };
 	        }
 	    }, {
@@ -6617,8 +6616,9 @@
 	            } : _props2$load;
 	            var loading = _props2.loading;
 	            var more = _props2.more;
+	            var paddingTop = _props2.paddingTop;
 
-	            var total = undefined;
+	            var total = void 0;
 
 	            if (typeof items.count === 'function') {
 	                total = items.count();
@@ -6634,7 +6634,8 @@
 	                total: total,
 	                load: load,
 	                loading: loading,
-	                more: more
+	                more: more,
+	                paddingTop: paddingTop
 	            });
 	        }
 	    }]);
@@ -6646,8 +6647,7 @@
 	    ItemComponent: _react.PropTypes.func,
 	    itemHeight: _react.PropTypes.number,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
-	    itemWidth: _react.PropTypes.number,
-	    paddingTop: _react.PropTypes.number
+	    itemWidth: _react.PropTypes.number
 	};
 
 	Ingrid.propTypes = {
@@ -10944,8 +10944,9 @@
 	        var itemHeight = props.itemHeight;
 	        var total = props.total;
 	        var buffer = props.buffer;
+	        var paddingTop = props.paddingTop;
 
-	        _this.calculator = new _GridCalculator2.default({ itemWidth: itemWidth, itemHeight: itemHeight, total: total, buffer: buffer });
+	        _this.calculator = new _GridCalculator2.default({ itemWidth: itemWidth, itemHeight: itemHeight, total: total, buffer: buffer, paddingTop: paddingTop });
 
 	        _this.state = _this.calculator.getState();
 	        return _this;
@@ -11147,8 +11148,7 @@
 	}(_react.Component);
 
 	Grid.contextTypes = {
-	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
-	    paddingTop: _react.PropTypes.number
+	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object])
 	};
 
 	exports.default = Grid;
@@ -11196,8 +11196,8 @@
 	 * @param itemsPerRow
 	 * @returns {number}
 	 */
-	var calculateMinVisibleIndex = exports.calculateMinVisibleIndex = function calculateMinVisibleIndex(scrollTop, itemHeight, itemsPerRow) {
-	  return itemHeight ? Math.floor(scrollTop / itemHeight) * itemsPerRow : 0;
+	var calculateMinVisibleIndex = exports.calculateMinVisibleIndex = function calculateMinVisibleIndex(scrollTop, itemHeight, itemsPerRow, paddingTop) {
+	  return scrollTop >= paddingTop && itemHeight ? Math.floor((scrollTop - paddingTop) / itemHeight) * itemsPerRow : 0;
 	};
 
 	/**
@@ -11219,8 +11219,8 @@
 	 * @param itemsPerRow
 	 * @param itemHeight
 	 */
-	var calculateOffsetTop = exports.calculateOffsetTop = function calculateOffsetTop(minVisibleIndex, itemsPerRow, itemHeight) {
-	  return minVisibleIndex / itemsPerRow * itemHeight;
+	var calculateOffsetTop = exports.calculateOffsetTop = function calculateOffsetTop(minVisibleIndex, itemsPerRow, itemHeight, paddingTop) {
+	  return minVisibleIndex / itemsPerRow * itemHeight + paddingTop;
 	};
 
 	/**
@@ -11274,6 +11274,8 @@
 	    var height = _ref$height === undefined ? 0 : _ref$height;
 	    var _ref$total = _ref.total;
 	    var total = _ref$total === undefined ? 0 : _ref$total;
+	    var _ref$paddingTop = _ref.paddingTop;
+	    var paddingTop = _ref$paddingTop === undefined ? 0 : _ref$paddingTop;
 
 	    _classCallCheck(this, GridCalculator);
 
@@ -11288,6 +11290,7 @@
 	    this.minVisibleIndex = minVisibleIndex;
 	    this.maxVisibleIndex = maxVisibleIndex;
 	    this.height = height;
+	    this.paddingTop = paddingTop;
 	    this.total = total;
 	  }
 
@@ -11307,9 +11310,9 @@
 
 	      this.itemsPerRow = calculateItemsPerRow(displayWidth, this.itemWidth);
 	      this.height = calculateHeight(this.total, this.itemsPerRow, this.itemHeight);
-	      this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow);
+	      this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow, this.paddingTop);
 	      this.maxVisibleIndex = calculateMaxVisibleIndex(displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer);
-	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight);
+	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight, this.paddingTop);
 	    }
 	  }, {
 	    key: "handleItemsSizeChange",
@@ -11319,9 +11322,9 @@
 
 	      this.itemsPerRow = calculateItemsPerRow(this.displayWidth, this.itemWidth);
 	      this.height = calculateHeight(this.total, this.itemsPerRow, this.itemHeight);
-	      this.minVisibleIndex = calculateMinVisibleIndex(this.scrollTop, this.itemHeight, this.itemsPerRow);
+	      this.minVisibleIndex = calculateMinVisibleIndex(this.scrollTop, this.itemHeight, this.itemsPerRow, this.paddingTop);
 	      this.maxVisibleIndex = calculateMaxVisibleIndex(this.displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer);
-	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight);
+	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight, this.paddingTop);
 	    }
 
 	    /**
@@ -11335,9 +11338,9 @@
 	      this.scrollTop = scrollTop;
 
 	      this.itemsPerRow = calculateItemsPerRow(this.displayWidth, this.itemWidth);
-	      this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow);
+	      this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow, this.paddingTop);
 	      this.maxVisibleIndex = calculateMaxVisibleIndex(this.displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer);
-	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight);
+	      this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight, this.paddingTop);
 	    }
 
 	    /**

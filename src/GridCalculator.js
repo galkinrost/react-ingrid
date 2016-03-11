@@ -13,7 +13,7 @@ export const calculateItemsPerRow = (displayWidth, itemWidth) => Math.floor(disp
  * @param itemsPerRow
  * @returns {number}
  */
-export const calculateMinVisibleIndex = (scrollTop, itemHeight, itemsPerRow) => itemHeight ? Math.floor(scrollTop / itemHeight) * itemsPerRow : 0
+export const calculateMinVisibleIndex = (scrollTop, itemHeight, itemsPerRow, paddingTop) => scrollTop >= paddingTop && itemHeight ? Math.floor((scrollTop - paddingTop) / itemHeight) * itemsPerRow : 0
 
 /**
  *
@@ -32,7 +32,7 @@ export const calculateMaxVisibleIndex = (displayHeight, itemHeight, itemsPerRow,
  * @param itemsPerRow
  * @param itemHeight
  */
-export const calculateOffsetTop = (minVisibleIndex, itemsPerRow, itemHeight) => minVisibleIndex / itemsPerRow * itemHeight
+export const calculateOffsetTop = (minVisibleIndex, itemsPerRow, itemHeight, paddingTop) => minVisibleIndex / itemsPerRow * itemHeight + paddingTop
 
 /**
  *
@@ -67,7 +67,8 @@ class GridCalculator {
         minVisibleIndex = 0,
         maxVisibleIndex = 0,
         height = 0,
-        total = 0
+        total = 0,
+        paddingTop = 0
         } = {}) {
         this.displayWidth = displayWidth
         this.displayHeight = displayHeight
@@ -80,6 +81,7 @@ class GridCalculator {
         this.minVisibleIndex = minVisibleIndex
         this.maxVisibleIndex = maxVisibleIndex
         this.height = height
+        this.paddingTop = paddingTop
         this.total = total
     }
 
@@ -97,9 +99,9 @@ class GridCalculator {
 
         this.itemsPerRow = calculateItemsPerRow(displayWidth, this.itemWidth)
         this.height = calculateHeight(this.total, this.itemsPerRow, this.itemHeight)
-        this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow)
+        this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow, this.paddingTop)
         this.maxVisibleIndex = calculateMaxVisibleIndex(displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer)
-        this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight)
+        this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight, this.paddingTop)
     }
 
     handleItemsSizeChange(itemWidth, itemHeight) {
@@ -109,9 +111,9 @@ class GridCalculator {
 
         this.itemsPerRow = calculateItemsPerRow(this.displayWidth, this.itemWidth)
         this.height = calculateHeight(this.total, this.itemsPerRow, this.itemHeight)
-        this.minVisibleIndex = calculateMinVisibleIndex(this.scrollTop, this.itemHeight, this.itemsPerRow)
+        this.minVisibleIndex = calculateMinVisibleIndex(this.scrollTop, this.itemHeight, this.itemsPerRow, this.paddingTop)
         this.maxVisibleIndex = calculateMaxVisibleIndex(this.displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer)
-        this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight)
+        this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight, this.paddingTop)
     }
 
     /**
@@ -122,9 +124,9 @@ class GridCalculator {
         this.scrollTop = scrollTop
 
         this.itemsPerRow = calculateItemsPerRow(this.displayWidth, this.itemWidth)
-        this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow)
+        this.minVisibleIndex = calculateMinVisibleIndex(scrollTop, this.itemHeight, this.itemsPerRow, this.paddingTop)
         this.maxVisibleIndex = calculateMaxVisibleIndex(this.displayHeight, this.itemHeight, this.itemsPerRow, this.minVisibleIndex, this.buffer)
-        this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight)
+        this.offsetTop = calculateOffsetTop(this.minVisibleIndex, this.itemsPerRow, this.itemHeight, this.paddingTop)
     }
 
     /**

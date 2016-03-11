@@ -36,8 +36,7 @@ describe(`react-ingrid`, () => {
                 ItemComponent: PropTypes.func,
                 itemHeight: PropTypes.number,
                 items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-                itemWidth: PropTypes.number,
-                paddingTop: PropTypes.number
+                itemWidth: PropTypes.number
             }
 
             try {
@@ -45,8 +44,7 @@ describe(`react-ingrid`, () => {
                     ItemComponent: rndoam.noop(),
                     itemHeight: rndoam.number(),
                     items: rndoam.array(),
-                    itemWidth: rndoam.number(),
-                    paddingTop: rndoam.number()
+                    itemWidth: rndoam.number()
                 }
 
                 const tree = TestUtils.renderIntoDocument(
@@ -71,7 +69,8 @@ describe(`react-ingrid`, () => {
                 items: rndoam.array(),
                 load: rndoam.noop(),
                 loading: true,
-                more: true
+                more: true,
+                paddingTop: rndoam.number()
             }
 
             const tree = TestUtils.renderIntoDocument(
@@ -91,13 +90,7 @@ describe(`react-ingrid`, () => {
 
         it(`should accept Immutable.js data structures`, () => {
             const props = {
-                buffer: rndoam.number(),
-                itemWidth: rndoam.number(),
-                itemHeight: rndoam.number(),
-                items: List(),
-                load: rndoam.noop(),
-                loading: true,
-                more: true
+                items: List(rndoam.array())
             }
 
             const tree = TestUtils.renderIntoDocument(
@@ -106,11 +99,7 @@ describe(`react-ingrid`, () => {
 
             const display = TestUtils.findRenderedComponentWithType(tree, DisplayMock)
 
-            const displayProps = {
-                ...props,
-                total: props.items.count()
-            }
-            expect(display.props).toEqual(displayProps)
+            expect(display.props.total).toEqual(props.items.count())
         })
     })
 })
