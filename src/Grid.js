@@ -17,11 +17,12 @@ class Grid extends Component {
             minVisibleIndex = 0,
             maxVisibleIndex = 0,
             height = 0
-            } = this.props
+        } = this.props
 
         const {
-            items = []
-            } = this.context
+            items = [],
+            paddingTop = 0
+        } = this.context
 
         const contentStyle = {
             height
@@ -29,7 +30,7 @@ class Grid extends Component {
 
         const scrollHelperStyle = {
             ...defaultScrollHelperStyle,
-            height: offsetTop
+            height: offsetTop + paddingTop
         }
 
         return (
@@ -38,7 +39,7 @@ class Grid extends Component {
                 {items
                     .slice(minVisibleIndex, maxVisibleIndex + 1)
                     .map(item => (
-                        <Item key={item.id} item={item}/>
+                        <Item key={typeof item.get === `function` ? item.get(`id`) : item.id} item={item}/>
                     ))}
             </div>
         )
@@ -46,7 +47,8 @@ class Grid extends Component {
 }
 
 Grid.contextTypes = {
-    items: PropTypes.array
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    paddingTop: PropTypes.number
 }
 
 export default Grid
