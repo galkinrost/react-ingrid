@@ -48,8 +48,8 @@ class Display extends Component {
 
     constructor(props) {
         super()
-        const {itemWidth, itemHeight, total, buffer} = props
-        this.calculator = new GridCalculator({itemWidth, itemHeight, total, buffer})
+        const {itemWidth, itemHeight, total, buffer, paddingTop} = props
+        this.calculator = new GridCalculator({itemWidth, itemHeight, total, buffer, paddingTop})
 
         this.state = this.calculator.getState()
     }

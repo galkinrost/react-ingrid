@@ -38,7 +38,8 @@ const props = {
     ItemComponent,
     items,
     itemWidth: 100,
-    itemHeight: 100
+    itemHeight: 100,
+    paddingTop: 100
 }
 
 const wrapperStyle = {
