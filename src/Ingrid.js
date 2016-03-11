@@ -4,20 +4,27 @@ import Display from './Display'
 class Ingrid extends Component {
 
     getChildContext() {
-        const {ItemComponent, itemWidth, itemHeight, items} = this.props
+        const {ItemComponent, itemWidth, itemHeight, items, paddingTop} = this.props
 
         return {
             ItemComponent,
             itemWidth,
             itemHeight,
-            items
+            items,
+            paddingTop
         }
     }
 
     render() {
         const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more} = this.props
 
-        const total = items.length
+        let total
+
+        if (typeof items.count === `function`) {
+            total = items.count()
+        } else {
+            total = items.length
+        }
 
         return (
             <Display
@@ -36,17 +43,19 @@ class Ingrid extends Component {
 
 Ingrid.childContextTypes = {
     ItemComponent: PropTypes.func,
-    itemWidth: PropTypes.number,
     itemHeight: PropTypes.number,
-    items: PropTypes.array
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    itemWidth: PropTypes.number,
+    paddingTop: PropTypes.number
 }
 
 Ingrid.propTypes = {
     buffer: PropTypes.number,
-    itemWidth: PropTypes.number.isRequired,
+    ItemComponent: PropTypes.func.isRequired,
     itemHeight: PropTypes.number.isRequired,
-    items: PropTypes.array.isRequired,
-    ItemComponent: PropTypes.func.isRequired
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    itemWidth: PropTypes.number.isRequired,
+    paddingTop: PropTypes.number
 }
 
 export default Ingrid

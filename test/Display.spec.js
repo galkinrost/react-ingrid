@@ -396,5 +396,47 @@ describe(`react-ingrid`, () => {
 
             restoreDisplay()
         })
+
+        it(`should update state on window&items resize`, () => {
+            class DisplayTest extends Component {
+                constructor() {
+                    super()
+                    this.state = {
+                        itemWidth: 100,
+                        itemHeight: 100,
+                        total: 4
+                    }
+                }
+                componentDidMount() {
+                    this.setState({
+                        itemWidth: 200,
+                        itemHeight: 200
+                    })
+                }
+                render() {
+                    return (
+                        <Display {...this.state} />
+                    )
+                }
+            }
+
+            const restoreDisplay = setDisplayClientBoundingRect({
+                width: 400,
+                height: 400
+            })
+
+            const tree = TestUtils.renderIntoDocument(
+                <DisplayTest />
+            )
+
+            const display = TestUtils.findRenderedComponentWithType(tree, Display)
+
+            const expectedHeight = 400
+
+            expect(display.state.height)
+                .toEqual(expectedHeight)
+
+            restoreDisplay()
+        })
     })
 })
