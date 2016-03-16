@@ -1,6 +1,6 @@
 # React Infinite Grid [![Build Status](https://travis-ci.org/babotech/react-ingrid.svg?branch=master)](https://travis-ci.org/babotech/react-ingrid)
 
-![Demo](https://github.com/babotech/react-ingrid/tree/master/examples/ingrid_demo.gif)
+![Demo](https://raw.githubusercontent.com/babotech/react-ingrid/master/examples/ingrid_demo.gif)
 
 _Hint: Pay attention to the DOM._
 
