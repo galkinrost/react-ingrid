@@ -224,7 +224,7 @@ export const handleGridScroll = value => (dispatch, getState) => {
             action: 'HIDE_MENU'
         })
     }
-    if (isMobile && (value < menuHeight))  {
+    if (isMobile && (value < menuHeight)) {
         dispatch({
             action: 'SHOW_MENU'
         })
