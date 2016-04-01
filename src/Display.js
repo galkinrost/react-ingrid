@@ -56,8 +56,13 @@ class Display extends Component {
 
     componentDidMount() {
         const {scrollTop, width, height} = getDisplaySize(this)
-        this.calculator.updateDisplaySize(width, height, scrollTop)
+        const {getPaddingTop} = this.props
 
+        if (typeof getPaddingTop === `function`) {
+            getPaddingTop(scrollTop)
+        }
+
+        this.calculator.updateDisplaySize(width, height, scrollTop)
         this.setState(this.calculator.getState())
 
         this.display.addEventListener(`scroll`, createScrollListener(this))
