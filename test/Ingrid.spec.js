@@ -70,7 +70,8 @@ describe(`react-ingrid`, () => {
                 load: rndoam.noop(),
                 loading: true,
                 more: true,
-                paddingTop: rndoam.number()
+                paddingTop: rndoam.number(),
+                getPaddingTop: rndoam.noop()
             }
 
             const tree = TestUtils.renderIntoDocument(

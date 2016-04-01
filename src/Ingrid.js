@@ -15,7 +15,7 @@ class Ingrid extends Component {
     }
 
     render() {
-        const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more, paddingTop} = this.props
+        const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more, paddingTop, getPaddingTop} = this.props
 
         let total
 
@@ -36,6 +36,7 @@ class Ingrid extends Component {
                 loading={loading}
                 more={more}
                 paddingTop={paddingTop}
+                getPaddingTop={getPaddingTop}
             />
         )
     }
@@ -54,7 +55,8 @@ Ingrid.propTypes = {
     itemHeight: PropTypes.number.isRequired,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     itemWidth: PropTypes.number.isRequired,
-    paddingTop: PropTypes.number
+    paddingTop: PropTypes.number,
+    getPaddingTop: PropTypes.func
 }
 
 export default Ingrid
