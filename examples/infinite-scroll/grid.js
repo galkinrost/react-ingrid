@@ -10963,11 +10963,6 @@
 	            var scrollTop = _getDisplaySize3.scrollTop;
 	            var width = _getDisplaySize3.width;
 	            var height = _getDisplaySize3.height;
-	            var getPaddingTop = this.props.getPaddingTop;
-
-	            if (typeof getPaddingTop === 'function') {
-	                getPaddingTop(scrollTop);
-	            }
 
 	            this.calculator.updateDisplaySize(width, height, scrollTop);
 	            this.setState(this.calculator.getState());
@@ -11002,10 +10997,17 @@
 	            var load = nextProps.load;
 	            var loading = nextProps.loading;
 	            var more = nextProps.more;
+	            var getPaddingTop = nextProps.getPaddingTop;
+	            var paddingTop = nextProps.paddingTop;
 	            var maxVisibleIndex = nextState.maxVisibleIndex;
+	            var offsetTop = nextState.offsetTop;
 
 	            if (more && !loading && maxVisibleIndex > total) {
 	                load();
+	            }
+
+	            if (typeof getPaddingTop === 'function') {
+	                getPaddingTop(offsetTop + paddingTop);
 	            }
 	        }
 	    }, {
