@@ -6617,8 +6617,9 @@
 	            var loading = _props2.loading;
 	            var more = _props2.more;
 	            var paddingTop = _props2.paddingTop;
+	            var getPaddingTop = _props2.getPaddingTop;
 
-	            var total = void 0;
+	            var total = undefined;
 
 	            if (typeof items.count === 'function') {
 	                total = items.count();
@@ -6635,7 +6636,8 @@
 	                load: load,
 	                loading: loading,
 	                more: more,
-	                paddingTop: paddingTop
+	                paddingTop: paddingTop,
+	                getPaddingTop: getPaddingTop
 	            });
 	        }
 	    }]);
@@ -6656,7 +6658,8 @@
 	    itemHeight: _react.PropTypes.number.isRequired,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number.isRequired,
-	    paddingTop: _react.PropTypes.number
+	    paddingTop: _react.PropTypes.number,
+	    getPaddingTop: _react.PropTypes.func
 	};
 
 	exports.default = Ingrid;
@@ -10960,9 +10963,13 @@
 	            var scrollTop = _getDisplaySize3.scrollTop;
 	            var width = _getDisplaySize3.width;
 	            var height = _getDisplaySize3.height;
+	            var getPaddingTop = this.props.getPaddingTop;
+
+	            if (typeof getPaddingTop === 'function') {
+	                getPaddingTop(scrollTop);
+	            }
 
 	            this.calculator.updateDisplaySize(width, height, scrollTop);
-
 	            this.setState(this.calculator.getState());
 
 	            this.display.addEventListener('scroll', createScrollListener(this));
