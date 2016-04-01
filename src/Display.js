@@ -56,11 +56,6 @@ class Display extends Component {
 
     componentDidMount() {
         const {scrollTop, width, height} = getDisplaySize(this)
-        const {getPaddingTop} = this.props
-
-        if (typeof getPaddingTop === `function`) {
-            getPaddingTop(scrollTop)
-        }
 
         this.calculator.updateDisplaySize(width, height, scrollTop)
         this.setState(this.calculator.getState())
@@ -88,10 +83,15 @@ class Display extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        const {total, load, loading, more} = nextProps
-        const {maxVisibleIndex} = nextState
+        const {total, load, loading, more, getPaddingTop, paddingTop} = nextProps
+        const {maxVisibleIndex, offsetTop} = nextState
+
         if (more && !loading && maxVisibleIndex > total) {
             load()
+        }
+
+        if (typeof getPaddingTop === `function`) {
+            getPaddingTop(offsetTop + paddingTop)
         }
     }
 
