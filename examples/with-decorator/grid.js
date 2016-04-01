@@ -6554,8 +6554,9 @@
 	            var loading = _props2.loading;
 	            var more = _props2.more;
 	            var paddingTop = _props2.paddingTop;
+	            var getPaddingTop = _props2.getPaddingTop;
 
-	            var total = void 0;
+	            var total = undefined;
 
 	            if (typeof items.count === 'function') {
 	                total = items.count();
@@ -6572,7 +6573,8 @@
 	                load: load,
 	                loading: loading,
 	                more: more,
-	                paddingTop: paddingTop
+	                paddingTop: paddingTop,
+	                getPaddingTop: getPaddingTop
 	            });
 	        }
 	    }]);
@@ -6593,7 +6595,8 @@
 	    itemHeight: _react.PropTypes.number.isRequired,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number.isRequired,
-	    paddingTop: _react.PropTypes.number
+	    paddingTop: _react.PropTypes.number,
+	    getPaddingTop: _react.PropTypes.func
 	};
 
 	exports.default = Ingrid;
@@ -10899,7 +10902,6 @@
 	            var height = _getDisplaySize3.height;
 
 	            this.calculator.updateDisplaySize(width, height, scrollTop);
-
 	            this.setState(this.calculator.getState());
 
 	            this.display.addEventListener('scroll', createScrollListener(this));
@@ -10932,10 +10934,17 @@
 	            var load = nextProps.load;
 	            var loading = nextProps.loading;
 	            var more = nextProps.more;
+	            var getPaddingTop = nextProps.getPaddingTop;
+	            var paddingTop = nextProps.paddingTop;
 	            var maxVisibleIndex = nextState.maxVisibleIndex;
+	            var offsetTop = nextState.offsetTop;
 
 	            if (more && !loading && maxVisibleIndex > total) {
 	                load();
+	            }
+
+	            if (typeof getPaddingTop === 'function') {
+	                getPaddingTop(offsetTop + paddingTop);
 	            }
 	        }
 	    }, {
