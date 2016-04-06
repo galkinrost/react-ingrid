@@ -59,6 +59,7 @@ const Grid = ingrid(props => props)(ItemComponent)
 * [`more`](#moreProp)
 * [`loading`](#loadingProp)
 * [`paddingTop`](#paddingTopProp)
+* [`paddingLeft`](#paddingLeftProp)
 * [`onScrollChange`](#onScrollChangeProp)
 
 
@@ -185,6 +186,10 @@ You might want to add extra padding on top. This is the best place to do it :win
 
 <b>Note:</b> Do not do it via CSS — Ingrid will not be able to calculate the top of the container, and everything will shake.
 
+<a name="paddingLeftProp"></a>
+#### paddingLeft (optional)
+
+The same is as the [`paddingTop`](#paddingTopProp) but for the left side
 
 <a name="onScrollChangeProp"></a>
 #### getPaddingTop (optional)
