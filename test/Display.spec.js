@@ -447,7 +447,7 @@ describe(`react-ingrid`, () => {
                 <Display paddingLeft={paddingLeft}/>
             )
 
-            const [display] = TestUtils.scryRenderedDOMComponentsWithTag(tree, `div`)
+            const [ display ] = TestUtils.scryRenderedDOMComponentsWithTag(tree, `div`)
 
             expect(display.style.paddingLeft).toEqual(`${paddingLeft}px`)
             expect(display.style.boxSizing).toEqual(`border-box`)
