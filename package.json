@@ -1,6 +1,6 @@
 {
   "name": "react-ingrid",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "React infinite grid",
   "files": [
     "dist",
@@ -14,8 +14,10 @@
     "build:umd": "cross-env NODE_ENV=development webpack src/index.js dist/react-ingrid.js",
     "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/react-ingrid.min.js",
     "build": "npm run build:lib && npm run build:examples && npm run build:umd && npm run build:umd:min && node ./prepublish",
+    "clean": "rimraf lib dist",
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src test",
+    "prepublish": "npm run clean && npm run build",
     "test": "mocha --compilers js:babel-register --recursive --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
   },
@@ -57,6 +59,7 @@
     "react-addons-test-utils": "^0.14.7",
     "react-contextify": "^0.1.0",
     "react-dom": "^0.14.7",
+    "rimraf": "^2.5.2",
     "rndoam": "^0.1.0",
     "webpack": "^1.12.13"
   },

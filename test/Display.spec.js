@@ -244,7 +244,7 @@ describe(`react-ingrid`, () => {
 
             expect(spyRemoveListener.calls.length).toEqual(1)
 
-            expect(spyAddListener.calls[0].arguments[1]).toEqual(spyRemoveListener.calls[0].arguments[1])
+            expect(spyAddListener.calls[ 0 ].arguments[ 1 ]).toEqual(spyRemoveListener.calls[ 0 ].arguments[ 1 ])
         })
 
         it(`should call the load method when maxVisibleIndex greater than total`, () => {
@@ -407,12 +407,14 @@ describe(`react-ingrid`, () => {
                         total: 4
                     }
                 }
+
                 componentDidMount() {
                     this.setState({
                         itemWidth: 200,
                         itemHeight: 200
                     })
                 }
+
                 render() {
                     return (
                         <Display {...this.state} />
@@ -437,6 +439,18 @@ describe(`react-ingrid`, () => {
                 .toEqual(expectedHeight)
 
             restoreDisplay()
+        })
+
+        it(`should set correct style`, () => {
+            const paddingLeft = 100
+            const tree = TestUtils.renderIntoDocument(
+                <Display paddingLeft={paddingLeft}/>
+            )
+
+            const [ display ] = TestUtils.scryRenderedDOMComponentsWithTag(tree, `div`)
+
+            expect(display.style.paddingLeft).toEqual(`${paddingLeft}px`)
+            expect(display.style.boxSizing).toEqual(`border-box`)
         })
     })
 })

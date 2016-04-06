@@ -14,10 +14,12 @@ describe(`react-ingrid`, () => {
     describe(`GridCalculator`, () => {
 
         it(`should correctly calculate items per row`, () => {
-            // calculateItemsPerRow(displayWidth: number, itemWidth: number)
+            // calculateItemsPerRow(displayWidth: number, itemWidth: number, paddingLeft: number)
             expect(calculateItemsPerRow(800, 400)).toEqual(2)
             expect(calculateItemsPerRow(600, 400)).toEqual(1)
             expect(calculateItemsPerRow(300, 400)).toEqual(1)
+
+            expect(calculateItemsPerRow(400, 200, 200)).toEqual(1)
         })
 
         it(`should correctly calculate minimal visible index`, () => {
