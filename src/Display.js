@@ -3,11 +3,12 @@ import React, {Component} from 'react'
 import Grid from './Grid'
 import GridCalculator from './GridCalculator'
 
-const displayStyle = {
+const defaultDisplayStyle = {
     height: `100%`,
     overflowX: `hidden`,
     overflowY: `scroll`,
     position: `relative`,
+    boxSizing: `border-box`,
     width: `100%`
 }
 
@@ -48,8 +49,8 @@ class Display extends Component {
 
     constructor(props) {
         super()
-        const {itemWidth, itemHeight, total, buffer, paddingTop} = props
-        this.calculator = new GridCalculator({itemWidth, itemHeight, total, buffer, paddingTop})
+        const {itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop} = props
+        this.calculator = new GridCalculator({itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop})
 
         this.state = this.calculator.getState()
     }
@@ -105,7 +106,12 @@ class Display extends Component {
 
     render() {
 
-        const {total} = this.props
+        const {total, paddingLeft} = this.props
+
+        const displayStyle = {
+            ...defaultDisplayStyle,
+            paddingLeft
+        }
 
         return (
             <div ref={display => {
