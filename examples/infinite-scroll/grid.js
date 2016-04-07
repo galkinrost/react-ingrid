@@ -6556,7 +6556,7 @@
 	var _Display2 = _interopRequireDefault(_Display);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { default: obj };
+	    return obj && obj.__esModule ? obj : { "default": obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
@@ -6628,7 +6628,7 @@
 	                total = items.length;
 	            }
 
-	            return _react2.default.createElement(_Display2.default, {
+	            return _react2["default"].createElement(_Display2["default"], {
 	                buffer: buffer,
 	                items: items,
 	                itemWidth: itemWidth,
@@ -6664,7 +6664,7 @@
 	    getPaddingTop: _react.PropTypes.func
 	};
 
-	exports.default = Ingrid;
+	exports["default"] = Ingrid;
 
 /***/ },
 /* 53 */
@@ -10859,7 +10859,7 @@
 	var _GridCalculator2 = _interopRequireDefault(_GridCalculator);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { default: obj };
+	    return obj && obj.__esModule ? obj : { "default": obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
@@ -10953,7 +10953,7 @@
 	        var paddingLeft = props.paddingLeft;
 	        var paddingTop = props.paddingTop;
 
-	        _this.calculator = new _GridCalculator2.default({ itemWidth: itemWidth, itemHeight: itemHeight, total: total, buffer: buffer, paddingLeft: paddingLeft, paddingTop: paddingTop });
+	        _this.calculator = new _GridCalculator2["default"]({ itemWidth: itemWidth, itemHeight: itemHeight, total: total, buffer: buffer, paddingLeft: paddingLeft, paddingTop: paddingTop });
 
 	        _this.state = _this.calculator.getState();
 	        return _this;
@@ -11037,21 +11037,21 @@
 	                paddingLeft: paddingLeft
 	            });
 
-	            return _react2.default.createElement('div', { ref: function ref(display) {
+	            return _react2["default"].createElement('div', { ref: function ref(display) {
 	                    _this2.display = display;
 	                },
 	                style: displayStyle
-	            }, _react2.default.createElement('div', { ref: function ref(content) {
+	            }, _react2["default"].createElement('div', { ref: function ref(content) {
 	                    _this2.content = content;
 	                }, style: contentStyle
-	            }, _react2.default.createElement(_Grid2.default, _extends({ total: total }, this.state))));
+	            }, _react2["default"].createElement(_Grid2["default"], _extends({ total: total }, this.state))));
 	        }
 	    }]);
 
 	    return Display;
 	}(_react.Component);
 
-	exports.default = Display;
+	exports["default"] = Display;
 
 /***/ },
 /* 90 */
@@ -11094,7 +11094,7 @@
 	var _Item2 = _interopRequireDefault(_Item);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { default: obj };
+	    return obj && obj.__esModule ? obj : { "default": obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
@@ -11157,8 +11157,8 @@
 	                height: offsetTop + paddingTop
 	            });
 
-	            return _react2.default.createElement('div', { style: contentStyle }, _react2.default.createElement('div', { style: scrollHelperStyle }), items.slice(minVisibleIndex, maxVisibleIndex + 1).map(function (item) {
-	                return _react2.default.createElement(_Item2.default, { key: typeof item.get === 'function' ? item.get('id') : item.id, item: item });
+	            return _react2["default"].createElement('div', { style: contentStyle }, _react2["default"].createElement('div', { style: scrollHelperStyle }), items.slice(minVisibleIndex, maxVisibleIndex + 1).map(function (item) {
+	                return _react2["default"].createElement(_Item2["default"], { key: typeof item.get === 'function' ? item.get('id') : item.id, item: item });
 	            }));
 	        }
 	    }]);
@@ -11170,7 +11170,7 @@
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object])
 	};
 
-	exports.default = Grid;
+	exports["default"] = Grid;
 
 /***/ },
 /* 91 */
@@ -11380,7 +11380,7 @@
 
 	    /**
 	     *
-	     * @returns {{minVisibleIndex: *, maxVisibleIndex: *, offsetTop: *}}
+	     * @returns {{minVisibleIndex: * maxVisibleIndex: * offsetTop: *}}
 	     */
 
 	  }, {
@@ -11398,7 +11398,7 @@
 	  return GridCalculator;
 	}();
 
-	exports.default = GridCalculator;
+	exports["default"] = GridCalculator;
 
 /***/ },
 /* 92 */
@@ -11437,7 +11437,7 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { default: obj };
+	    return obj && obj.__esModule ? obj : { "default": obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
@@ -11461,6 +11461,7 @@
 	var defaultItemStyle = {
 	    display: 'inline-block',
 	    position: 'relative',
+	    verticalAlign: 'bottom',
 	    width: 0,
 	    height: 0
 	};
@@ -11488,7 +11489,7 @@
 	                height: itemHeight
 	            });
 
-	            return _react2.default.createElement('div', { style: itemStyle }, _react2.default.createElement(ItemComponent, { data: item }));
+	            return _react2["default"].createElement('div', { style: itemStyle }, _react2["default"].createElement(ItemComponent, { data: item }));
 	        }
 	    }]);
 
@@ -11501,7 +11502,7 @@
 	    itemHeight: _react.PropTypes.number
 	};
 
-	exports.default = Item;
+	exports["default"] = Item;
 
 /***/ },
 /* 93 */
@@ -11523,11 +11524,11 @@
 	var _ingridDecorator2 = _interopRequireDefault(_ingridDecorator);
 
 	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
+	  return obj && obj.__esModule ? obj : { "default": obj };
 	}
 
-	exports.ingrid = _ingridDecorator2.default;
-	exports.default = _Ingrid2.default;
+	exports.ingrid = _ingridDecorator2["default"];
+	exports["default"] = _Ingrid2["default"];
 
 /***/ },
 /* 94 */
@@ -11558,7 +11559,7 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { default: obj };
+	    return obj && obj.__esModule ? obj : { "default": obj };
 	}
 
 	var ingrid = function ingrid() {
@@ -11567,12 +11568,12 @@
 	    } : arguments[0];
 	    return function (ItemComponent) {
 	        return function (props) {
-	            return _react2.default.createElement(_Ingrid2.default, _extends({}, mapProps(props), { ItemComponent: ItemComponent }));
+	            return _react2["default"].createElement(_Ingrid2["default"], _extends({}, mapProps(props), { ItemComponent: ItemComponent }));
 	        };
 	    };
 	};
 
-	exports.default = ingrid;
+	exports["default"] = ingrid;
 
 /***/ },
 /* 95 */

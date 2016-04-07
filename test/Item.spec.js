@@ -75,5 +75,20 @@ describe(`react-ingrid`, () => {
             expect(divs[0].style.width).toEqual(`${props.itemWidth}px`)
             expect(divs[0].style.height).toEqual(`${props.itemHeight}px`)
         })
+
+        it(`should have correct positioning`, () => {
+            const props = {
+                ItemComponent: ItemComponentMock
+            }
+
+            const tree = TestUtils.renderIntoDocument(
+                <WithContext {...props} />
+            )
+
+            const divs = TestUtils.scryRenderedDOMComponentsWithTag(tree, `div`)
+
+            expect(divs[0].style.verticalAlign).toEqual(`bottom`)
+            expect(divs[0].style.display).toEqual(`inline-block`)
+        })
     })
 })
