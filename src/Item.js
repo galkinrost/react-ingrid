@@ -3,6 +3,7 @@ import React, {Component, PropTypes} from 'react'
 const defaultItemStyle = {
     display: `inline-block`,
     position: `relative`,
+    verticalAlign: `bottom`,
     width: 0,
     height: 0
 }
