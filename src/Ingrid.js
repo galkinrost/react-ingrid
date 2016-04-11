@@ -15,7 +15,20 @@ class Ingrid extends Component {
     }
 
     render() {
-        const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more, paddingLeft, paddingTop, getPaddingTop} = this.props
+        const {
+            buffer,
+            getPaddingTop,
+            itemHeight,
+            items,
+            itemWidth,
+            load = () => null,
+            loading,
+            more,
+            onLoading,
+            paddingBot,
+            paddingLeft,
+            paddingTop
+        } = this.props
 
         let total
 
@@ -28,16 +41,18 @@ class Ingrid extends Component {
         return (
             <Display
                 buffer={buffer}
+                getPaddingTop={getPaddingTop}
+                itemHeight={itemHeight}
                 items={items}
                 itemWidth={itemWidth}
-                itemHeight={itemHeight}
-                total={total}
                 load={load}
                 loading={loading}
                 more={more}
+                onLoading={onLoading}
+                paddingBot={paddingBot}
                 paddingLeft={paddingLeft}
                 paddingTop={paddingTop}
-                getPaddingTop={getPaddingTop}
+                total={total}
             />
         )
     }
@@ -52,12 +67,14 @@ Ingrid.childContextTypes = {
 
 Ingrid.propTypes = {
     buffer: PropTypes.number,
+    getPaddingTop: PropTypes.func,
     ItemComponent: PropTypes.func.isRequired,
     itemHeight: PropTypes.number.isRequired,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     itemWidth: PropTypes.number.isRequired,
-    paddingTop: PropTypes.number,
-    getPaddingTop: PropTypes.func
+    onLoading: PropTypes.func,
+    paddingBot: PropTypes.number,
+    paddingTop: PropTypes.number
 }
 
 export default Ingrid
