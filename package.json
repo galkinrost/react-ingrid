@@ -1,6 +1,6 @@
 {
   "name": "react-ingrid",
-  "version": "0.4.2-beta.0",
+  "version": "0.4.2-beta.1",
   "description": "React infinite grid",
   "files": [
     "dist",

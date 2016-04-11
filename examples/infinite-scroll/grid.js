@@ -11016,18 +11016,15 @@
 	            var height = nextState.height;
 
 	            if (more && !loading && maxVisibleIndex > total) {
+	                onLoading();
+	                this.setState({
+	                    height: height + paddingBot
+	                });
 	                load();
 	            }
 
 	            if (typeof getPaddingTop === 'function') {
 	                getPaddingTop(offsetTop + paddingTop);
-	            }
-
-	            if (loading) {
-	                this.setState({
-	                    height: height + paddingBot
-	                });
-	                onLoading();
 	            }
 	        }
 	    }, {
