@@ -29,9 +29,15 @@ describe(`react-ingrid`, () => {
             ({default: Grid} = require(`../src/Grid`))
 
             GridWithContext = contextify({
-                items: PropTypes.array
+                items: PropTypes.array,
+                loading: PropTypes.bool,
+                PreloaderComponent: PropTypes.func,
+                preloaderOffset: PropTypes.number
             }, props => ({
-                items: props.items || []
+                items: props.items || [],
+                loading: props.loading,
+                PreloaderComponent: props.PreloaderComponent,
+                preloaderOffset: props.preloaderOffset
             }))(Grid)
         })
 
@@ -43,7 +49,10 @@ describe(`react-ingrid`, () => {
         it(`should receive props in the context`, () => {
 
             const context = {
-                items: rndoam.array()
+                items: rndoam.array(),
+                loading: false,
+                PreloaderComponent: rndoam.noop(),
+                preloaderOffset: rndoam.number()
             }
 
             const tree = TestUtils

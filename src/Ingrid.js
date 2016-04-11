@@ -4,18 +4,40 @@ import Display from './Display'
 class Ingrid extends Component {
 
     getChildContext() {
-        const {ItemComponent, itemWidth, itemHeight, items} = this.props
+        const {
+            ItemComponent,
+            itemHeight,
+            items,
+            itemWidth,
+            loading,
+            PreloaderComponent,
+            preloaderOffset
+        } = this.props
 
         return {
             ItemComponent,
-            itemWidth,
             itemHeight,
-            items
+            items,
+            itemWidth,
+            loading,
+            PreloaderComponent,
+            preloaderOffset
         }
     }
 
     render() {
-        const {buffer, items, itemWidth, itemHeight, load = () => null, loading, more, paddingLeft, paddingTop, getPaddingTop} = this.props
+        const {
+            buffer,
+            getPaddingTop,
+            itemHeight,
+            items,
+            itemWidth,
+            load = () => null,
+            loading,
+            more,
+            paddingLeft,
+            paddingTop
+        } = this.props
 
         let total
 
@@ -28,16 +50,16 @@ class Ingrid extends Component {
         return (
             <Display
                 buffer={buffer}
+                getPaddingTop={getPaddingTop}
+                itemHeight={itemHeight}
                 items={items}
                 itemWidth={itemWidth}
-                itemHeight={itemHeight}
-                total={total}
                 load={load}
                 loading={loading}
                 more={more}
                 paddingLeft={paddingLeft}
                 paddingTop={paddingTop}
-                getPaddingTop={getPaddingTop}
+                total={total}
             />
         )
     }
@@ -47,17 +69,21 @@ Ingrid.childContextTypes = {
     ItemComponent: PropTypes.func,
     itemHeight: PropTypes.number,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    itemWidth: PropTypes.number
+    itemWidth: PropTypes.number,
+    loading: PropTypes.bool,
+    PreloaderComponent: PropTypes.func,
+    preloaderOffset: PropTypes.number
 }
 
 Ingrid.propTypes = {
     buffer: PropTypes.number,
+    getPaddingTop: PropTypes.func,
     ItemComponent: PropTypes.func.isRequired,
     itemHeight: PropTypes.number.isRequired,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     itemWidth: PropTypes.number.isRequired,
     paddingTop: PropTypes.number,
-    getPaddingTop: PropTypes.func
+    preloaderOffset: PropTypes.number
 }
 
 export default Ingrid
