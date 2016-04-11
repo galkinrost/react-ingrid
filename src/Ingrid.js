@@ -4,13 +4,15 @@ import Display from './Display'
 class Ingrid extends Component {
 
     getChildContext() {
-        const {ItemComponent, itemWidth, itemHeight, items} = this.props
+        const {ItemComponent, itemWidth, itemHeight, items, preloaderOffset, loading} = this.props
 
         return {
             ItemComponent,
             itemWidth,
             itemHeight,
-            items
+            items,
+            preloaderOffset,
+            loading
         }
     }
 
@@ -24,10 +26,9 @@ class Ingrid extends Component {
             load = () => null,
             loading,
             more,
-            onLoading,
-            paddingBot,
             paddingLeft,
-            paddingTop
+            paddingTop,
+            preloaderOffset
         } = this.props
 
         let total
@@ -48,10 +49,9 @@ class Ingrid extends Component {
                 load={load}
                 loading={loading}
                 more={more}
-                onLoading={onLoading}
-                paddingBot={paddingBot}
                 paddingLeft={paddingLeft}
                 paddingTop={paddingTop}
+                preloaderOffset={preloaderOffset}
                 total={total}
             />
         )
@@ -62,7 +62,9 @@ Ingrid.childContextTypes = {
     ItemComponent: PropTypes.func,
     itemHeight: PropTypes.number,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    itemWidth: PropTypes.number
+    itemWidth: PropTypes.number,
+    preloaderOffset: PropTypes.number,
+    loading: PropTypes.bool
 }
 
 Ingrid.propTypes = {
@@ -72,9 +74,8 @@ Ingrid.propTypes = {
     itemHeight: PropTypes.number.isRequired,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     itemWidth: PropTypes.number.isRequired,
-    onLoading: PropTypes.func,
-    paddingBot: PropTypes.number,
-    paddingTop: PropTypes.number
+    paddingTop: PropTypes.number,
+    preloaderOffset: PropTypes.number
 }
 
 export default Ingrid

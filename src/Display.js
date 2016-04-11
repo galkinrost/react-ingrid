@@ -84,14 +84,10 @@ class Display extends Component {
     }
 
     componentWillUpdate(nextProps, nextState) {
-        const {total, load, loading, more, getPaddingTop, paddingTop, paddingBot, onLoading} = nextProps
-        const {maxVisibleIndex, offsetTop, height} = nextState
+        const {total, load, loading, more, getPaddingTop, paddingTop} = nextProps
+        const {maxVisibleIndex, offsetTop} = nextState
 
         if (more && !loading && maxVisibleIndex > total) {
-            onLoading()
-            this.setState({
-                height: height + paddingBot
-            })
             load()
         }
 

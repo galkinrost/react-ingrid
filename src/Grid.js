@@ -21,11 +21,13 @@ class Grid extends Component {
 
         const {
             items = [],
-            paddingTop = 0
+            paddingTop = 0,
+            preloaderOffset,
+            loading
         } = this.context
 
         const contentStyle = {
-            height
+            height: loading ? preloaderOffset + height : height
         }
 
         const scrollHelperStyle = {

@@ -6594,12 +6594,16 @@
 	            var itemWidth = _props.itemWidth;
 	            var itemHeight = _props.itemHeight;
 	            var items = _props.items;
+	            var preloaderOffset = _props.preloaderOffset;
+	            var loading = _props.loading;
 
 	            return {
 	                ItemComponent: ItemComponent,
 	                itemWidth: itemWidth,
 	                itemHeight: itemHeight,
-	                items: items
+	                items: items,
+	                preloaderOffset: preloaderOffset,
+	                loading: loading
 	            };
 	        }
 	    }, {
@@ -6617,10 +6621,9 @@
 	            } : _props2$load;
 	            var loading = _props2.loading;
 	            var more = _props2.more;
-	            var onLoading = _props2.onLoading;
-	            var paddingBot = _props2.paddingBot;
 	            var paddingLeft = _props2.paddingLeft;
 	            var paddingTop = _props2.paddingTop;
+	            var preloaderOffset = _props2.preloaderOffset;
 
 	            var total = undefined;
 
@@ -6639,10 +6642,9 @@
 	                load: load,
 	                loading: loading,
 	                more: more,
-	                onLoading: onLoading,
-	                paddingBot: paddingBot,
 	                paddingLeft: paddingLeft,
 	                paddingTop: paddingTop,
+	                preloaderOffset: preloaderOffset,
 	                total: total
 	            });
 	        }
@@ -6655,7 +6657,9 @@
 	    ItemComponent: _react.PropTypes.func,
 	    itemHeight: _react.PropTypes.number,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
-	    itemWidth: _react.PropTypes.number
+	    itemWidth: _react.PropTypes.number,
+	    preloaderOffset: _react.PropTypes.number,
+	    loading: _react.PropTypes.bool
 	};
 
 	Ingrid.propTypes = {
@@ -6665,9 +6669,8 @@
 	    itemHeight: _react.PropTypes.number.isRequired,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number.isRequired,
-	    onLoading: _react.PropTypes.func,
-	    paddingBot: _react.PropTypes.number,
-	    paddingTop: _react.PropTypes.number
+	    paddingTop: _react.PropTypes.number,
+	    preloaderOffset: _react.PropTypes.number
 	};
 
 	exports.default = Ingrid;
@@ -11009,17 +11012,10 @@
 	            var more = nextProps.more;
 	            var getPaddingTop = nextProps.getPaddingTop;
 	            var paddingTop = nextProps.paddingTop;
-	            var paddingBot = nextProps.paddingBot;
-	            var onLoading = nextProps.onLoading;
 	            var maxVisibleIndex = nextState.maxVisibleIndex;
 	            var offsetTop = nextState.offsetTop;
-	            var height = nextState.height;
 
 	            if (more && !loading && maxVisibleIndex > total) {
-	                onLoading();
-	                this.setState({
-	                    height: height + paddingBot
-	                });
 	                load();
 	            }
 
@@ -11161,9 +11157,11 @@
 	            var items = _context$items === undefined ? [] : _context$items;
 	            var _context$paddingTop = _context.paddingTop;
 	            var paddingTop = _context$paddingTop === undefined ? 0 : _context$paddingTop;
+	            var preloaderOffset = _context.preloaderOffset;
+	            var loading = _context.loading;
 
 	            var contentStyle = {
-	                height: height
+	                height: loading ? preloaderOffset + height : height
 	            };
 
 	            var scrollHelperStyle = _extends({}, defaultScrollHelperStyle, {
