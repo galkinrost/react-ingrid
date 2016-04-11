@@ -49,7 +49,9 @@ class Grid extends Component {
 }
 
 Grid.contextTypes = {
-    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ])
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    preloaderOffset: PropTypes.number,
+    loading: PropTypes.bool
 }
 
 export default Grid

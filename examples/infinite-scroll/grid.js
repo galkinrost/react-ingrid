@@ -11178,7 +11178,9 @@
 	}(_react.Component);
 
 	Grid.contextTypes = {
-	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object])
+	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
+	    preloaderOffset: _react.PropTypes.number,
+	    loading: _react.PropTypes.bool
 	};
 
 	exports.default = Grid;
