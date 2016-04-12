@@ -21,7 +21,7 @@ class DefaultPreloader extends Component {
         }
         return (
             <div style={style}>
-                LOADING...
+                isLoading...
             </div>
         )
     }
@@ -41,7 +41,7 @@ class Grid extends Component {
 
         const {
             items = [],
-            loading,
+            isLoading,
             paddingTop = 0,
             PreloaderComponent = DefaultPreloader,
             preloaderHeight = defaultpreloaderHeight
@@ -49,7 +49,7 @@ class Grid extends Component {
 
         const contentStyle = {
             position: `relative`,
-            height: loading ? preloaderHeight + height : height
+            height: isLoading ? preloaderHeight + height : height
         }
 
         const scrollHelperStyle = {
@@ -71,7 +71,7 @@ class Grid extends Component {
                     .map(item => (
                         <Item key={typeof item.get === `function` ? item.get(`id`) : item.id} item={item}/>
                     ))}
-                {loading ?
+                {isLoading ?
                     <div style={preloaderStyle}>
                         <PreloaderComponent />
                     </div> :
@@ -84,7 +84,7 @@ class Grid extends Component {
 
 Grid.contextTypes = {
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    loading: PropTypes.bool,
+    isLoading: PropTypes.bool,
     PreloaderComponent: PropTypes.func,
     preloaderHeight: PropTypes.number
 }

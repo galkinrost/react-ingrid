@@ -30,12 +30,12 @@ describe(`react-ingrid`, () => {
 
             GridWithContext = contextify({
                 items: PropTypes.array,
-                loading: PropTypes.bool,
+                isLoading: PropTypes.bool,
                 PreloaderComponent: PropTypes.func,
                 preloaderHeight: PropTypes.number
             }, props => ({
                 items: props.items || [],
-                loading: props.loading,
+                isLoading: props.isLoading,
                 PreloaderComponent: props.PreloaderComponent,
                 preloaderHeight: props.preloaderHeight
             }))(Grid)
@@ -50,7 +50,7 @@ describe(`react-ingrid`, () => {
 
             const context = {
                 items: rndoam.array(),
-                loading: false,
+                isLoading: false,
                 PreloaderComponent: rndoam.noop(),
                 preloaderHeight: rndoam.number()
             }
@@ -163,9 +163,9 @@ describe(`react-ingrid`, () => {
             )
         })
 
-        it(`should change height while loading`, () => {
+        it(`should change height while isLoading`, () => {
             const props = {
-                loading: true,
+                isLoading: true,
                 preloaderHeight: 300,
                 height: 1000
             }

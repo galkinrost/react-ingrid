@@ -37,7 +37,7 @@ describe(`react-ingrid`, () => {
                 itemHeight: PropTypes.number,
                 items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
                 itemWidth: PropTypes.number,
-                loading: PropTypes.bool,
+                isLoading: PropTypes.bool,
                 PreloaderComponent: PropTypes.func,
                 preloaderHeight: PropTypes.number,
                 isShowingPreloader: PropTypes.bool
@@ -49,7 +49,7 @@ describe(`react-ingrid`, () => {
                     itemHeight: rndoam.number(),
                     items: rndoam.array(),
                     itemWidth: rndoam.number(),
-                    loading: false,
+                    isLoading: false,
                     PreloaderComponent: rndoam.noop(),
                     preloaderHeight: rndoam.number(),
                     isShowingPreloader: false
@@ -76,7 +76,7 @@ describe(`react-ingrid`, () => {
                 itemHeight: rndoam.number(),
                 items: rndoam.array(),
                 load: rndoam.noop(),
-                loading: true,
+                isLoading: true,
                 more: true,
                 paddingTop: rndoam.number(),
                 paddingLeft: rndoam.number(),
