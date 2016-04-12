@@ -36,7 +36,7 @@ class Ingrid extends Component {
             itemWidth,
             load = () => null,
             isLoading,
-            more,
+            hasMore,
             paddingLeft,
             paddingTop
         } = this.props
@@ -58,7 +58,7 @@ class Ingrid extends Component {
                 itemWidth={itemWidth}
                 load={load}
                 isLoading={isLoading}
-                more={more}
+                hasMore={hasMore}
                 paddingLeft={paddingLeft}
                 paddingTop={paddingTop}
                 total={total}

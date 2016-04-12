@@ -1317,7 +1317,7 @@
 	    }
 	  }
 
-	  // Children can be more than one argument, and those are transferred onto
+	  // Children can be hasMore than one argument, and those are transferred onto
 	  // the newly allocated props object.
 	  var childrenLength = arguments.length - 2;
 	  if (childrenLength === 1) {
@@ -1407,7 +1407,7 @@
 	    }
 	  }
 
-	  // Children can be more than one argument, and those are transferred onto
+	  // Children can be hasMore than one argument, and those are transferred onto
 	  // the newly allocated props object.
 	  var childrenLength = arguments.length - 2;
 	  if (childrenLength === 1) {
@@ -2550,7 +2550,7 @@
 	    this.defaultPrevented = true;
 	    var event = this.nativeEvent;
 	    if (true) {
-	       true ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `preventDefault` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
+	       true ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `preventDefault` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for hasMore information.') : undefined;
 	    }
 	    if (!event) {
 	      return;
@@ -2567,7 +2567,7 @@
 	  stopPropagation: function () {
 	    var event = this.nativeEvent;
 	    if (true) {
-	       true ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `stopPropagation` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for more information.') : undefined;
+	       true ? warning(event, 'This synthetic event is reused for performance reasons. If you\'re ' + 'seeing this, you\'re calling `stopPropagation` on a ' + 'released/nullified synthetic event. This is a no-op. See ' + 'https://fb.me/react-event-pooling for hasMore information.') : undefined;
 	    }
 	    if (!event) {
 	      return;
@@ -3234,7 +3234,7 @@
 	   * @internal
 	   */
 	  processEventQueue: function (simulated) {
-	    // Set `eventQueue` to null before processing it so that we can tell if more
+	    // Set `eventQueue` to null before processing it so that we can tell if hasMore
 	    // events get enqueued while processing.
 	    var processingEventQueue = eventQueue;
 	    eventQueue = null;
@@ -4169,7 +4169,7 @@
 	    var ret;
 	    try {
 	      this._isInTransaction = true;
-	      // Catching errors makes debugging more difficult, so we start with
+	      // Catching errors makes debugging hasMore difficult, so we start with
 	      // errorThrown set to true before setting it to false after calling
 	      // close -- if it's still set to true in the finally block, it means
 	      // one of these calls threw.
@@ -4202,7 +4202,7 @@
 	    for (var i = startIndex; i < transactionWrappers.length; i++) {
 	      var wrapper = transactionWrappers[i];
 	      try {
-	        // Catching errors makes debugging more difficult, so we start with the
+	        // Catching errors makes debugging hasMore difficult, so we start with the
 	        // OBSERVED_ERROR state before overwriting it with the real return value
 	        // of initialize -- if it's still set to OBSERVED_ERROR in the finally
 	        // block, it means wrapper.initialize threw.
@@ -4235,7 +4235,7 @@
 	      var initData = this.wrapperInitData[i];
 	      var errorThrown;
 	      try {
-	        // Catching errors makes debugging more difficult, so we start with
+	        // Catching errors makes debugging hasMore difficult, so we start with
 	        // errorThrown set to true before setting it to false after calling
 	        // close -- if it's still set to true in the finally block, it means
 	        // wrapper.close threw.
@@ -4403,7 +4403,7 @@
 	      // Magic theory: IE8 supposedly differentiates between added and updated
 	      // nodes when processing innerHTML, innerHTML on updated nodes suffers
 	      // from worse whitespace behavior. Re-adding a node like this triggers
-	      // the initial and more favorable whitespace behavior.
+	      // the initial and hasMore favorable whitespace behavior.
 	      // TODO: What to do on a detached node?
 	      if (node.parentNode) {
 	        node.parentNode.replaceChild(node, node);
@@ -6559,7 +6559,7 @@
 	                return null;
 	            } : _props2$load;
 	            var isLoading = _props2.isLoading;
-	            var more = _props2.more;
+	            var hasMore = _props2.hasMore;
 	            var paddingLeft = _props2.paddingLeft;
 	            var paddingTop = _props2.paddingTop;
 
@@ -6579,7 +6579,7 @@
 	                itemWidth: itemWidth,
 	                load: load,
 	                isLoading: isLoading,
-	                more: more,
+	                hasMore: hasMore,
 	                paddingLeft: paddingLeft,
 	                paddingTop: paddingTop,
 	                total: total
@@ -7331,7 +7331,7 @@
 	 * @private
 	 */
 	function publishEventForPlugin(dispatchConfig, PluginModule, eventName) {
-	  !!EventPluginRegistry.eventNameDispatchConfigs.hasOwnProperty(eventName) ?  true ? invariant(false, 'EventPluginHub: More than one plugin attempted to publish the same ' + 'event name, `%s`.', eventName) : invariant(false) : undefined;
+	  !!EventPluginRegistry.eventNameDispatchConfigs.hasOwnProperty(eventName) ?  true ? invariant(false, 'EventPluginHub: hasMore than one plugin attempted to publish the same ' + 'event name, `%s`.', eventName) : invariant(false) : undefined;
 	  EventPluginRegistry.eventNameDispatchConfigs[eventName] = dispatchConfig;
 
 	  var phasedRegistrationNames = dispatchConfig.phasedRegistrationNames;
@@ -7359,7 +7359,7 @@
 	 * @private
 	 */
 	function publishRegistrationName(registrationName, PluginModule, eventName) {
-	  !!EventPluginRegistry.registrationNameModules[registrationName] ?  true ? invariant(false, 'EventPluginHub: More than one plugin attempted to publish the same ' + 'registration name, `%s`.', registrationName) : invariant(false) : undefined;
+	  !!EventPluginRegistry.registrationNameModules[registrationName] ?  true ? invariant(false, 'EventPluginHub: hasMore than one plugin attempted to publish the same ' + 'registration name, `%s`.', registrationName) : invariant(false) : undefined;
 	  EventPluginRegistry.registrationNameModules[registrationName] = PluginModule;
 	  EventPluginRegistry.registrationNameDependencies[registrationName] = PluginModule.eventTypes[eventName].dependencies;
 	}
@@ -7401,7 +7401,7 @@
 	   * @see {EventPluginHub.injection.injectEventPluginOrder}
 	   */
 	  injectEventPluginOrder: function (InjectedEventPluginOrder) {
-	    !!EventPluginOrder ?  true ? invariant(false, 'EventPluginRegistry: Cannot inject event plugin ordering more than ' + 'once. You are likely trying to load more than one copy of React.') : invariant(false) : undefined;
+	    !!EventPluginOrder ?  true ? invariant(false, 'EventPluginRegistry: Cannot inject event plugin ordering hasMore than ' + 'once. You are likely trying to load hasMore than one copy of React.') : invariant(false) : undefined;
 	    // Clone the ordering so it cannot be dynamically mutated.
 	    EventPluginOrder = Array.prototype.slice.call(InjectedEventPluginOrder);
 	    recomputePluginOrdering();
@@ -7761,7 +7761,7 @@
 	 *
 	 * The class specification supports a specific protocol of methods that have
 	 * special meaning (e.g. `render`). See `ReactClassInterface` for
-	 * more the comprehensive protocol. Any other properties and methods in the
+	 * hasMore the comprehensive protocol. Any other properties and methods in the
 	 * class specification will be available on the prototype.
 	 *
 	 * @interface ReactClassInterface
@@ -8063,9 +8063,9 @@
 	    !(specPolicy === SpecPolicy.OVERRIDE_BASE) ?  true ? invariant(false, 'ReactClassInterface: You are attempting to override ' + '`%s` from your class specification. Ensure that your method names ' + 'do not overlap with React methods.', name) : invariant(false) : undefined;
 	  }
 
-	  // Disallow defining methods more than once unless explicitly allowed.
+	  // Disallow defining methods hasMore than once unless explicitly allowed.
 	  if (proto.hasOwnProperty(name)) {
-	    !(specPolicy === SpecPolicy.DEFINE_MANY || specPolicy === SpecPolicy.DEFINE_MANY_MERGED) ?  true ? invariant(false, 'ReactClassInterface: You are attempting to define ' + '`%s` on your component more than once. This conflict may be due ' + 'to a mixin.', name) : invariant(false) : undefined;
+	    !(specPolicy === SpecPolicy.DEFINE_MANY || specPolicy === SpecPolicy.DEFINE_MANY_MERGED) ?  true ? invariant(false, 'ReactClassInterface: You are attempting to define ' + '`%s` on your component hasMore than once. This conflict may be due ' + 'to a mixin.', name) : invariant(false) : undefined;
 	  }
 	}
 
@@ -8128,7 +8128,7 @@
 	          // These cases should already be caught by validateMethodOverride.
 	          !(isReactClassMethod && (specPolicy === SpecPolicy.DEFINE_MANY_MERGED || specPolicy === SpecPolicy.DEFINE_MANY)) ?  true ? invariant(false, 'ReactClass: Unexpected spec policy %s for key %s ' + 'when mixing in component specs.', specPolicy, name) : invariant(false) : undefined;
 
-	          // For methods which are defined more than once, call the existing
+	          // For methods which are defined hasMore than once, call the existing
 	          // methods before calling the new property, merging if appropriate.
 	          if (specPolicy === SpecPolicy.DEFINE_MANY_MERGED) {
 	            proto[name] = createMergedResultFunction(proto[name], property);
@@ -8164,7 +8164,7 @@
 	    !!isReserved ?  true ? invariant(false, 'ReactClass: You are attempting to define a reserved ' + 'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' + 'as an instance property instead; it will still be accessible on the ' + 'constructor.', name) : invariant(false) : undefined;
 
 	    var isInherited = (name in Constructor);
-	    !!isInherited ?  true ? invariant(false, 'ReactClass: You are attempting to define ' + '`%s` on your component more than once. This conflict may be ' + 'due to a mixin.', name) : invariant(false) : undefined;
+	    !!isInherited ?  true ? invariant(false, 'ReactClass: You are attempting to define ' + '`%s` on your component hasMore than once. This conflict may be ' + 'due to a mixin.', name) : invariant(false) : undefined;
 	    Constructor[name] = property;
 	  }
 	}
@@ -8283,7 +8283,7 @@
 	}
 
 	/**
-	 * Add more to the ReactClass base class. These are all legacy features and
+	 * Add hasMore to the ReactClass base class. These are all legacy features and
 	 * therefore not already part of the modern ReactComponent.
 	 */
 	var ReactClassMixin = {
@@ -8669,7 +8669,7 @@
 
 	    for (var i = 0; i < expectedFeatures.length; i++) {
 	      if (!expectedFeatures[i]) {
-	        console.error('One or more ES5 shim/shams expected by React are not available: ' + 'https://fb.me/react-warning-polyfills');
+	        console.error('One or hasMore ES5 shim/shams expected by React are not available: ' + 'https://fb.me/react-warning-polyfills');
 	        break;
 	      }
 	    }
@@ -9304,7 +9304,7 @@
 
 	  var addenda = {
 	    parentOrOwner: addendum,
-	    url: ' See https://fb.me/react-warning-keys for more information.',
+	    url: ' See https://fb.me/react-warning-keys for hasMore information.',
 	    childOwner: null
 	  };
 
@@ -10157,7 +10157,7 @@
 	 *     render: function() { ... }
 	 *   });
 	 *
-	 * A more formal specification of how these methods are used:
+	 * A hasMore formal specification of how these methods are used:
 	 *
 	 *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
 	 *   decl := ReactPropTypes.{type}(.isRequired)?
@@ -10234,7 +10234,7 @@
 	    if (propType !== expectedType) {
 	      var locationName = ReactPropTypeLocationNames[location];
 	      // `propValue` being instance of, say, date/regexp, pass the 'object'
-	      // check, but we can offer a more precise error message here rather than
+	      // check, but we can offer a hasMore precise error message here rather than
 	      // 'of type `object`'.
 	      var preciseType = getPreciseType(propValue);
 
@@ -10452,7 +10452,7 @@
 	  return propType;
 	}
 
-	// This handles more types than `getPropType`. Only used for error messages.
+	// This handles hasMore types than `getPropType`. Only used for error messages.
 	// See `createPrimitiveTypeChecker`.
 	function getPreciseType(propValue) {
 	  var propType = getPropType(propValue);
@@ -10947,13 +10947,13 @@
 	            var total = nextProps.total;
 	            var load = nextProps.load;
 	            var isLoading = nextProps.isLoading;
-	            var more = nextProps.more;
+	            var hasMore = nextProps.hasMore;
 	            var getPaddingTop = nextProps.getPaddingTop;
 	            var paddingTop = nextProps.paddingTop;
 	            var maxVisibleIndex = nextState.maxVisibleIndex;
 	            var offsetTop = nextState.offsetTop;
 
-	            if (more && !isLoading && maxVisibleIndex > total) {
+	            if (hasMore && !isLoading && maxVisibleIndex > total) {
 	                load();
 	            }
 
@@ -11714,7 +11714,7 @@
 	 *
 	 *   var createArrayFromMixed = require('createArrayFromMixed');
 	 *
-	 *   function takesOneOrMoreThings(things) {
+	 *   function takesOneOrhasMoreThings(things) {
 	 *     things = createArrayFromMixed(things);
 	 *     ...
 	 *   }
@@ -14907,7 +14907,7 @@
 	      ReactCurrentOwner.current = null;
 	    }
 	    !(
-	    // TODO: An `isValidNode` function would probably be more appropriate
+	    // TODO: An `isValidNode` function would probably be hasMore appropriate
 	    renderedComponent === null || renderedComponent === false || ReactElement.isValidElement(renderedComponent)) ?  true ? invariant(false, '%s.render(): A valid ReactComponent must be returned. You may have ' + 'returned undefined, an array or some other invalid object.', this.getName() || 'ReactCompositeComponent') : invariant(false) : undefined;
 	    return renderedComponent;
 	  },
@@ -15254,10 +15254,10 @@
 	  }
 	  if (props.dangerouslySetInnerHTML != null) {
 	    !(props.children == null) ?  true ? invariant(false, 'Can only set one of `children` or `props.dangerouslySetInnerHTML`.') : invariant(false) : undefined;
-	    !(typeof props.dangerouslySetInnerHTML === 'object' && HTML in props.dangerouslySetInnerHTML) ?  true ? invariant(false, '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' + 'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' + 'for more information.') : invariant(false) : undefined;
+	    !(typeof props.dangerouslySetInnerHTML === 'object' && HTML in props.dangerouslySetInnerHTML) ?  true ? invariant(false, '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' + 'Please visit https://fb.me/react-invariant-dangerously-set-inner-html ' + 'for hasMore information.') : invariant(false) : undefined;
 	  }
 	  if (true) {
-	     true ? warning(props.innerHTML == null, 'Directly setting property `innerHTML` is not permitted. ' + 'For more information, lookup documentation on `dangerouslySetInnerHTML`.') : undefined;
+	     true ? warning(props.innerHTML == null, 'Directly setting property `innerHTML` is not permitted. ' + 'For hasMore information, lookup documentation on `dangerouslySetInnerHTML`.') : undefined;
 	     true ? warning(!props.contentEditable || props.children == null, 'A component is `contentEditable` and contains `children` managed by ' + 'React. It is now your responsibility to guarantee that none of ' + 'those nodes are unexpectedly modified or duplicated. This is ' + 'probably not intentional.') : undefined;
 	  }
 	  !(props.style == null || typeof props.style === 'object') ?  true ? invariant(false, 'The `style` prop expects a mapping from style properties to values, ' + 'not a string. For example, style={{marginRight: spacing + \'em\'}} when ' + 'using JSX.%s', getDeclarationErrorAddendum(component)) : invariant(false) : undefined;
@@ -17671,7 +17671,7 @@
 
 	/**
 	 * Updating children of a component may trigger recursive updates. The depth is
-	 * used to batch recursive updates to render markup more efficiently.
+	 * used to batch recursive updates to render markup hasMore efficiently.
 	 *
 	 * @type {number}
 	 * @private

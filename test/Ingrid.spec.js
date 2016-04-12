@@ -77,7 +77,7 @@ describe(`react-ingrid`, () => {
                 items: rndoam.array(),
                 load: rndoam.noop(),
                 isLoading: true,
-                more: true,
+                hasMore: true,
                 paddingTop: rndoam.number(),
                 paddingLeft: rndoam.number(),
                 getPaddingTop: rndoam.noop()

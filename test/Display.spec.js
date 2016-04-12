@@ -253,7 +253,7 @@ describe(`react-ingrid`, () => {
                 total: 100,
                 load: expect.createSpy(),
                 isLoading: false,
-                more: true
+                hasMore: true
             }
 
             class Container extends Component {
@@ -287,7 +287,7 @@ describe(`react-ingrid`, () => {
                 total: 100,
                 load: expect.createSpy(),
                 isLoading: true,
-                more: true
+                hasMore: true
             }
 
             class Container extends Component {
@@ -315,13 +315,13 @@ describe(`react-ingrid`, () => {
             expect(props.load.calls.length).toEqual(0)
         })
 
-        it(`should not call the load method if it's no more`, () => {
+        it(`should not call the load method if it's no hasMore`, () => {
 
             const props = {
                 total: 100,
                 load: expect.createSpy(),
                 isLoading: false,
-                more: false
+                hasMore: false
             }
 
             class Container extends Component {

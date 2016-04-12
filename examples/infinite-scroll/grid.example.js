@@ -51,7 +51,7 @@ class Container extends Component {
         super()
         this.state = {
             isLoading: false,
-            more: true,
+            hasMore: true,
             items
         }
     }
@@ -63,14 +63,14 @@ class Container extends Component {
             })
 
             setTimeout(() => {
-                const moreItems = this
+                const hasMoreItems = this
                     .state
                     .items
                     .concat(generateItems())
                 this.setState({
                     isLoading: false,
-                    items: moreItems,
-                    more: moreItems.length < max
+                    items: hasMoreItems,
+                    hasMore: hasMoreItems.length < max
                 })
             }, 1000)
         }

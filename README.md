@@ -36,8 +36,8 @@ const props = {
     items,
     itemWidth: 100,
     itemHeight: 100,
-    load: () => ( /* load more items */ ),
-    more: Boolean, // has more
+    load: () => ( /* load hasMore items */ ),
+    hasMore: Boolean, // has hasMore
     isLoading: Boolean
 }
 
@@ -56,7 +56,7 @@ const Grid = ingrid(props => props)(ItemComponent)
 * [`itemWidth`](#itemDimensionsProp)
 * [`itemHeight`](#itemDimensionsProp)
 * [`load`](#loadProp)
-* [`more`](#moreProp)
+* [`hasMore`](#hasMoreProp)
 * [`isLoading`](#isLoadingProp)
 * [`paddingTop`](#paddingTopProp)
 * [`paddingLeft`](#paddingLeftProp)
@@ -131,14 +131,14 @@ return (
 <a name="loadProp"></a>
 #### load (required)
 
-Function that loads more items when user scrolls. Ingrid will call "load" every time user scrolls a page (unless you provide the [more](#moreProp) prop).
+Function that loads hasMore items when user scrolls. Ingrid will call "load" every time user scrolls a page (unless you provide the [hasMore](#hasMoreProp) prop).
 You design how items are modelled. Therefore, it's your responsibility to load <b>and sort</b> [items](#itemsProp) in your store.
 
 
-<a name="moreProp"></a>
-#### more (optional, boolean)
+<a name="hasMoreProp"></a>
+#### hasMore (optional, boolean)
 
-Ingrid loads [items](#itemsProp) when user scrolls. You must provide a boolean to tell whether you have more items to load.
+Ingrid loads [items](#itemsProp) when user scrolls. You must provide a boolean to tell whether you have hasMore items to load.
 
 By default, it is always true.
 
@@ -151,10 +151,10 @@ Normally you don't want to send multiple load requests at the same time. To tell
 Also, you might want to show a preloader while isLoading new items. For example:
 
 ```js
-const ImagesGrid = ({ onLoadMore, isisLoading }) => {
+const ImagesGrid = ({ onLoadhasMore, isisLoading }) => {
     const props = {
         ...
-        load: () => onLoadMore(),
+        load: () => onLoadhasMore(),
         isLoading: isisLoading,
         ...
     }
@@ -171,7 +171,7 @@ class App extends React.Component {
         return (
             {isisLoading ?
                 <ImagesGrid /> :
-                this.renderLoadMoreSpinner()
+                this.renderLoadhasMoreSpinner()
             }
         )
     }
