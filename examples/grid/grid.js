@@ -6534,7 +6534,7 @@
 	            var itemHeight = _props.itemHeight;
 	            var items = _props.items;
 	            var itemWidth = _props.itemWidth;
-	            var isLoading = _props.isLoading;
+	            var loading = _props.loading;
 	            var PreloaderComponent = _props.PreloaderComponent;
 	            var preloaderHeight = _props.preloaderHeight;
 	            var isShowingPreloader = _props.isShowingPreloader;
@@ -6544,7 +6544,7 @@
 	                itemHeight: itemHeight,
 	                items: items,
 	                itemWidth: itemWidth,
-	                isLoading: isLoading,
+	                loading: loading,
 	                PreloaderComponent: PreloaderComponent,
 	                preloaderHeight: preloaderHeight,
 	                isShowingPreloader: isShowingPreloader
@@ -6563,8 +6563,8 @@
 	            var load = _props2$load === undefined ? function () {
 	                return null;
 	            } : _props2$load;
-	            var isLoading = _props2.isLoading;
-	            var hasMore = _props2.hasMore;
+	            var loading = _props2.loading;
+	            var more = _props2.more;
 	            var paddingLeft = _props2.paddingLeft;
 	            var paddingTop = _props2.paddingTop;
 
@@ -6583,8 +6583,8 @@
 	                items: items,
 	                itemWidth: itemWidth,
 	                load: load,
-	                isLoading: isLoading,
-	                hasMore: hasMore,
+	                loading: loading,
+	                more: more,
 	                paddingLeft: paddingLeft,
 	                paddingTop: paddingTop,
 	                total: total
@@ -6600,7 +6600,7 @@
 	    itemHeight: _react.PropTypes.number,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number,
-	    isLoading: _react.PropTypes.bool,
+	    loading: _react.PropTypes.bool,
 	    PreloaderComponent: _react.PropTypes.func,
 	    preloaderHeight: _react.PropTypes.number,
 	    isShowingPreloader: _react.PropTypes.bool
@@ -10952,14 +10952,14 @@
 	        value: function componentWillUpdate(nextProps, nextState) {
 	            var total = nextProps.total;
 	            var load = nextProps.load;
-	            var isLoading = nextProps.isLoading;
-	            var hasMore = nextProps.hasMore;
+	            var loading = nextProps.loading;
+	            var more = nextProps.more;
 	            var getPaddingTop = nextProps.getPaddingTop;
 	            var paddingTop = nextProps.paddingTop;
 	            var maxVisibleIndex = nextState.maxVisibleIndex;
 	            var offsetTop = nextState.offsetTop;
 
-	            if (hasMore && !isLoading && maxVisibleIndex > total) {
+	            if (more && !loading && maxVisibleIndex > total) {
 	                load();
 	            }
 
@@ -11130,7 +11130,7 @@
 	            var _context = this.context;
 	            var _context$items = _context.items;
 	            var items = _context$items === undefined ? [] : _context$items;
-	            var isLoading = _context.isLoading;
+	            var loading = _context.loading;
 	            var _context$paddingTop = _context.paddingTop;
 	            var paddingTop = _context$paddingTop === undefined ? 0 : _context$paddingTop;
 	            var _context$PreloaderCom = _context.PreloaderComponent;
@@ -11142,7 +11142,7 @@
 
 	            var contentStyle = {
 	                position: 'relative',
-	                height: isShowingPreloader && isLoading ? preloaderHeight + height : height
+	                height: isShowingPreloader && loading ? preloaderHeight + height : height
 	            };
 
 	            var scrollHelperStyle = _extends({}, defaultScrollHelperStyle, {
@@ -11157,7 +11157,7 @@
 
 	            return _react2.default.createElement('div', { style: contentStyle }, _react2.default.createElement('div', { style: scrollHelperStyle }), items.slice(minVisibleIndex, maxVisibleIndex + 1).map(function (item) {
 	                return _react2.default.createElement(_Item2.default, { key: typeof item.get === 'function' ? item.get('id') : item.id, item: item });
-	            }), isShowingPreloader && isLoading ? _react2.default.createElement('div', { style: preloaderStyle }, _react2.default.createElement(PreloaderComponent, null)) : '');
+	            }), isShowingPreloader && loading ? _react2.default.createElement('div', { style: preloaderStyle }, _react2.default.createElement(PreloaderComponent, null)) : '');
 	        }
 	    }]);
 
@@ -11166,7 +11166,7 @@
 
 	Grid.contextTypes = {
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
-	    isLoading: _react.PropTypes.bool,
+	    loading: _react.PropTypes.bool,
 	    PreloaderComponent: _react.PropTypes.func,
 	    preloaderHeight: _react.PropTypes.number,
 	    isShowingPreloader: _react.PropTypes.bool

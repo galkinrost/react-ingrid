@@ -41,7 +41,7 @@ class Grid extends Component {
 
         const {
             items = [],
-            isLoading,
+            loading,
             paddingTop = 0,
             PreloaderComponent = DefaultPreloader,
             preloaderHeight = defaultpreloaderHeight,
@@ -50,7 +50,7 @@ class Grid extends Component {
 
         const contentStyle = {
             position: `relative`,
-            height: isShowingPreloader && isLoading ? preloaderHeight + height : height
+            height: isShowingPreloader && loading ? preloaderHeight + height : height
         }
 
         const scrollHelperStyle = {
@@ -73,7 +73,7 @@ class Grid extends Component {
                         <Item key={typeof item.get === `function` ? item.get(`id`) : item.id} item={item}/>
                     ))}
 
-                {isShowingPreloader && isLoading ?
+                {isShowingPreloader && loading ?
                     <div style={preloaderStyle}>
                         <PreloaderComponent />
                     </div> :
@@ -86,7 +86,7 @@ class Grid extends Component {
 
 Grid.contextTypes = {
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    isLoading: PropTypes.bool,
+    loading: PropTypes.bool,
     PreloaderComponent: PropTypes.func,
     preloaderHeight: PropTypes.number,
     isShowingPreloader: PropTypes.bool

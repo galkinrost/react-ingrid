@@ -37,13 +37,13 @@ describe(`react-ingrid`, () => {
 
             GridWithContext = contextify({
                 items: PropTypes.array,
-                isLoading: PropTypes.bool,
+                loading: PropTypes.bool,
                 PreloaderComponent: PropTypes.func,
                 preloaderHeight: PropTypes.number,
                 isShowingPreloader: PropTypes.bool
             }, props => ({
                 items: props.items || [],
-                isLoading: props.isLoading,
+                loading: props.loading,
                 PreloaderComponent: props.PreloaderComponent,
                 preloaderHeight: props.preloaderHeight,
                 isShowingPreloader: props.isShowingPreloader
@@ -59,7 +59,7 @@ describe(`react-ingrid`, () => {
 
             const context = {
                 items: rndoam.array(),
-                isLoading: false,
+                loading: false,
                 PreloaderComponent: rndoam.noop(),
                 preloaderHeight: rndoam.number(),
                 isShowingPreloader: true
@@ -173,10 +173,10 @@ describe(`react-ingrid`, () => {
             )
         })
 
-        it(`should change height while isLoading`, () => {
+        it(`should change height while loading`, () => {
             const props = {
                 height: 1000,
-                isLoading: true,
+                loading: true,
                 preloaderHeight: 300
             }
 
@@ -193,7 +193,7 @@ describe(`react-ingrid`, () => {
         it(`should not change height if isShowingPreloader is false`, () => {
             const props = {
                 height: 1000,
-                isLoading: true,
+                loading: true,
                 isShowingPreloader: false,
                 preloaderHeight: 300
             }
@@ -210,7 +210,7 @@ describe(`react-ingrid`, () => {
 
         it(`should show default preloader if no provided`, () => {
             const props = {
-                isLoading: true
+                loading: true
             }
 
             const grid = TestUtils
@@ -225,7 +225,7 @@ describe(`react-ingrid`, () => {
 
         it(`should show custom preloader if provided`, () => {
             const props = {
-                isLoading: true,
+                loading: true,
                 PreloaderComponent: PreloaderComponentMock
             }
 

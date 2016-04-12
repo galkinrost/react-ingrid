@@ -36,9 +36,9 @@ const props = {
     items,
     itemWidth: 100,
     itemHeight: 100,
-    load: () => ( /* load hasMore items */ ),
-    hasMore: Boolean, // has hasMore
-    isLoading: Boolean
+    load: () => ( /* load more items */ ),
+    more: Boolean, // has more
+    loading: Boolean
 }
 
 ...
@@ -56,8 +56,8 @@ const Grid = ingrid(props => props)(ItemComponent)
 * [`itemWidth`](#itemDimensionsProp)
 * [`itemHeight`](#itemDimensionsProp)
 * [`load`](#loadProp)
-* [`hasMore`](#hasMoreProp)
-* [`isLoading`](#isLoadingProp)
+* [`more`](#moreProp)
+* [`loading`](#loadingProp)
 * [`paddingTop`](#paddingTopProp)
 * [`paddingLeft`](#paddingLeftProp)
 * [`onScrollChange`](#onScrollChangeProp)
@@ -134,31 +134,31 @@ return (
 <a name="loadProp"></a>
 #### load (required)
 
-Function that loads hasMore items when user scrolls. Ingrid will call "load" every time user scrolls a page (unless you provide the [hasMore](#hasMoreProp) prop).
+Function that loads more items when user scrolls. Ingrid will call "load" every time user scrolls a page (unless you provide the [more](#moreProp) prop).
 You design how items are modelled. Therefore, it's your responsibility to load <b>and sort</b> [items](#itemsProp) in your store.
 
 
-<a name="hasMoreProp"></a>
-#### hasMore (optional, boolean)
+<a name="moreProp"></a>
+#### more (optional, boolean)
 
-Ingrid loads [items](#itemsProp) when user scrolls. You must provide a boolean to tell whether you have hasMore items to load.
+Ingrid loads [items](#itemsProp) when user scrolls. You must provide a boolean to tell whether you have more items to load.
 
 By default, it is always true.
 
 
-<a name="isLoadingProp"></a>
-#### isLoading (required, boolean)
+<a name="loadingProp"></a>
+#### loading (required, boolean)
 
 Normally you don't want to send multiple load requests at the same time. To tell Ingrid not to do it provide a boolean.
 
-Also, you might want to show a preloader while isLoading new items. For example:
+Also, you might want to show a preloader while loading new items. For example:
 
 ```js
-const ImagesGrid = ({ onLoadhasMore, isisLoading }) => {
+const ImagesGrid = ({ onLoadmore, loading }) => {
     const props = {
         ...
-        load: () => onLoadhasMore(),
-        isLoading: isisLoading,
+        load: () => onLoadmore(),
+        loading,
         ...
     }
 
@@ -170,11 +170,11 @@ const ImagesGrid = ({ onLoadhasMore, isisLoading }) => {
 class App extends React.Component {
     ...
     render() {
-        const { isisLoading } = this.props
+        const { loading } = this.props
         return (
-            {isisLoading ?
+            {loading ?
                 <ImagesGrid /> :
-                this.renderLoadhasMoreSpinner()
+                this.renderLoadmoreSpinner()
             }
         )
     }
