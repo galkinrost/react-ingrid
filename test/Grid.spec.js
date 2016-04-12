@@ -32,12 +32,12 @@ describe(`react-ingrid`, () => {
                 items: PropTypes.array,
                 loading: PropTypes.bool,
                 PreloaderComponent: PropTypes.func,
-                preloaderOffset: PropTypes.number
+                preloaderHeight: PropTypes.number
             }, props => ({
                 items: props.items || [],
                 loading: props.loading,
                 PreloaderComponent: props.PreloaderComponent,
-                preloaderOffset: props.preloaderOffset
+                preloaderHeight: props.preloaderHeight
             }))(Grid)
         })
 
@@ -52,7 +52,7 @@ describe(`react-ingrid`, () => {
                 items: rndoam.array(),
                 loading: false,
                 PreloaderComponent: rndoam.noop(),
-                preloaderOffset: rndoam.number()
+                preloaderHeight: rndoam.number()
             }
 
             const tree = TestUtils
@@ -161,6 +161,23 @@ describe(`react-ingrid`, () => {
             items.forEach((item, i) =>
                 expect(item._reactInternalInstance._currentElement.key).toEqual(i.toString())
             )
+        })
+
+        it(`should change height while loading`, () => {
+            const props = {
+                loading: true,
+                preloaderHeight: 300,
+                height: 1000
+            }
+
+            const grid = TestUtils
+                .renderIntoDocument(
+                    <GridWithContext {...props} />
+                )
+
+            const divs = TestUtils.scryRenderedDOMComponentsWithTag(grid, `div`)
+
+            expect(divs[0].style.height).toEqual(`${props.height + props.preloaderHeight}px`)
         })
     })
 })

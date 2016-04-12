@@ -11,7 +11,7 @@ class Ingrid extends Component {
             itemWidth,
             loading,
             PreloaderComponent,
-            preloaderOffset
+            preloaderHeight
         } = this.props
 
         return {
@@ -21,7 +21,7 @@ class Ingrid extends Component {
             itemWidth,
             loading,
             PreloaderComponent,
-            preloaderOffset
+            preloaderHeight
         }
     }
 
@@ -72,7 +72,8 @@ Ingrid.childContextTypes = {
     itemWidth: PropTypes.number,
     loading: PropTypes.bool,
     PreloaderComponent: PropTypes.func,
-    preloaderOffset: PropTypes.number
+    preloaderHeight: PropTypes.number,
+    isShowingPreloader: PropTypes.bool
 }
 
 Ingrid.propTypes = {
@@ -83,7 +84,7 @@ Ingrid.propTypes = {
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     itemWidth: PropTypes.number.isRequired,
     paddingTop: PropTypes.number,
-    preloaderOffset: PropTypes.number
+    preloaderHeight: PropTypes.number
 }
 
 export default Ingrid

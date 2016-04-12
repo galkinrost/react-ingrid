@@ -37,19 +37,19 @@ class Grid extends Component {
             height = 0
         } = this.props
 
-        const defaultPreloaderOffset = 200
+        const defaultpreloaderHeight = 200
 
         const {
             items = [],
             loading,
             paddingTop = 0,
             PreloaderComponent = DefaultPreloader,
-            preloaderOffset = defaultPreloaderOffset
+            preloaderHeight = defaultpreloaderHeight
         } = this.context
 
         const contentStyle = {
             position: `relative`,
-            height: loading ? preloaderOffset + height : height
+            height: loading ? preloaderHeight + height : height
         }
 
         const scrollHelperStyle = {
@@ -86,7 +86,7 @@ Grid.contextTypes = {
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     loading: PropTypes.bool,
     PreloaderComponent: PropTypes.func,
-    preloaderOffset: PropTypes.number
+    preloaderHeight: PropTypes.number
 }
 
 export default Grid

@@ -6596,7 +6596,7 @@
 	            var itemWidth = _props.itemWidth;
 	            var loading = _props.loading;
 	            var PreloaderComponent = _props.PreloaderComponent;
-	            var preloaderOffset = _props.preloaderOffset;
+	            var preloaderHeight = _props.preloaderHeight;
 
 	            return {
 	                ItemComponent: ItemComponent,
@@ -6605,7 +6605,7 @@
 	                itemWidth: itemWidth,
 	                loading: loading,
 	                PreloaderComponent: PreloaderComponent,
-	                preloaderOffset: preloaderOffset
+	                preloaderHeight: preloaderHeight
 	            };
 	        }
 	    }, {
@@ -6660,7 +6660,7 @@
 	    itemWidth: _react.PropTypes.number,
 	    loading: _react.PropTypes.bool,
 	    PreloaderComponent: _react.PropTypes.func,
-	    preloaderOffset: _react.PropTypes.number
+	    preloaderHeight: _react.PropTypes.number
 	};
 
 	Ingrid.propTypes = {
@@ -6671,7 +6671,7 @@
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number.isRequired,
 	    paddingTop: _react.PropTypes.number,
-	    preloaderOffset: _react.PropTypes.number
+	    preloaderHeight: _react.PropTypes.number
 	};
 
 	exports.default = Ingrid;
@@ -11181,7 +11181,7 @@
 	            var _props$height = _props.height;
 	            var height = _props$height === undefined ? 0 : _props$height;
 
-	            var defaultPreloaderOffset = 200;
+	            var defaultpreloaderHeight = 200;
 
 	            var _context = this.context;
 	            var _context$items = _context.items;
@@ -11191,12 +11191,12 @@
 	            var paddingTop = _context$paddingTop === undefined ? 0 : _context$paddingTop;
 	            var _context$PreloaderCom = _context.PreloaderComponent;
 	            var PreloaderComponent = _context$PreloaderCom === undefined ? DefaultPreloader : _context$PreloaderCom;
-	            var _context$preloaderOff = _context.preloaderOffset;
-	            var preloaderOffset = _context$preloaderOff === undefined ? defaultPreloaderOffset : _context$preloaderOff;
+	            var _context$preloaderOff = _context.preloaderHeight;
+	            var preloaderHeight = _context$preloaderOff === undefined ? defaultpreloaderHeight : _context$preloaderOff;
 
 	            var contentStyle = {
 	                position: 'relative',
-	                height: loading ? preloaderOffset + height : height
+	                height: loading ? preloaderHeight + height : height
 	            };
 
 	            var scrollHelperStyle = _extends({}, defaultScrollHelperStyle, {
@@ -11222,7 +11222,7 @@
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    loading: _react.PropTypes.bool,
 	    PreloaderComponent: _react.PropTypes.func,
-	    preloaderOffset: _react.PropTypes.number
+	    preloaderHeight: _react.PropTypes.number
 	};
 
 	exports.default = Grid;
