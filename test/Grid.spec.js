@@ -14,11 +14,17 @@ class ItemMock extends Component {
     }
 }
 
+class PreloaderComponentMock extends Component {
+    render() {
+        return <div />
+    }
+}
+
 
 describe(`react-ingrid`, () => {
 
     describe(`Grid`, () => {
-        let Grid, GridWithContext
+        let Grid, GridWithContext, DefaultPreloader
 
         before(() => {
             mockery.enable({
@@ -26,18 +32,21 @@ describe(`react-ingrid`, () => {
             })
 
             mockery.registerMock(`./Item`, ItemMock);
-            ({default: Grid} = require(`../src/Grid`))
+            ({default: Grid} = require(`../src/Grid`));
+            ({DefaultPreloader} = require(`../src/Grid`))
 
             GridWithContext = contextify({
                 items: PropTypes.array,
                 isLoading: PropTypes.bool,
                 PreloaderComponent: PropTypes.func,
-                preloaderHeight: PropTypes.number
+                preloaderHeight: PropTypes.number,
+                isShowingPreloader: PropTypes.bool
             }, props => ({
                 items: props.items || [],
                 isLoading: props.isLoading,
                 PreloaderComponent: props.PreloaderComponent,
-                preloaderHeight: props.preloaderHeight
+                preloaderHeight: props.preloaderHeight,
+                isShowingPreloader: props.isShowingPreloader
             }))(Grid)
         })
 
@@ -52,7 +61,8 @@ describe(`react-ingrid`, () => {
                 items: rndoam.array(),
                 isLoading: false,
                 PreloaderComponent: rndoam.noop(),
-                preloaderHeight: rndoam.number()
+                preloaderHeight: rndoam.number(),
+                isShowingPreloader: true
             }
 
             const tree = TestUtils
@@ -165,9 +175,9 @@ describe(`react-ingrid`, () => {
 
         it(`should change height while isLoading`, () => {
             const props = {
+                height: 1000,
                 isLoading: true,
-                preloaderHeight: 300,
-                height: 1000
+                preloaderHeight: 300
             }
 
             const grid = TestUtils
@@ -178,6 +188,56 @@ describe(`react-ingrid`, () => {
             const divs = TestUtils.scryRenderedDOMComponentsWithTag(grid, `div`)
 
             expect(divs[0].style.height).toEqual(`${props.height + props.preloaderHeight}px`)
+        })
+
+        it(`should not change height if isShowingPreloader is false`, () => {
+            const props = {
+                height: 1000,
+                isLoading: true,
+                isShowingPreloader: false,
+                preloaderHeight: 300
+            }
+
+            const grid = TestUtils
+                .renderIntoDocument(
+                    <GridWithContext {...props} />
+                )
+
+            const divs = TestUtils.scryRenderedDOMComponentsWithTag(grid, `div`)
+
+            expect(divs[0].style.height).toEqual(`${props.height}px`)
+        })
+
+        it(`should show default preloader if no provided`, () => {
+            const props = {
+                isLoading: true
+            }
+
+            const grid = TestUtils
+                .renderIntoDocument(
+                    <GridWithContext {...props} />
+                )
+
+            const preloaderComponent = TestUtils.findRenderedComponentWithType(grid, DefaultPreloader)
+
+            expect(preloaderComponent).toExist()
+        })
+
+        it(`should show custom preloader if provided`, () => {
+            const props = {
+                isLoading: true,
+                PreloaderComponent: PreloaderComponentMock
+            }
+
+            const grid = TestUtils
+                .renderIntoDocument(
+                    <GridWithContext {...props} />
+                )
+
+            const preloaderComponent = TestUtils.findRenderedComponentWithType(grid, props.PreloaderComponent)
+
+            expect(preloaderComponent).toExist()
+            expect(preloaderComponent).toNotEqual(DefaultPreloader)
         })
     })
 })
