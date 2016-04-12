@@ -9,6 +9,24 @@ const defaultScrollHelperStyle = {
     height: 0
 }
 
+export class DefaultPreloader extends Component {
+    render() {
+        const style = {
+            color: `#000`,
+            fontSize: `20px`,
+            fontFamily: `sans-serif`,
+            marginLeft: `-70px`,
+            marginBottom: `35px`,
+            letterSpacing: `1.5px`
+        }
+        return (
+            <div style={style}>
+                Loading...
+            </div>
+        )
+    }
+}
+
 class Grid extends Component {
 
     render() {
@@ -19,18 +37,31 @@ class Grid extends Component {
             height = 0
         } = this.props
 
+        const defaultpreloaderHeight = 200
+
         const {
             items = [],
-            paddingTop = 0
+            loading,
+            paddingTop = 0,
+            PreloaderComponent = DefaultPreloader,
+            preloaderHeight = defaultpreloaderHeight,
+            isShowingPreloader = true
         } = this.context
 
         const contentStyle = {
-            height
+            position: `relative`,
+            height: isShowingPreloader && loading ? preloaderHeight + height : height
         }
 
         const scrollHelperStyle = {
             ...defaultScrollHelperStyle,
             height: offsetTop + paddingTop
+        }
+
+        const preloaderStyle = {
+            bottom: 0,
+            left: `50%`,
+            position: `absolute`
         }
 
         return (
@@ -41,13 +72,24 @@ class Grid extends Component {
                     .map(item => (
                         <Item key={typeof item.get === `function` ? item.get(`id`) : item.id} item={item}/>
                     ))}
+
+                {isShowingPreloader && loading ?
+                    <div style={preloaderStyle}>
+                        <PreloaderComponent />
+                    </div> :
+                    ``
+                }
             </div>
         )
     }
 }
 
 Grid.contextTypes = {
-    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ])
+    items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    loading: PropTypes.bool,
+    PreloaderComponent: PropTypes.func,
+    preloaderHeight: PropTypes.number,
+    isShowingPreloader: PropTypes.bool
 }
 
 export default Grid

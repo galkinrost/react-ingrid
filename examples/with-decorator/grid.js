@@ -6493,7 +6493,7 @@
 	var _Display2 = _interopRequireDefault(_Display);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { "default": obj };
+	    return obj && obj.__esModule ? obj : { default: obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
@@ -6528,15 +6528,23 @@
 	        value: function getChildContext() {
 	            var _props = this.props;
 	            var ItemComponent = _props.ItemComponent;
-	            var itemWidth = _props.itemWidth;
 	            var itemHeight = _props.itemHeight;
 	            var items = _props.items;
+	            var itemWidth = _props.itemWidth;
+	            var loading = _props.loading;
+	            var PreloaderComponent = _props.PreloaderComponent;
+	            var preloaderHeight = _props.preloaderHeight;
+	            var isShowingPreloader = _props.isShowingPreloader;
 
 	            return {
 	                ItemComponent: ItemComponent,
-	                itemWidth: itemWidth,
 	                itemHeight: itemHeight,
-	                items: items
+	                items: items,
+	                itemWidth: itemWidth,
+	                loading: loading,
+	                PreloaderComponent: PreloaderComponent,
+	                preloaderHeight: preloaderHeight,
+	                isShowingPreloader: isShowingPreloader
 	            };
 	        }
 	    }, {
@@ -6544,9 +6552,10 @@
 	        value: function render() {
 	            var _props2 = this.props;
 	            var buffer = _props2.buffer;
+	            var getPaddingTop = _props2.getPaddingTop;
+	            var itemHeight = _props2.itemHeight;
 	            var items = _props2.items;
 	            var itemWidth = _props2.itemWidth;
-	            var itemHeight = _props2.itemHeight;
 	            var _props2$load = _props2.load;
 	            var load = _props2$load === undefined ? function () {
 	                return null;
@@ -6555,9 +6564,8 @@
 	            var more = _props2.more;
 	            var paddingLeft = _props2.paddingLeft;
 	            var paddingTop = _props2.paddingTop;
-	            var getPaddingTop = _props2.getPaddingTop;
 
-	            var total = void 0;
+	            var total = undefined;
 
 	            if (typeof items.count === 'function') {
 	                total = items.count();
@@ -6565,18 +6573,18 @@
 	                total = items.length;
 	            }
 
-	            return _react2["default"].createElement(_Display2["default"], {
+	            return _react2.default.createElement(_Display2.default, {
 	                buffer: buffer,
+	                getPaddingTop: getPaddingTop,
+	                itemHeight: itemHeight,
 	                items: items,
 	                itemWidth: itemWidth,
-	                itemHeight: itemHeight,
-	                total: total,
 	                load: load,
 	                loading: loading,
 	                more: more,
 	                paddingLeft: paddingLeft,
 	                paddingTop: paddingTop,
-	                getPaddingTop: getPaddingTop
+	                total: total
 	            });
 	        }
 	    }]);
@@ -6588,20 +6596,25 @@
 	    ItemComponent: _react.PropTypes.func,
 	    itemHeight: _react.PropTypes.number,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
-	    itemWidth: _react.PropTypes.number
+	    itemWidth: _react.PropTypes.number,
+	    loading: _react.PropTypes.bool,
+	    PreloaderComponent: _react.PropTypes.func,
+	    preloaderHeight: _react.PropTypes.number,
+	    isShowingPreloader: _react.PropTypes.bool
 	};
 
 	Ingrid.propTypes = {
 	    buffer: _react.PropTypes.number,
+	    getPaddingTop: _react.PropTypes.func,
 	    ItemComponent: _react.PropTypes.func.isRequired,
 	    itemHeight: _react.PropTypes.number.isRequired,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number.isRequired,
 	    paddingTop: _react.PropTypes.number,
-	    getPaddingTop: _react.PropTypes.func
+	    preloaderHeight: _react.PropTypes.number
 	};
 
-	exports["default"] = Ingrid;
+	exports.default = Ingrid;
 
 /***/ },
 /* 53 */
@@ -10796,7 +10809,7 @@
 	var _GridCalculator2 = _interopRequireDefault(_GridCalculator);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { "default": obj };
+	    return obj && obj.__esModule ? obj : { default: obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
@@ -10890,7 +10903,7 @@
 	        var paddingLeft = props.paddingLeft;
 	        var paddingTop = props.paddingTop;
 
-	        _this.calculator = new _GridCalculator2["default"]({ itemWidth: itemWidth, itemHeight: itemHeight, total: total, buffer: buffer, paddingLeft: paddingLeft, paddingTop: paddingTop });
+	        _this.calculator = new _GridCalculator2.default({ itemWidth: itemWidth, itemHeight: itemHeight, total: total, buffer: buffer, paddingLeft: paddingLeft, paddingTop: paddingTop });
 
 	        _this.state = _this.calculator.getState();
 	        return _this;
@@ -10974,21 +10987,21 @@
 	                paddingLeft: paddingLeft
 	            });
 
-	            return _react2["default"].createElement('div', { ref: function ref(display) {
+	            return _react2.default.createElement('div', { ref: function ref(display) {
 	                    _this2.display = display;
 	                },
 	                style: displayStyle
-	            }, _react2["default"].createElement('div', { ref: function ref(content) {
+	            }, _react2.default.createElement('div', { ref: function ref(content) {
 	                    _this2.content = content;
 	                }, style: contentStyle
-	            }, _react2["default"].createElement(_Grid2["default"], _extends({ total: total }, this.state))));
+	            }, _react2.default.createElement(_Grid2.default, _extends({ total: total }, this.state))));
 	        }
 	    }]);
 
 	    return Display;
 	}(_react.Component);
 
-	exports["default"] = Display;
+	exports.default = Display;
 
 /***/ },
 /* 90 */
@@ -11001,6 +11014,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
+	exports.DefaultPreloader = undefined;
 
 	var _extends = Object.assign || function (target) {
 	    for (var i = 1; i < arguments.length; i++) {
@@ -11031,7 +11045,7 @@
 	var _Item2 = _interopRequireDefault(_Item);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { "default": obj };
+	    return obj && obj.__esModule ? obj : { default: obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
@@ -11059,8 +11073,35 @@
 	    height: 0
 	};
 
-	var Grid = function (_Component) {
-	    _inherits(Grid, _Component);
+	var DefaultPreloader = exports.DefaultPreloader = function (_Component) {
+	    _inherits(DefaultPreloader, _Component);
+
+	    function DefaultPreloader() {
+	        _classCallCheck(this, DefaultPreloader);
+
+	        return _possibleConstructorReturn(this, Object.getPrototypeOf(DefaultPreloader).apply(this, arguments));
+	    }
+
+	    _createClass(DefaultPreloader, [{
+	        key: 'render',
+	        value: function render() {
+	            var style = {
+	                color: '#000',
+	                fontSize: '20px',
+	                fontFamily: 'sans-serif',
+	                marginLeft: '-70px',
+	                marginBottom: '35px',
+	                letterSpacing: '1.5px'
+	            };
+	            return _react2.default.createElement('div', { style: style }, 'Loading...');
+	        }
+	    }]);
+
+	    return DefaultPreloader;
+	}(_react.Component);
+
+	var Grid = function (_Component2) {
+	    _inherits(Grid, _Component2);
 
 	    function Grid() {
 	        _classCallCheck(this, Grid);
@@ -11080,23 +11121,40 @@
 	            var maxVisibleIndex = _props$maxVisibleInde === undefined ? 0 : _props$maxVisibleInde;
 	            var _props$height = _props.height;
 	            var height = _props$height === undefined ? 0 : _props$height;
+
+	            var defaultpreloaderHeight = 200;
+
 	            var _context = this.context;
 	            var _context$items = _context.items;
 	            var items = _context$items === undefined ? [] : _context$items;
+	            var loading = _context.loading;
 	            var _context$paddingTop = _context.paddingTop;
 	            var paddingTop = _context$paddingTop === undefined ? 0 : _context$paddingTop;
+	            var _context$PreloaderCom = _context.PreloaderComponent;
+	            var PreloaderComponent = _context$PreloaderCom === undefined ? DefaultPreloader : _context$PreloaderCom;
+	            var _context$preloaderHei = _context.preloaderHeight;
+	            var preloaderHeight = _context$preloaderHei === undefined ? defaultpreloaderHeight : _context$preloaderHei;
+	            var _context$isShowingPre = _context.isShowingPreloader;
+	            var isShowingPreloader = _context$isShowingPre === undefined ? true : _context$isShowingPre;
 
 	            var contentStyle = {
-	                height: height
+	                position: 'relative',
+	                height: isShowingPreloader && loading ? preloaderHeight + height : height
 	            };
 
 	            var scrollHelperStyle = _extends({}, defaultScrollHelperStyle, {
 	                height: offsetTop + paddingTop
 	            });
 
-	            return _react2["default"].createElement('div', { style: contentStyle }, _react2["default"].createElement('div', { style: scrollHelperStyle }), items.slice(minVisibleIndex, maxVisibleIndex + 1).map(function (item) {
-	                return _react2["default"].createElement(_Item2["default"], { key: typeof item.get === 'function' ? item.get('id') : item.id, item: item });
-	            }));
+	            var preloaderStyle = {
+	                bottom: 0,
+	                left: '50%',
+	                position: 'absolute'
+	            };
+
+	            return _react2.default.createElement('div', { style: contentStyle }, _react2.default.createElement('div', { style: scrollHelperStyle }), items.slice(minVisibleIndex, maxVisibleIndex + 1).map(function (item) {
+	                return _react2.default.createElement(_Item2.default, { key: typeof item.get === 'function' ? item.get('id') : item.id, item: item });
+	            }), isShowingPreloader && loading ? _react2.default.createElement('div', { style: preloaderStyle }, _react2.default.createElement(PreloaderComponent, null)) : '');
 	        }
 	    }]);
 
@@ -11104,10 +11162,14 @@
 	}(_react.Component);
 
 	Grid.contextTypes = {
-	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object])
+	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
+	    loading: _react.PropTypes.bool,
+	    PreloaderComponent: _react.PropTypes.func,
+	    preloaderHeight: _react.PropTypes.number,
+	    isShowingPreloader: _react.PropTypes.bool
 	};
 
-	exports["default"] = Grid;
+	exports.default = Grid;
 
 /***/ },
 /* 91 */
@@ -11317,7 +11379,7 @@
 
 	    /**
 	     *
-	     * @returns {{minVisibleIndex: * maxVisibleIndex: * offsetTop: *}}
+	     * @returns {{minVisibleIndex: *, maxVisibleIndex: *, offsetTop: *}}
 	     */
 
 	  }, {
@@ -11335,7 +11397,7 @@
 	  return GridCalculator;
 	}();
 
-	exports["default"] = GridCalculator;
+	exports.default = GridCalculator;
 
 /***/ },
 /* 92 */
@@ -11374,7 +11436,7 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { "default": obj };
+	    return obj && obj.__esModule ? obj : { default: obj };
 	}
 
 	function _classCallCheck(instance, Constructor) {
@@ -11426,7 +11488,7 @@
 	                height: itemHeight
 	            });
 
-	            return _react2["default"].createElement('div', { style: itemStyle }, _react2["default"].createElement(ItemComponent, { data: item }));
+	            return _react2.default.createElement('div', { style: itemStyle }, _react2.default.createElement(ItemComponent, { data: item }));
 	        }
 	    }]);
 
@@ -11439,7 +11501,7 @@
 	    itemHeight: _react.PropTypes.number
 	};
 
-	exports["default"] = Item;
+	exports.default = Item;
 
 /***/ },
 /* 93 */
@@ -11461,11 +11523,11 @@
 	var _ingridDecorator2 = _interopRequireDefault(_ingridDecorator);
 
 	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { "default": obj };
+	  return obj && obj.__esModule ? obj : { default: obj };
 	}
 
-	exports.ingrid = _ingridDecorator2["default"];
-	exports["default"] = _Ingrid2["default"];
+	exports.ingrid = _ingridDecorator2.default;
+	exports.default = _Ingrid2.default;
 
 /***/ },
 /* 94 */
@@ -11496,7 +11558,7 @@
 	var _react2 = _interopRequireDefault(_react);
 
 	function _interopRequireDefault(obj) {
-	    return obj && obj.__esModule ? obj : { "default": obj };
+	    return obj && obj.__esModule ? obj : { default: obj };
 	}
 
 	var ingrid = function ingrid() {
@@ -11505,12 +11567,12 @@
 	    } : arguments[0];
 	    return function (ItemComponent) {
 	        return function (props) {
-	            return _react2["default"].createElement(_Ingrid2["default"], _extends({}, mapProps(props), { ItemComponent: ItemComponent }));
+	            return _react2.default.createElement(_Ingrid2.default, _extends({}, mapProps(props), { ItemComponent: ItemComponent }));
 	        };
 	    };
 	};
 
-	exports["default"] = ingrid;
+	exports.default = ingrid;
 
 /***/ },
 /* 95 */

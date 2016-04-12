@@ -61,6 +61,9 @@ const Grid = ingrid(props => props)(ItemComponent)
 * [`paddingTop`](#paddingTopProp)
 * [`paddingLeft`](#paddingLeftProp)
 * [`onScrollChange`](#onScrollChangeProp)
+* [`PreloaderComponent`](#PreloaderComponentProp)
+* [`preloaderHeight`](#preloaderHeightProp)
+* [`isShowingPreloader`](#isShowingPreloaderProp)
 
 
 <a name="ItemComponentProp"></a>
@@ -151,11 +154,11 @@ Normally you don't want to send multiple load requests at the same time. To tell
 Also, you might want to show a preloader while loading new items. For example:
 
 ```js
-const ImagesGrid = ({ onLoadMore, isLoading }) => {
+const ImagesGrid = ({ onLoadmore, loading }) => {
     const props = {
         ...
-        load: () => onLoadMore(),
-        loading: isLoading,
+        load: () => onLoadmore(),
+        loading,
         ...
     }
 
@@ -167,11 +170,11 @@ const ImagesGrid = ({ onLoadMore, isLoading }) => {
 class App extends React.Component {
     ...
     render() {
-        const { isLoading } = this.props
+        const { loading } = this.props
         return (
-            {isLoading ?
+            {loading ?
                 <ImagesGrid /> :
-                this.renderLoadMoreSpinner()
+                this.renderLoadmoreSpinner()
             }
         )
     }
@@ -186,10 +189,12 @@ You might want to add extra padding on top. This is the best place to do it :win
 
 <b>Note:</b> Do not do it via CSS — Ingrid will not be able to calculate the top of the container, and everything will shake.
 
+
 <a name="paddingLeftProp"></a>
 #### paddingLeft (optional)
 
 The same is as the [`paddingTop`](#paddingTopProp) but for the left side
+
 
 <a name="onScrollChangeProp"></a>
 #### getPaddingTop (optional)
@@ -250,6 +255,33 @@ class App extends React.Component {
     }
 }
 ```
+
+<a name="isShowingPreloaderProp"></a>
+#### isShowingPreloader (optional, boolean)
+
+Ingrid shows a preloader while loading new items. We don't recommend to disable this behaviour. The better way is to create your own preloader and pass it through [`PreloaderComponent`](#PreloaderComponentProp) prop.
+
+By default, it is true.
+
+
+<a name="PreloaderComponentProp"></a>
+#### PreloaderComponent (optional)
+
+If you don't happy with our default preloader use your :sparkles:imagination:sparkles: to implement your own.
+
+```js
+const PreloaderComponent = () => (
+    <div>
+        <h1>Much loading. So wait.</h1>
+    </div>
+)
+```
+
+
+<a name="preloaderHeightProp"></a>
+#### preloaderHeight (optional)
+
+You can add more space for your preloader here.
 
 ## Examples
 
