@@ -33,18 +33,26 @@ describe(`react-ingrid`, () => {
 
         it(`should transfer props into the context`, () => {
             DisplayMock.contextTypes = {
+                loading: PropTypes.bool,
+                isShowingPreloader: PropTypes.bool,
                 ItemComponent: PropTypes.func,
                 itemHeight: PropTypes.number,
                 items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-                itemWidth: PropTypes.number
+                itemWidth: PropTypes.number,
+                PreloaderComponent: PropTypes.func,
+                preloaderHeight: PropTypes.number
             }
 
             try {
                 const props = {
+                    loading: false,
+                    isShowingPreloader: false,
                     ItemComponent: rndoam.noop(),
                     itemHeight: rndoam.number(),
                     items: rndoam.array(),
-                    itemWidth: rndoam.number()
+                    itemWidth: rndoam.number(),
+                    PreloaderComponent: rndoam.noop(),
+                    preloaderHeight: rndoam.number()
                 }
 
                 const tree = TestUtils.renderIntoDocument(
@@ -62,17 +70,17 @@ describe(`react-ingrid`, () => {
 
         it(`should transfer props into the Display component`, () => {
             const props = {
-                ItemComponent: rndoam.noop(),
                 buffer: rndoam.number(),
-                itemWidth: rndoam.number(),
+                getPaddingTop: rndoam.noop(),
+                more: true,
+                loading: true,
+                ItemComponent: rndoam.noop(),
                 itemHeight: rndoam.number(),
                 items: rndoam.array(),
+                itemWidth: rndoam.number(),
                 load: rndoam.noop(),
-                loading: true,
-                more: true,
-                paddingTop: rndoam.number(),
                 paddingLeft: rndoam.number(),
-                getPaddingTop: rndoam.noop()
+                paddingTop: rndoam.number()
             }
 
             const tree = TestUtils.renderIntoDocument(
