@@ -9,7 +9,7 @@ class Ingrid extends Component {
             itemHeight,
             items,
             itemWidth,
-            isLoading,
+            loading,
             PreloaderComponent,
             preloaderHeight,
             isShowingPreloader
@@ -20,7 +20,7 @@ class Ingrid extends Component {
             itemHeight,
             items,
             itemWidth,
-            isLoading,
+            loading,
             PreloaderComponent,
             preloaderHeight,
             isShowingPreloader
@@ -35,8 +35,8 @@ class Ingrid extends Component {
             items,
             itemWidth,
             load = () => null,
-            isLoading,
-            hasMore,
+            loading,
+            more,
             paddingLeft,
             paddingTop
         } = this.props
@@ -57,8 +57,8 @@ class Ingrid extends Component {
                 items={items}
                 itemWidth={itemWidth}
                 load={load}
-                isLoading={isLoading}
-                hasMore={hasMore}
+                loading={loading}
+                more={more}
                 paddingLeft={paddingLeft}
                 paddingTop={paddingTop}
                 total={total}
@@ -72,7 +72,7 @@ Ingrid.childContextTypes = {
     itemHeight: PropTypes.number,
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     itemWidth: PropTypes.number,
-    isLoading: PropTypes.bool,
+    loading: PropTypes.bool,
     PreloaderComponent: PropTypes.func,
     preloaderHeight: PropTypes.number,
     isShowingPreloader: PropTypes.bool

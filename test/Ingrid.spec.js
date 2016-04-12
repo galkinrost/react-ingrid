@@ -33,7 +33,7 @@ describe(`react-ingrid`, () => {
 
         it(`should transfer props into the context`, () => {
             DisplayMock.contextTypes = {
-                isLoading: PropTypes.bool,
+                loading: PropTypes.bool,
                 isShowingPreloader: PropTypes.bool,
                 ItemComponent: PropTypes.func,
                 itemHeight: PropTypes.number,
@@ -45,7 +45,7 @@ describe(`react-ingrid`, () => {
 
             try {
                 const props = {
-                    isLoading: false,
+                    loading: false,
                     isShowingPreloader: false,
                     ItemComponent: rndoam.noop(),
                     itemHeight: rndoam.number(),
@@ -72,8 +72,8 @@ describe(`react-ingrid`, () => {
             const props = {
                 buffer: rndoam.number(),
                 getPaddingTop: rndoam.noop(),
-                hasMore: true,
-                isLoading: true,
+                more: true,
+                loading: true,
                 ItemComponent: rndoam.noop(),
                 itemHeight: rndoam.number(),
                 items: rndoam.array(),
