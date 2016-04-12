@@ -11086,7 +11086,7 @@
 	                fontSize: '20px',
 	                fontFamily: 'sans-serif',
 	                marginLeft: '-70px',
-	                marginBottom: '40px',
+	                marginBottom: '35px',
 	                letterSpacing: '1.5px'
 	            };
 	            return _react2.default.createElement('div', { style: style }, 'LOADING...');
