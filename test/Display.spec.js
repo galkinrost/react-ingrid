@@ -252,7 +252,7 @@ describe(`react-ingrid`, () => {
             const props = {
                 total: 100,
                 load: expect.createSpy(),
-                loading: false,
+                isLoading: false,
                 more: true
             }
 
@@ -286,7 +286,7 @@ describe(`react-ingrid`, () => {
             const props = {
                 total: 100,
                 load: expect.createSpy(),
-                loading: true,
+                isLoading: true,
                 more: true
             }
 
@@ -320,7 +320,7 @@ describe(`react-ingrid`, () => {
             const props = {
                 total: 100,
                 load: expect.createSpy(),
-                loading: false,
+                isLoading: false,
                 more: false
             }
 

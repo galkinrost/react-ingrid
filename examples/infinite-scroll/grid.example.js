@@ -50,7 +50,7 @@ class Container extends Component {
     constructor() {
         super()
         this.state = {
-            loading: false,
+            isLoading: false,
             more: true,
             items
         }
@@ -59,7 +59,7 @@ class Container extends Component {
     render() {
         const load = () => {
             this.setState({
-                loading: true
+                isLoading: true
             })
 
             setTimeout(() => {
@@ -68,7 +68,7 @@ class Container extends Component {
                     .items
                     .concat(generateItems())
                 this.setState({
-                    loading: false,
+                    isLoading: false,
                     items: moreItems,
                     more: moreItems.length < max
                 })

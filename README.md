@@ -38,7 +38,7 @@ const props = {
     itemHeight: 100,
     load: () => ( /* load more items */ ),
     more: Boolean, // has more
-    loading: Boolean
+    isLoading: Boolean
 }
 
 ...
@@ -57,7 +57,7 @@ const Grid = ingrid(props => props)(ItemComponent)
 * [`itemHeight`](#itemDimensionsProp)
 * [`load`](#loadProp)
 * [`more`](#moreProp)
-* [`loading`](#loadingProp)
+* [`isLoading`](#isLoadingProp)
 * [`paddingTop`](#paddingTopProp)
 * [`paddingLeft`](#paddingLeftProp)
 * [`onScrollChange`](#onScrollChangeProp)
@@ -143,19 +143,19 @@ Ingrid loads [items](#itemsProp) when user scrolls. You must provide a boolean t
 By default, it is always true.
 
 
-<a name="loadingProp"></a>
-#### loading (required, boolean)
+<a name="isLoadingProp"></a>
+#### isLoading (required, boolean)
 
 Normally you don't want to send multiple load requests at the same time. To tell Ingrid not to do it provide a boolean.
 
-Also, you might want to show a preloader while loading new items. For example:
+Also, you might want to show a preloader while isLoading new items. For example:
 
 ```js
-const ImagesGrid = ({ onLoadMore, isLoading }) => {
+const ImagesGrid = ({ onLoadMore, isisLoading }) => {
     const props = {
         ...
         load: () => onLoadMore(),
-        loading: isLoading,
+        isLoading: isisLoading,
         ...
     }
 
@@ -167,9 +167,9 @@ const ImagesGrid = ({ onLoadMore, isLoading }) => {
 class App extends React.Component {
     ...
     render() {
-        const { isLoading } = this.props
+        const { isisLoading } = this.props
         return (
-            {isLoading ?
+            {isisLoading ?
                 <ImagesGrid /> :
                 this.renderLoadMoreSpinner()
             }

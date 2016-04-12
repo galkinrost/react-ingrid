@@ -840,7 +840,7 @@
 	  _renderSubtreeIntoContainer: function (parentComponent, nextElement, container, callback) {
 	    !ReactElement.isValidElement(nextElement) ?  true ? invariant(false, 'ReactDOM.render(): Invalid component element.%s', typeof nextElement === 'string' ? ' Instead of passing an element string, make sure to instantiate ' + 'it by passing it to React.createElement.' : typeof nextElement === 'function' ? ' Instead of passing a component class, make sure to instantiate ' + 'it by passing it to React.createElement.' :
 	    // Check if it quacks like an element
-	    nextElement != null && nextElement.props !== undefined ? ' This may be caused by unintentionally loading two independent ' + 'copies of React.' : '') : invariant(false) : undefined;
+	    nextElement != null && nextElement.props !== undefined ? ' This may be caused by unintentionally isLoading two independent ' + 'copies of React.' : '') : invariant(false) : undefined;
 
 	     true ? warning(!container || !container.tagName || container.tagName.toUpperCase() !== 'BODY', 'render(): Rendering components directly into document.body is ' + 'discouraged, since its children are often manipulated by third-party ' + 'scripts and browser extensions. This may lead to subtle ' + 'reconciliation issues. Try rendering into a container element created ' + 'for your app.') : undefined;
 
@@ -6534,7 +6534,7 @@
 	            var itemHeight = _props.itemHeight;
 	            var items = _props.items;
 	            var itemWidth = _props.itemWidth;
-	            var loading = _props.loading;
+	            var isLoading = _props.isLoading;
 	            var PreloaderComponent = _props.PreloaderComponent;
 	            var preloaderHeight = _props.preloaderHeight;
 
@@ -6543,7 +6543,7 @@
 	                itemHeight: itemHeight,
 	                items: items,
 	                itemWidth: itemWidth,
-	                loading: loading,
+	                isLoading: isLoading,
 	                PreloaderComponent: PreloaderComponent,
 	                preloaderHeight: preloaderHeight
 	            };
@@ -6561,7 +6561,7 @@
 	            var load = _props2$load === undefined ? function () {
 	                return null;
 	            } : _props2$load;
-	            var loading = _props2.loading;
+	            var isLoading = _props2.isLoading;
 	            var more = _props2.more;
 	            var paddingLeft = _props2.paddingLeft;
 	            var paddingTop = _props2.paddingTop;
@@ -6581,7 +6581,7 @@
 	                items: items,
 	                itemWidth: itemWidth,
 	                load: load,
-	                loading: loading,
+	                isLoading: isLoading,
 	                more: more,
 	                paddingLeft: paddingLeft,
 	                paddingTop: paddingTop,
@@ -6598,7 +6598,7 @@
 	    itemHeight: _react.PropTypes.number,
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number,
-	    loading: _react.PropTypes.bool,
+	    isLoading: _react.PropTypes.bool,
 	    PreloaderComponent: _react.PropTypes.func,
 	    preloaderHeight: _react.PropTypes.number
 	};
@@ -10949,14 +10949,14 @@
 	        value: function componentWillUpdate(nextProps, nextState) {
 	            var total = nextProps.total;
 	            var load = nextProps.load;
-	            var loading = nextProps.loading;
+	            var isLoading = nextProps.isLoading;
 	            var more = nextProps.more;
 	            var getPaddingTop = nextProps.getPaddingTop;
 	            var paddingTop = nextProps.paddingTop;
 	            var maxVisibleIndex = nextState.maxVisibleIndex;
 	            var offsetTop = nextState.offsetTop;
 
-	            if (more && !loading && maxVisibleIndex > total) {
+	            if (more && !isLoading && maxVisibleIndex > total) {
 	                load();
 	            }
 
@@ -11092,7 +11092,7 @@
 	                marginBottom: '35px',
 	                letterSpacing: '1.5px'
 	            };
-	            return _react2.default.createElement('div', { style: style }, 'LOADING...');
+	            return _react2.default.createElement('div', { style: style }, 'isLoading...');
 	        }
 	    }]);
 
@@ -11126,7 +11126,7 @@
 	            var _context = this.context;
 	            var _context$items = _context.items;
 	            var items = _context$items === undefined ? [] : _context$items;
-	            var loading = _context.loading;
+	            var isLoading = _context.isLoading;
 	            var _context$paddingTop = _context.paddingTop;
 	            var paddingTop = _context$paddingTop === undefined ? 0 : _context$paddingTop;
 	            var _context$PreloaderCom = _context.PreloaderComponent;
@@ -11136,7 +11136,7 @@
 
 	            var contentStyle = {
 	                position: 'relative',
-	                height: loading ? preloaderHeight + height : height
+	                height: isLoading ? preloaderHeight + height : height
 	            };
 
 	            var scrollHelperStyle = _extends({}, defaultScrollHelperStyle, {
@@ -11151,7 +11151,7 @@
 
 	            return _react2.default.createElement('div', { style: contentStyle }, _react2.default.createElement('div', { style: scrollHelperStyle }), items.slice(minVisibleIndex, maxVisibleIndex + 1).map(function (item) {
 	                return _react2.default.createElement(_Item2.default, { key: typeof item.get === 'function' ? item.get('id') : item.id, item: item });
-	            }), loading ? _react2.default.createElement('div', { style: preloaderStyle }, _react2.default.createElement(PreloaderComponent, null)) : '');
+	            }), isLoading ? _react2.default.createElement('div', { style: preloaderStyle }, _react2.default.createElement(PreloaderComponent, null)) : '');
 	        }
 	    }]);
 
@@ -11160,7 +11160,7 @@
 
 	Grid.contextTypes = {
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
-	    loading: _react.PropTypes.bool,
+	    isLoading: _react.PropTypes.bool,
 	    PreloaderComponent: _react.PropTypes.func,
 	    preloaderHeight: _react.PropTypes.number
 	};
