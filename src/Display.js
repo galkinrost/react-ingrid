@@ -50,7 +50,7 @@ class Display extends Component {
     constructor(props) {
         super()
         const {itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop} = props
-        this.calculator = new GridCalculator({itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop})
+        this.calculator = new GridCalculator({itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop, maxVisibleIndex: total})
 
         this.state = this.calculator.getState()
     }
