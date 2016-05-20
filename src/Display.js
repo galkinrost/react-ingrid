@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 import Grid from './Grid'
 import GridCalculator from './GridCalculator'
@@ -50,7 +50,15 @@ class Display extends Component {
     constructor(props) {
         super()
         const {itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop} = props
-        this.calculator = new GridCalculator({itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop, maxVisibleIndex: total})
+        this.calculator = new GridCalculator({
+            itemWidth,
+            itemHeight,
+            total,
+            buffer,
+            paddingLeft,
+            paddingTop,
+            maxVisibleIndex: typeof window === `undefined` ? total : 0
+        })
 
         this.state = this.calculator.getState()
     }

@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import TestUtils from 'react-addons-test-utils'
 
@@ -80,10 +80,36 @@ describe(`react-ingrid`, () => {
 
             expect(display.state).toEqual({
                 minVisibleIndex: 0,
-                maxVisibleIndex: 100,
+                maxVisibleIndex: 0,
                 offsetTop: 0,
                 height: 0
             })
+        })
+
+        it(`should render all items on server rendering`, () => {
+            const window = global.window;
+
+            const props = {
+                itemWidth: 100,
+                itemHeight: 100,
+                total: 100
+            }
+
+            delete global.window
+
+            try {
+                const display = new Display(props)
+
+                expect(display.state).toEqual({
+                    minVisibleIndex: 0,
+                    maxVisibleIndex: 100,
+                    offsetTop: 0,
+                    height: 0
+                })
+            } finally {
+                global.window = window
+            }
+
         })
 
         it(`should update state when component did mount`, () => {

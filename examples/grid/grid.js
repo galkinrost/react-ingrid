@@ -6568,7 +6568,7 @@
 	            var paddingLeft = _props2.paddingLeft;
 	            var paddingTop = _props2.paddingTop;
 
-	            var total = undefined;
+	            var total = void 0;
 
 	            if (typeof items.count === 'function') {
 	                total = items.count();
@@ -10906,7 +10906,15 @@
 	        var paddingLeft = props.paddingLeft;
 	        var paddingTop = props.paddingTop;
 
-	        _this.calculator = new _GridCalculator2.default({ itemWidth: itemWidth, itemHeight: itemHeight, total: total, buffer: buffer, paddingLeft: paddingLeft, paddingTop: paddingTop });
+	        _this.calculator = new _GridCalculator2.default({
+	            itemWidth: itemWidth,
+	            itemHeight: itemHeight,
+	            total: total,
+	            buffer: buffer,
+	            paddingLeft: paddingLeft,
+	            paddingTop: paddingTop,
+	            maxVisibleIndex: typeof window === 'undefined' ? total : 0
+	        });
 
 	        _this.state = _this.calculator.getState();
 	        return _this;
