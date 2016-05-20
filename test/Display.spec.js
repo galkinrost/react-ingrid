@@ -80,14 +80,14 @@ describe(`react-ingrid`, () => {
 
             expect(display.state).toEqual({
                 minVisibleIndex: 0,
-                maxVisibleIndex: 100,
+                maxVisibleIndex: 0,
                 offsetTop: 0,
                 height: 0
             })
         })
 
         it(`should render all items on server rendering`, () => {
-            const window = global.window;
+            const window = global.window
 
             const props = {
                 itemWidth: 100,
@@ -95,7 +95,7 @@ describe(`react-ingrid`, () => {
                 total: 100
             }
 
-            delete global.window
+            Reflect.deleteProperty(global, `window`)
 
             try {
                 const display = new Display(props)

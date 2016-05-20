@@ -51,6 +51,7 @@
     "eslint-config-babo": "^0.1.1",
     "expect": "^1.14.0",
     "glob": "^7.0.0",
+    "harmony-reflect": "^1.4.6",
     "immutable": "^3.7.6",
     "jsdom": "^8.0.2",
     "mocha": "^2.4.5",
