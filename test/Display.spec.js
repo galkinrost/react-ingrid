@@ -80,7 +80,7 @@ describe(`react-ingrid`, () => {
 
             expect(display.state).toEqual({
                 minVisibleIndex: 0,
-                maxVisibleIndex: 0,
+                maxVisibleIndex: 100,
                 offsetTop: 0,
                 height: 0
             })
