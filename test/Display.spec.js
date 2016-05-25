@@ -86,29 +86,23 @@ describe(`react-ingrid`, () => {
             })
         })
 
-        it(`should render all items on server rendering`, () => {
-            const window = global.window
+        it(`should render all items on the initial render call if prerenderAll is true`, () => {
 
             const props = {
                 itemWidth: 100,
                 itemHeight: 100,
-                total: 100
+                total: 100,
+                shouldPrerenderAll: true
             }
+            
+            const display = new Display(props)
 
-            Reflect.deleteProperty(global, `window`)
-
-            try {
-                const display = new Display(props)
-
-                expect(display.state).toEqual({
-                    minVisibleIndex: 0,
-                    maxVisibleIndex: 100,
-                    offsetTop: 0,
-                    height: 0
-                })
-            } finally {
-                global.window = window
-            }
+            expect(display.state).toEqual({
+                minVisibleIndex: 0,
+                maxVisibleIndex: 100,
+                offsetTop: 0,
+                height: 0
+            })
 
         })
 

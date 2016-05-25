@@ -38,7 +38,8 @@ class Ingrid extends Component {
             loading,
             more,
             paddingLeft,
-            paddingTop
+            paddingTop,
+            shouldPrerenderAll = false
         } = this.props
 
         let total
@@ -59,6 +60,7 @@ class Ingrid extends Component {
                 load={load}
                 loading={loading}
                 more={more}
+                shouldPrerenderAll={shouldPrerenderAll}
                 paddingLeft={paddingLeft}
                 paddingTop={paddingTop}
                 total={total}
@@ -86,7 +88,8 @@ Ingrid.propTypes = {
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     itemWidth: PropTypes.number.isRequired,
     paddingTop: PropTypes.number,
-    preloaderHeight: PropTypes.number
+    preloaderHeight: PropTypes.number,
+    prerenderAll: PropTypes.bool
 }
 
 export default Ingrid

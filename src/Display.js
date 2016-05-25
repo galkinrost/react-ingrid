@@ -49,7 +49,7 @@ class Display extends Component {
 
     constructor(props) {
         super()
-        const {itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop} = props
+        const {itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop, shouldPrerenderAll} = props
         this.calculator = new GridCalculator({
             itemWidth,
             itemHeight,
@@ -57,7 +57,7 @@ class Display extends Component {
             buffer,
             paddingLeft,
             paddingTop,
-            maxVisibleIndex: typeof window === `undefined` ? total : 0
+            maxVisibleIndex: shouldPrerenderAll ? total : 0
         })
 
         this.state = this.calculator.getState()

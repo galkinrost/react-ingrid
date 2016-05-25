@@ -64,6 +64,7 @@ const Grid = ingrid(props => props)(ItemComponent)
 * [`PreloaderComponent`](#PreloaderComponentProp)
 * [`preloaderHeight`](#preloaderHeightProp)
 * [`isShowingPreloader`](#isShowingPreloaderProp)
+* [`shouldPrerenderAll`](#shouldPrerenderAll)
 
 
 <a name="ItemComponentProp"></a>
@@ -282,6 +283,11 @@ const PreloaderComponent = () => (
 #### preloaderHeight (optional)
 
 You can add more space for your preloader here.
+
+<a name="shouldPrerenderAll"></a>
+#### shouldPrerenderAll (optional)
+
+If you want to render your grid on the server side you should set this propery true. In this case all items will be rendered on the initial render call.
 
 ## Examples
 
