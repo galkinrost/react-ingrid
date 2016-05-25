@@ -6564,6 +6564,8 @@
 	            var more = _props2.more;
 	            var paddingLeft = _props2.paddingLeft;
 	            var paddingTop = _props2.paddingTop;
+	            var _props2$shouldPrerend = _props2.shouldPrerenderAll;
+	            var shouldPrerenderAll = _props2$shouldPrerend === undefined ? false : _props2$shouldPrerend;
 
 	            var total = void 0;
 
@@ -6582,6 +6584,7 @@
 	                load: load,
 	                loading: loading,
 	                more: more,
+	                shouldPrerenderAll: shouldPrerenderAll,
 	                paddingLeft: paddingLeft,
 	                paddingTop: paddingTop,
 	                total: total
@@ -6611,7 +6614,8 @@
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number.isRequired,
 	    paddingTop: _react.PropTypes.number,
-	    preloaderHeight: _react.PropTypes.number
+	    preloaderHeight: _react.PropTypes.number,
+	    prerenderAll: _react.PropTypes.bool
 	};
 
 	exports.default = Ingrid;
@@ -10902,6 +10906,7 @@
 	        var buffer = props.buffer;
 	        var paddingLeft = props.paddingLeft;
 	        var paddingTop = props.paddingTop;
+	        var shouldPrerenderAll = props.shouldPrerenderAll;
 
 	        _this.calculator = new _GridCalculator2.default({
 	            itemWidth: itemWidth,
@@ -10910,7 +10915,7 @@
 	            buffer: buffer,
 	            paddingLeft: paddingLeft,
 	            paddingTop: paddingTop,
-	            maxVisibleIndex: typeof window === 'undefined' ? total : 0
+	            maxVisibleIndex: shouldPrerenderAll ? total : 0
 	        });
 
 	        _this.state = _this.calculator.getState();
