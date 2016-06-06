@@ -5,8 +5,8 @@ import GridCalculator from './GridCalculator'
 
 const defaultDisplayStyle = {
     height: `100%`,
-    overflowX: `hidden`,
-    overflowY: `scroll`,
+    overflowX: `auto`,
+    overflowY: `auto`,
     position: `relative`,
     boxSizing: `border-box`,
     width: `100%`
