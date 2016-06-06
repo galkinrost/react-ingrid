@@ -10900,7 +10900,7 @@
 	var defaultDisplayStyle = {
 	    height: '100%',
 	    overflowX: 'hidden',
-	    overflowY: 'scroll',
+	    overflowY: 'auto',
 	    position: 'relative',
 	    boxSizing: 'border-box',
 	    width: '100%'
