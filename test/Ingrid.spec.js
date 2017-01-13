@@ -81,6 +81,7 @@ describe(`react-ingrid`, () => {
                 load: rndoam.noop(),
                 paddingLeft: rndoam.number(),
                 paddingTop: rndoam.number(),
+                resizeTracking: rndoam.string(),
                 shouldPrerenderAll: true
             }
 
