@@ -64,10 +64,7 @@ class Display extends Component {
     }
 
     componentDidMount() {
-        const {scrollTop, width, height} = getDisplaySize(this)
-
-        this.calculator.updateDisplaySize(width, height, scrollTop)
-        this.setState(this.calculator.getState())
+        this.updateDisplaySizeInState()
 
         this.display.addEventListener(`scroll`, createScrollListener(this))
         window.addEventListener(`resize`, createWindowResizeListener(this))
@@ -89,6 +86,9 @@ class Display extends Component {
             this.calculator.handleItemsSizeChange(itemWidth, itemHeight)
             this.setState(this.calculator.getState())
         }
+        if (nextProps.resizeTracking !== this.props.resizeTracking) {
+            this.updateDisplaySizeInState()
+        }
     }
 
     componentWillUpdate(nextProps, nextState) {
@@ -102,6 +102,13 @@ class Display extends Component {
         if (typeof getPaddingTop === `function`) {
             getPaddingTop(offsetTop + paddingTop)
         }
+    }
+
+    updateDisplaySizeInState() {
+        const {scrollTop, width, height} = getDisplaySize(this)
+
+        this.calculator.updateDisplaySize(width, height, scrollTop)
+        this.setState(this.calculator.getState())
     }
 
     getDisplayBoundingClientRect() {
