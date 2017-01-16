@@ -94,7 +94,7 @@ describe(`react-ingrid`, () => {
                 total: 100,
                 shouldPrerenderAll: true
             }
-            
+
             const display = new Display(props)
 
             expect(display.state).toEqual({
@@ -236,6 +236,69 @@ describe(`react-ingrid`, () => {
                     offsetTop: 0,
                     height: 0
                 })
+
+            restoreDisplay()
+        })
+
+        it(`should update state on resizeTracking prop change`, () => {
+            const props = {
+                itemWidth: 100,
+                itemHeight: 100,
+                resizeTracking: `initial`
+            }
+
+            // const display = TestUtils.renderIntoDocument(
+            //     <Display {...props} />
+            // )
+
+            const display = ReactDOM.render(
+                <Display {...props} />,
+                mountNode
+            )
+
+            expect(display.state)
+                .toEqual({
+                    minVisibleIndex: 0,
+                    maxVisibleIndex: 0,
+                    offsetTop: 0,
+                    height: 0
+                })
+            const newProps = {...props, resizeTracking: `second`}
+            console.log(display.props)
+
+            ReactDOM.render(
+                <Display {...newProps} />,
+                mountNode
+            )
+            console.log(display.props)
+            const setupDisplay = setDisplayClientBoundingRect({
+                top: 0,
+                width: 3000,
+                height: 3000
+            })
+
+            setupDisplay()
+
+            ReactDOM.render(
+                <Display {...newProps} />,
+                mountNode
+            )
+
+            expect(display.state)
+                .toEqual({
+                    minVisibleIndex: 0,
+                    maxVisibleIndex: 3,
+                    offsetTop: 0,
+                    height: 0
+                })
+
+            const restoreDisplay = setDisplayClientBoundingRect({
+                top: 0,
+                width: 200,
+                height: 100
+            })
+
+            ReactDOM.unmountComponentAtNode(mountNode)
 
             restoreDisplay()
         })
