@@ -125,7 +125,7 @@
 	    function Container() {
 	        _classCallCheck(this, Container);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Container).call(this));
+	        var _this = _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).call(this));
 
 	        _this.state = {
 	            loading: false,
@@ -5449,7 +5449,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.7';
+	module.exports = '0.14.8';
 
 /***/ },
 /* 41 */
@@ -6531,7 +6531,7 @@
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -6583,21 +6583,21 @@
 	    function Ingrid() {
 	        _classCallCheck(this, Ingrid);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Ingrid).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Ingrid.__proto__ || Object.getPrototypeOf(Ingrid)).apply(this, arguments));
 	    }
 
 	    _createClass(Ingrid, [{
 	        key: 'getChildContext',
 	        value: function getChildContext() {
-	            var _props = this.props;
-	            var ItemComponent = _props.ItemComponent;
-	            var itemHeight = _props.itemHeight;
-	            var items = _props.items;
-	            var itemWidth = _props.itemWidth;
-	            var loading = _props.loading;
-	            var PreloaderComponent = _props.PreloaderComponent;
-	            var preloaderHeight = _props.preloaderHeight;
-	            var isShowingPreloader = _props.isShowingPreloader;
+	            var _props = this.props,
+	                ItemComponent = _props.ItemComponent,
+	                itemHeight = _props.itemHeight,
+	                items = _props.items,
+	                itemWidth = _props.itemWidth,
+	                loading = _props.loading,
+	                PreloaderComponent = _props.PreloaderComponent,
+	                preloaderHeight = _props.preloaderHeight,
+	                isShowingPreloader = _props.isShowingPreloader;
 
 	            return {
 	                ItemComponent: ItemComponent,
@@ -6613,22 +6613,24 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _props2 = this.props;
-	            var buffer = _props2.buffer;
-	            var getPaddingTop = _props2.getPaddingTop;
-	            var itemHeight = _props2.itemHeight;
-	            var items = _props2.items;
-	            var itemWidth = _props2.itemWidth;
-	            var _props2$load = _props2.load;
-	            var load = _props2$load === undefined ? function () {
+	            var _props2 = this.props,
+	                buffer = _props2.buffer,
+	                getPaddingTop = _props2.getPaddingTop,
+	                itemHeight = _props2.itemHeight,
+	                items = _props2.items,
+	                itemWidth = _props2.itemWidth,
+	                _props2$load = _props2.load,
+	                load = _props2$load === undefined ? function () {
 	                return null;
-	            } : _props2$load;
-	            var loading = _props2.loading;
-	            var more = _props2.more;
-	            var paddingLeft = _props2.paddingLeft;
-	            var paddingTop = _props2.paddingTop;
-	            var _props2$shouldPrerend = _props2.shouldPrerenderAll;
-	            var shouldPrerenderAll = _props2$shouldPrerend === undefined ? false : _props2$shouldPrerend;
+	            } : _props2$load,
+	                loading = _props2.loading,
+	                more = _props2.more,
+	                paddingLeft = _props2.paddingLeft,
+	                paddingTop = _props2.paddingTop,
+	                parentHeight = _props2.parentHeight,
+	                parentWidth = _props2.parentWidth,
+	                _props2$shouldPrerend = _props2.shouldPrerenderAll,
+	                shouldPrerenderAll = _props2$shouldPrerend === undefined ? false : _props2$shouldPrerend;
 
 	            var total = void 0;
 
@@ -6650,7 +6652,9 @@
 	                shouldPrerenderAll: shouldPrerenderAll,
 	                paddingLeft: paddingLeft,
 	                paddingTop: paddingTop,
-	                total: total
+	                total: total,
+	                parentHeight: parentHeight,
+	                parentWidth: parentWidth
 	            });
 	        }
 	    }]);
@@ -6677,6 +6681,8 @@
 	    items: _react.PropTypes.oneOfType([_react.PropTypes.array, _react.PropTypes.object]),
 	    itemWidth: _react.PropTypes.number.isRequired,
 	    paddingTop: _react.PropTypes.number,
+	    parentHeight: _react.PropTypes.number,
+	    parentWidth: _react.PropTypes.number,
 	    preloaderHeight: _react.PropTypes.number,
 	    prerenderAll: _react.PropTypes.bool
 	};
@@ -9587,6 +9593,10 @@
 	  }
 	};
 
+	function registerNullComponentID() {
+	  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
+	}
+
 	var ReactEmptyComponent = function (instantiate) {
 	  this._currentElement = null;
 	  this._rootNodeID = null;
@@ -9595,7 +9605,7 @@
 	assign(ReactEmptyComponent.prototype, {
 	  construct: function (element) {},
 	  mountComponent: function (rootID, transaction, context) {
-	    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+	    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
 	    this._rootNodeID = rootID;
 	    return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
 	  },
@@ -10837,7 +10847,7 @@
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -10909,15 +10919,13 @@
 	var contentStyle = {};
 
 	var getDisplaySize = function getDisplaySize(inst) {
-	    var _inst$getDisplayBound = inst.getDisplayBoundingClientRect();
+	    var _inst$getDisplayBound = inst.getDisplayBoundingClientRect(),
+	        displayTop = _inst$getDisplayBound.top,
+	        width = _inst$getDisplayBound.width,
+	        height = _inst$getDisplayBound.height;
 
-	    var displayTop = _inst$getDisplayBound.top;
-	    var width = _inst$getDisplayBound.width;
-	    var height = _inst$getDisplayBound.height;
-
-	    var _inst$getContentBound = inst.getContentBoundingClientRect();
-
-	    var contentTop = _inst$getContentBound.top;
+	    var _inst$getContentBound = inst.getContentBoundingClientRect(),
+	        contentTop = _inst$getContentBound.top;
 
 	    var scrollTop = displayTop - contentTop;
 
@@ -10930,9 +10938,8 @@
 
 	var createScrollListener = function createScrollListener(inst) {
 	    return function () {
-	        var _getDisplaySize = getDisplaySize(inst);
-
-	        var scrollTop = _getDisplaySize.scrollTop;
+	        var _getDisplaySize = getDisplaySize(inst),
+	            scrollTop = _getDisplaySize.scrollTop;
 
 	        inst.calculator.updateScrollTop(scrollTop);
 
@@ -10942,11 +10949,10 @@
 
 	var createWindowResizeListener = function createWindowResizeListener(inst) {
 	    inst.windowResizeListener = function () {
-	        var _getDisplaySize2 = getDisplaySize(inst);
-
-	        var scrollTop = _getDisplaySize2.scrollTop;
-	        var width = _getDisplaySize2.width;
-	        var height = _getDisplaySize2.height;
+	        var _getDisplaySize2 = getDisplaySize(inst),
+	            scrollTop = _getDisplaySize2.scrollTop,
+	            width = _getDisplaySize2.width,
+	            height = _getDisplaySize2.height;
 
 	        inst.calculator.updateDisplaySize(width, height, scrollTop);
 	        inst.setState(inst.calculator.getState());
@@ -10961,15 +10967,15 @@
 	    function Display(props) {
 	        _classCallCheck(this, Display);
 
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Display).call(this));
+	        var _this = _possibleConstructorReturn(this, (Display.__proto__ || Object.getPrototypeOf(Display)).call(this));
 
-	        var itemWidth = props.itemWidth;
-	        var itemHeight = props.itemHeight;
-	        var total = props.total;
-	        var buffer = props.buffer;
-	        var paddingLeft = props.paddingLeft;
-	        var paddingTop = props.paddingTop;
-	        var shouldPrerenderAll = props.shouldPrerenderAll;
+	        var itemWidth = props.itemWidth,
+	            itemHeight = props.itemHeight,
+	            total = props.total,
+	            buffer = props.buffer,
+	            paddingLeft = props.paddingLeft,
+	            paddingTop = props.paddingTop,
+	            shouldPrerenderAll = props.shouldPrerenderAll;
 
 	        _this.calculator = new _GridCalculator2.default({
 	            itemWidth: itemWidth,
@@ -10988,14 +10994,7 @@
 	    _createClass(Display, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var _getDisplaySize3 = getDisplaySize(this);
-
-	            var scrollTop = _getDisplaySize3.scrollTop;
-	            var width = _getDisplaySize3.width;
-	            var height = _getDisplaySize3.height;
-
-	            this.calculator.updateDisplaySize(width, height, scrollTop);
-	            this.setState(this.calculator.getState());
+	            this.updateDisplaySizeInState();
 
 	            this.display.addEventListener('scroll', createScrollListener(this));
 	            window.addEventListener('resize', createWindowResizeListener(this));
@@ -11013,24 +11012,27 @@
 	                this.setState(this.calculator.getState());
 	            }
 	            if (nextProps.itemWidth !== this.props.itemWidth || nextProps.itemHeight !== this.props.itemHeight) {
-	                var itemWidth = nextProps.itemWidth;
-	                var itemHeight = nextProps.itemHeight;
+	                var itemWidth = nextProps.itemWidth,
+	                    itemHeight = nextProps.itemHeight;
 
 	                this.calculator.handleItemsSizeChange(itemWidth, itemHeight);
 	                this.setState(this.calculator.getState());
+	            }
+	            if (nextProps.parentHeight !== this.props.parentHeight || nextProps.parentWidth !== this.props.parentWidth) {
+	                this.updateDisplaySizeInState();
 	            }
 	        }
 	    }, {
 	        key: 'componentWillUpdate',
 	        value: function componentWillUpdate(nextProps, nextState) {
-	            var total = nextProps.total;
-	            var load = nextProps.load;
-	            var loading = nextProps.loading;
-	            var more = nextProps.more;
-	            var getPaddingTop = nextProps.getPaddingTop;
-	            var paddingTop = nextProps.paddingTop;
-	            var maxVisibleIndex = nextState.maxVisibleIndex;
-	            var offsetTop = nextState.offsetTop;
+	            var total = nextProps.total,
+	                load = nextProps.load,
+	                loading = nextProps.loading,
+	                more = nextProps.more,
+	                getPaddingTop = nextProps.getPaddingTop,
+	                paddingTop = nextProps.paddingTop;
+	            var maxVisibleIndex = nextState.maxVisibleIndex,
+	                offsetTop = nextState.offsetTop;
 
 	            if (more && !loading && maxVisibleIndex > total) {
 	                load();
@@ -11039,6 +11041,17 @@
 	            if (typeof getPaddingTop === 'function') {
 	                getPaddingTop(offsetTop + paddingTop);
 	            }
+	        }
+	    }, {
+	        key: 'updateDisplaySizeInState',
+	        value: function updateDisplaySizeInState() {
+	            var _getDisplaySize3 = getDisplaySize(this),
+	                scrollTop = _getDisplaySize3.scrollTop,
+	                width = _getDisplaySize3.width,
+	                height = _getDisplaySize3.height;
+
+	            this.calculator.updateDisplaySize(width, height, scrollTop);
+	            this.setState(this.calculator.getState());
 	        }
 	    }, {
 	        key: 'getDisplayBoundingClientRect',
@@ -11055,9 +11068,9 @@
 	        value: function render() {
 	            var _this2 = this;
 
-	            var _props = this.props;
-	            var total = _props.total;
-	            var paddingLeft = _props.paddingLeft;
+	            var _props = this.props,
+	                total = _props.total,
+	                paddingLeft = _props.paddingLeft;
 
 	            var displayStyle = _extends({}, defaultDisplayStyle, {
 	                paddingLeft: paddingLeft
@@ -11085,7 +11098,7 @@
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -11155,7 +11168,7 @@
 	    function DefaultPreloader() {
 	        _classCallCheck(this, DefaultPreloader);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(DefaultPreloader).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (DefaultPreloader.__proto__ || Object.getPrototypeOf(DefaultPreloader)).apply(this, arguments));
 	    }
 
 	    _createClass(DefaultPreloader, [{
@@ -11182,36 +11195,36 @@
 	    function Grid() {
 	        _classCallCheck(this, Grid);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Grid).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Grid.__proto__ || Object.getPrototypeOf(Grid)).apply(this, arguments));
 	    }
 
 	    _createClass(Grid, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props = this.props;
-	            var _props$offsetTop = _props.offsetTop;
-	            var offsetTop = _props$offsetTop === undefined ? 0 : _props$offsetTop;
-	            var _props$minVisibleInde = _props.minVisibleIndex;
-	            var minVisibleIndex = _props$minVisibleInde === undefined ? 0 : _props$minVisibleInde;
-	            var _props$maxVisibleInde = _props.maxVisibleIndex;
-	            var maxVisibleIndex = _props$maxVisibleInde === undefined ? 0 : _props$maxVisibleInde;
-	            var _props$height = _props.height;
-	            var height = _props$height === undefined ? 0 : _props$height;
+	            var _props = this.props,
+	                _props$offsetTop = _props.offsetTop,
+	                offsetTop = _props$offsetTop === undefined ? 0 : _props$offsetTop,
+	                _props$minVisibleInde = _props.minVisibleIndex,
+	                minVisibleIndex = _props$minVisibleInde === undefined ? 0 : _props$minVisibleInde,
+	                _props$maxVisibleInde = _props.maxVisibleIndex,
+	                maxVisibleIndex = _props$maxVisibleInde === undefined ? 0 : _props$maxVisibleInde,
+	                _props$height = _props.height,
+	                height = _props$height === undefined ? 0 : _props$height;
 
 	            var defaultpreloaderHeight = 200;
 
-	            var _context = this.context;
-	            var _context$items = _context.items;
-	            var items = _context$items === undefined ? [] : _context$items;
-	            var loading = _context.loading;
-	            var _context$paddingTop = _context.paddingTop;
-	            var paddingTop = _context$paddingTop === undefined ? 0 : _context$paddingTop;
-	            var _context$PreloaderCom = _context.PreloaderComponent;
-	            var PreloaderComponent = _context$PreloaderCom === undefined ? DefaultPreloader : _context$PreloaderCom;
-	            var _context$preloaderHei = _context.preloaderHeight;
-	            var preloaderHeight = _context$preloaderHei === undefined ? defaultpreloaderHeight : _context$preloaderHei;
-	            var _context$isShowingPre = _context.isShowingPreloader;
-	            var isShowingPreloader = _context$isShowingPre === undefined ? true : _context$isShowingPre;
+	            var _context = this.context,
+	                _context$items = _context.items,
+	                items = _context$items === undefined ? [] : _context$items,
+	                loading = _context.loading,
+	                _context$paddingTop = _context.paddingTop,
+	                paddingTop = _context$paddingTop === undefined ? 0 : _context$paddingTop,
+	                _context$PreloaderCom = _context.PreloaderComponent,
+	                PreloaderComponent = _context$PreloaderCom === undefined ? DefaultPreloader : _context$PreloaderCom,
+	                _context$preloaderHei = _context.preloaderHeight,
+	                preloaderHeight = _context$preloaderHei === undefined ? defaultpreloaderHeight : _context$preloaderHei,
+	                _context$isShowingPre = _context.isShowingPreloader,
+	                isShowingPreloader = _context$isShowingPre === undefined ? true : _context$isShowingPre;
 
 	            var contentStyle = {
 	                position: 'relative',
@@ -11280,7 +11293,7 @@
 	 * @returns {number}
 	 */
 	var calculateItemsPerRow = exports.calculateItemsPerRow = function calculateItemsPerRow(displayWidth, itemWidth) {
-	  var paddingLeft = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+	  var paddingLeft = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 	  return Math.floor((displayWidth - paddingLeft) / itemWidth) || 1;
 	};
 
@@ -11341,38 +11354,36 @@
 	   * @param minVisibleIndex
 	   * @param maxVisibleIndex
 	   */
-
 	  function GridCalculator() {
-	    var _ref = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
-	    var _ref$displayWidth = _ref.displayWidth;
-	    var displayWidth = _ref$displayWidth === undefined ? 0 : _ref$displayWidth;
-	    var _ref$displayHeight = _ref.displayHeight;
-	    var displayHeight = _ref$displayHeight === undefined ? 0 : _ref$displayHeight;
-	    var _ref$itemWidth = _ref.itemWidth;
-	    var itemWidth = _ref$itemWidth === undefined ? 0 : _ref$itemWidth;
-	    var _ref$itemHeight = _ref.itemHeight;
-	    var itemHeight = _ref$itemHeight === undefined ? 0 : _ref$itemHeight;
-	    var _ref$offsetTop = _ref.offsetTop;
-	    var offsetTop = _ref$offsetTop === undefined ? 0 : _ref$offsetTop;
-	    var _ref$scrollTop = _ref.scrollTop;
-	    var scrollTop = _ref$scrollTop === undefined ? 0 : _ref$scrollTop;
-	    var _ref$buffer = _ref.buffer;
-	    var buffer = _ref$buffer === undefined ? 0 : _ref$buffer;
-	    var _ref$itemsPerRow = _ref.itemsPerRow;
-	    var itemsPerRow = _ref$itemsPerRow === undefined ? 0 : _ref$itemsPerRow;
-	    var _ref$minVisibleIndex = _ref.minVisibleIndex;
-	    var minVisibleIndex = _ref$minVisibleIndex === undefined ? 0 : _ref$minVisibleIndex;
-	    var _ref$maxVisibleIndex = _ref.maxVisibleIndex;
-	    var maxVisibleIndex = _ref$maxVisibleIndex === undefined ? 0 : _ref$maxVisibleIndex;
-	    var _ref$height = _ref.height;
-	    var height = _ref$height === undefined ? 0 : _ref$height;
-	    var _ref$total = _ref.total;
-	    var total = _ref$total === undefined ? 0 : _ref$total;
-	    var _ref$paddingLeft = _ref.paddingLeft;
-	    var paddingLeft = _ref$paddingLeft === undefined ? 0 : _ref$paddingLeft;
-	    var _ref$paddingTop = _ref.paddingTop;
-	    var paddingTop = _ref$paddingTop === undefined ? 0 : _ref$paddingTop;
+	    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+	        _ref$displayWidth = _ref.displayWidth,
+	        displayWidth = _ref$displayWidth === undefined ? 0 : _ref$displayWidth,
+	        _ref$displayHeight = _ref.displayHeight,
+	        displayHeight = _ref$displayHeight === undefined ? 0 : _ref$displayHeight,
+	        _ref$itemWidth = _ref.itemWidth,
+	        itemWidth = _ref$itemWidth === undefined ? 0 : _ref$itemWidth,
+	        _ref$itemHeight = _ref.itemHeight,
+	        itemHeight = _ref$itemHeight === undefined ? 0 : _ref$itemHeight,
+	        _ref$offsetTop = _ref.offsetTop,
+	        offsetTop = _ref$offsetTop === undefined ? 0 : _ref$offsetTop,
+	        _ref$scrollTop = _ref.scrollTop,
+	        scrollTop = _ref$scrollTop === undefined ? 0 : _ref$scrollTop,
+	        _ref$buffer = _ref.buffer,
+	        buffer = _ref$buffer === undefined ? 0 : _ref$buffer,
+	        _ref$itemsPerRow = _ref.itemsPerRow,
+	        itemsPerRow = _ref$itemsPerRow === undefined ? 0 : _ref$itemsPerRow,
+	        _ref$minVisibleIndex = _ref.minVisibleIndex,
+	        minVisibleIndex = _ref$minVisibleIndex === undefined ? 0 : _ref$minVisibleIndex,
+	        _ref$maxVisibleIndex = _ref.maxVisibleIndex,
+	        maxVisibleIndex = _ref$maxVisibleIndex === undefined ? 0 : _ref$maxVisibleIndex,
+	        _ref$height = _ref.height,
+	        height = _ref$height === undefined ? 0 : _ref$height,
+	        _ref$total = _ref.total,
+	        total = _ref$total === undefined ? 0 : _ref$total,
+	        _ref$paddingLeft = _ref.paddingLeft,
+	        paddingLeft = _ref$paddingLeft === undefined ? 0 : _ref$paddingLeft,
+	        _ref$paddingTop = _ref.paddingTop,
+	        paddingTop = _ref$paddingTop === undefined ? 0 : _ref$paddingTop;
 
 	    _classCallCheck(this, GridCalculator);
 
@@ -11481,7 +11492,7 @@
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -11547,17 +11558,17 @@
 	    function Item() {
 	        _classCallCheck(this, Item);
 
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(Item).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Item.__proto__ || Object.getPrototypeOf(Item)).apply(this, arguments));
 	    }
 
 	    _createClass(Item, [{
 	        key: 'render',
 	        value: function render() {
 	            var item = this.props.item;
-	            var _context = this.context;
-	            var ItemComponent = _context.ItemComponent;
-	            var itemWidth = _context.itemWidth;
-	            var itemHeight = _context.itemHeight;
+	            var _context = this.context,
+	                ItemComponent = _context.ItemComponent,
+	                itemWidth = _context.itemWidth,
+	                itemHeight = _context.itemHeight;
 
 	            var itemStyle = _extends({}, defaultItemStyle, {
 	                width: itemWidth,
@@ -11638,9 +11649,9 @@
 	}
 
 	var ingrid = function ingrid() {
-	    var mapProps = arguments.length <= 0 || arguments[0] === undefined ? function () {
+	    var mapProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : function () {
 	        return {};
-	    } : arguments[0];
+	    };
 	    return function (ItemComponent) {
 	        return function (props) {
 	            return _react2.default.createElement(_Ingrid2.default, _extends({}, mapProps(props), { ItemComponent: ItemComponent }));
