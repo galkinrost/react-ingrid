@@ -39,7 +39,8 @@ class Ingrid extends Component {
             more,
             paddingLeft,
             paddingTop,
-            resizeTracking,
+            parentHeight,
+            parentWidth,
             shouldPrerenderAll = false
         } = this.props
 
@@ -65,7 +66,8 @@ class Ingrid extends Component {
                 paddingLeft={paddingLeft}
                 paddingTop={paddingTop}
                 total={total}
-                resizeTracking={resizeTracking}
+                parentHeight={parentHeight}
+                parentWidth={parentWidth}
             />
         )
     }
@@ -90,9 +92,10 @@ Ingrid.propTypes = {
     items: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
     itemWidth: PropTypes.number.isRequired,
     paddingTop: PropTypes.number,
+    parentHeight: PropTypes.number,
+    parentWidth: PropTypes.number,
     preloaderHeight: PropTypes.number,
-    prerenderAll: PropTypes.bool,
-    resizeTracking: PropTypes.string
+    prerenderAll: PropTypes.bool
 }
 
 export default Ingrid

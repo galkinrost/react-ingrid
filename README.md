@@ -65,7 +65,8 @@ const Grid = ingrid(props => props)(ItemComponent)
 * [`preloaderHeight`](#preloaderHeightProp)
 * [`isShowingPreloader`](#isShowingPreloaderProp)
 * [`shouldPrerenderAll`](#shouldPrerenderAll)
-
+* [`parentWidth`](#parentDimensionsProp)
+* [`parentHeight`](#parentDimensionsProp)
 
 <a name="ItemComponentProp"></a>
 #### ItemComponent (required)
@@ -288,6 +289,11 @@ You can add more space for your preloader here.
 #### shouldPrerenderAll (optional)
 
 If you want to render your grid on the server side you should set this propery true. In this case all items will be rendered on the initial render call.
+
+<a name="parentDimensionsProp"></a>
+#### parentWidth & parentHeight (optional)
+
+The parentComponent's width and height. Use this to track changes in the parent's dimensions (beyond window-resize) and force a resize of the Ingrid component.
 
 ## Examples
 

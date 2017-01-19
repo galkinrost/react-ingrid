@@ -86,7 +86,7 @@ class Display extends Component {
             this.calculator.handleItemsSizeChange(itemWidth, itemHeight)
             this.setState(this.calculator.getState())
         }
-        if (nextProps.resizeTracking !== this.props.resizeTracking) {
+        if (nextProps.parentHeight !== this.props.parentHeight || nextProps.parentWidth !== this.props.parentWidth) {
             this.updateDisplaySizeInState()
         }
     }
