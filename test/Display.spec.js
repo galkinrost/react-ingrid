@@ -462,6 +462,53 @@ describe(`react-ingrid`, () => {
             restoreDisplay()
         })
 
+        it(`should update props on parent dimensions update`, () => {
+            class DisplayTest extends Component {
+                constructor() {
+                    super()
+                    this.state = {
+                        parentWidth: 50,
+                        parentHeight: 50,
+                        itemWidth: 50,
+                        itemHeight: 50,
+                        total: 4
+                    }
+                }
+
+                componentDidMount() {
+                    this.setState({
+                        parentWidth: 75,
+                        parentHeight: 75
+                    })
+                }
+
+                render() {
+                    return (
+                        <Display {...this.state} />
+                    )
+                }
+            }
+
+            const restoreDisplay = setDisplayClientBoundingRect({
+                width: 150,
+                height: 150
+            })
+
+            const tree = TestUtils.renderIntoDocument(
+                <DisplayTest />
+            )
+
+            const display = TestUtils.findRenderedComponentWithType(tree, Display)
+            const expectedHeight = 75
+            const expectedWidth = 75
+            expect(display.props.parentHeight)
+                .toEqual(expectedHeight)
+            expect(display.props.parentWidth)
+                .toEqual(expectedWidth)
+
+            restoreDisplay()
+        })
+
         it(`should set correct style`, () => {
             const paddingLeft = 100
             const tree = TestUtils.renderIntoDocument(

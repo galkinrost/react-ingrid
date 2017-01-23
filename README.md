@@ -293,7 +293,7 @@ If you want to render your grid on the server side you should set this propery t
 <a name="parentDimensionsProp"></a>
 #### parentWidth & parentHeight (optional)
 
-The parentComponent's width and height. Use this to track changes in the parent's dimensions (beyond window-resize) and force a resize of the Ingrid component.
+The parentComponent's width and height. Use this to control the height and width of the Ingrid component, useful when ancestor components can be programatically resized.
 
 ## Examples
 
