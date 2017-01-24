@@ -49,7 +49,7 @@ class Display extends Component {
 
     constructor(props) {
         super()
-        const {itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop, shouldPrerenderAll} = props
+        const {itemWidth, itemHeight, total, buffer, paddingLeft, paddingTop, shouldPrerenderAll, parentHeight, parentWidth} = props
         this.calculator = new GridCalculator({
             itemWidth,
             itemHeight,
@@ -57,24 +57,28 @@ class Display extends Component {
             buffer,
             paddingLeft,
             paddingTop,
-            maxVisibleIndex: shouldPrerenderAll ? total : 0
+            maxVisibleIndex: shouldPrerenderAll ? total : 0,
+            displayHeight: parentHeight || 0,
+            displayWidth: parentWidth || 0
         })
 
         this.state = this.calculator.getState()
     }
 
     componentDidMount() {
-        const {scrollTop, width, height} = getDisplaySize(this)
-
-        this.calculator.updateDisplaySize(width, height, scrollTop)
-        this.setState(this.calculator.getState())
+        const {parentHeight, parentWidth} = this.props
+        this.updateDisplaySizeInState()
 
         this.display.addEventListener(`scroll`, createScrollListener(this))
-        window.addEventListener(`resize`, createWindowResizeListener(this))
+        if (!parentHeight || !parentWidth) {
+            window.addEventListener(`resize`, createWindowResizeListener(this))
+        }
     }
 
     componentWillUnmount() {
-        window.removeEventListener(`resize`, this.windowResizeListener)
+        if (this.windowResizeListener) {
+            window.removeEventListener(`resize`, this.windowResizeListener)
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -88,6 +92,9 @@ class Display extends Component {
             const {itemWidth, itemHeight} = nextProps
             this.calculator.handleItemsSizeChange(itemWidth, itemHeight)
             this.setState(this.calculator.getState())
+        }
+        if (nextProps.parentHeight !== this.props.parentHeight || nextProps.parentWidth !== this.props.parentWidth) {
+            this.updateDisplaySizeInState()
         }
     }
 
@@ -104,6 +111,13 @@ class Display extends Component {
         }
     }
 
+    updateDisplaySizeInState() {
+        const {scrollTop, width, height} = getDisplaySize(this)
+
+        this.calculator.updateDisplaySize(width, height, scrollTop)
+        this.setState(this.calculator.getState())
+    }
+
     getDisplayBoundingClientRect() {
         return this.display.getBoundingClientRect()
     }
@@ -114,11 +128,15 @@ class Display extends Component {
 
     render() {
 
-        const {total, paddingLeft} = this.props
+        const {total, paddingLeft, parentWidth, parentHeight} = this.props
 
-        const displayStyle = {
+        let displayStyle = {
             ...defaultDisplayStyle,
             paddingLeft
+        }
+
+        if (parentHeight && parentWidth) {
+            displayStyle = {...displayStyle, width: parentWidth, height: parentHeight}
         }
 
         return (
