@@ -74,6 +74,7 @@ class Display extends Component {
     }
 
     componentWillUnmount() {
+        this.display.removeEventListener(`scroll`, createScrollListener(this))
         window.removeEventListener(`resize`, this.windowResizeListener)
     }
 
